@@ -2,8 +2,8 @@
 
 An open-source marketplace for electric vehicles.
 
-# Stack
--Backend
+# stack
+- Backend
     - Node.js
     - Express.js
 - Frontend

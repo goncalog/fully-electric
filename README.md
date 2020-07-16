@@ -14,4 +14,3 @@ An open-source marketplace for electric vehicles.
 - Testing
     - TDD
     - Jest
-    

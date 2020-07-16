@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "serverstart": "DEBUG=fully-electric-backend:* npm run devstart"
+    "serverstart": "DEBUG=fully-electric-backend:* npm run devstart",
+    "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -18,11 +19,14 @@
     "express-session": "^1.17.1",
     "helmet": "^3.23.3",
     "http-errors": "~1.6.3",
+    "jest": "^26.1.0",
+    "jest-cli": "^26.1.0",
     "mongoose": "^5.9.24",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "supertest": "^4.0.2"
   }
 }

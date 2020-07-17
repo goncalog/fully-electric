@@ -11,7 +11,8 @@ mongoServer.getConnectionString().then(mongoUri => {
         autoReconnect: true,
         reconnectTries: Number.MAX_VALUE,
         reconnectInterval: 1000,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     };
 
     mongoose.connect(mongoUri, mongooseOpts);

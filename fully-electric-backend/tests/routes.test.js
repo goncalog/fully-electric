@@ -24,6 +24,6 @@ test('testing route works', done => {
         .then(() => {
             request(app)
                 .get('/test')
-                .expect({ array: ['hey'] })
+                .expect({ testArray: ['hello'] }, done)
         });
 });

@@ -1,16 +1,21 @@
-# fully-electric
+# Fully Electric
 
 An open-source marketplace for electric vehicles.
 
-# stack
-- Backend
+# Built with
+- Backend (API)
     - Node.js
     - Express.js
+
 - Frontend
     - React.js
-    - HTML/CSS
+    - JavaScript
+    - HTML
+    - CSS
+
 - Database
     - MongoDB
+
 - Testing
     - TDD
     - Jest

@@ -6,10 +6,11 @@
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=fully-electric-backend:* npm run devstart",
-    "test": "jest"
+    "test": "mocha"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chai": "^4.2.0",
     "clean-css": "^4.2.3",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
@@ -21,6 +22,7 @@
     "http-errors": "~1.6.3",
     "jest": "^26.1.0",
     "jest-cli": "^26.1.0",
+    "mocha": "^8.0.1",
     "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.24",
     "morgan": "~1.9.1",

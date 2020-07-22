@@ -1,3 +1,4 @@
+const assert = require('chai').assert;
 const EV = require('../models/ev');
 
 const ev = new EV({
@@ -17,6 +18,8 @@ const ev = new EV({
     full_vehicle_inspection: true,
 });
 
-test('EV model exists', () => {
-    expect(ev).toBeInstanceOf(EV);
+describe('EV model', () => {
+    it('EV model exists', () => {
+        assert.instanceOf(ev, EV, 'ev is instance of EV');
+    });
 });

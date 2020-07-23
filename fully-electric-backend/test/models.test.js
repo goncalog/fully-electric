@@ -3,6 +3,7 @@ const EV = require('../models/ev');
 const Make = require('../models/make');
 const Model = require('../models/model');
 const Location = require('../models/location');
+const Seller = require('../models/seller');
 
 const tesla = new Make({
     name: "Tesla",
@@ -24,6 +25,13 @@ const london = new Location({
     country: 'UK',
 });
 
+const missTesla = new Seller({
+    name: 'Miss Tesla',
+    contact: 'miss.tesla@gmail.com',
+    rating: 4.2,
+    test: 2,
+});
+
 const date = new Date;
 
 const ev = new EV({
@@ -34,7 +42,7 @@ const ev = new EV({
     mileage: 18000,
     location: london,
     image_url: 'https://placeholder.com/image111',
-    seller: 'Miss Tesla',
+    seller: missTesla,
     list_date: date,
     equipment_and_options: 'placeholder',
     exterior: 'placeholder',
@@ -83,7 +91,7 @@ describe('EV model', () => {
     });
 
     it('EV model has seller', () => {
-        assert.strictEqual(ev.seller, 'Miss Tesla', `ev seller is Miss Tesla`);
+        assert.strictEqual(ev.seller.name, 'Miss Tesla', `ev seller is Miss Tesla`);
     });
 
     it('EV model has list date', () => {

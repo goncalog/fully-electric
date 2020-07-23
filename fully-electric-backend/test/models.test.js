@@ -64,11 +64,11 @@ describe('EV model', () => {
     });
 
     it('EV model has make', () => {
-        assert.strictEqual(ev.make.name, 'Tesla', 'ev make is Tesla');
+        assert.instanceOf(ev.make, Make, 'ev make is instance of Make');
     });
 
     it('EV model has model', () => {
-        assert.strictEqual(`${ev.model.name} ${ev.model.secondary_name}`, 'S 70', 'ev model is S 70');
+        assert.instanceOf(ev.model, Model, 'ev model is instance of Model');
     });
 
     it('EV model has year', () => {
@@ -84,7 +84,7 @@ describe('EV model', () => {
     });
 
     it('EV model has location', () => {
-        assert.strictEqual(`${ev.location.city}, ${ev.location.country}`, 'London, UK', 'ev location is London, UK');
+        assert.instanceOf(ev.location, Location, 'ev location is instance of Location');
     });
 
     it('EV model has image url', () => {
@@ -93,7 +93,7 @@ describe('EV model', () => {
     });
 
     it('EV model has seller', () => {
-        assert.strictEqual(ev.seller.name, 'Miss Tesla', `ev seller is Miss Tesla`);
+        assert.instanceOf(ev.seller, Seller, 'ev seller is instance of Seller');
     });
 
     it('EV model has list date', () => {

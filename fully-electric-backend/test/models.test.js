@@ -2,6 +2,7 @@ const assert = require('chai').assert;
 const EV = require('../models/ev');
 const Make = require('../models/make');
 const Model = require('../models/model');
+const Location = require('../models/location');
 
 const tesla = new Make({
     name: "Tesla",
@@ -18,6 +19,11 @@ const s70 = new Model({
     rating: 4.75,
 });
 
+const london = new Location({
+    city: 'London',
+    country: 'UK',
+});
+
 const date = new Date;
 
 const ev = new EV({
@@ -26,7 +32,7 @@ const ev = new EV({
     year: 2018,
     price: 50000,
     mileage: 18000,
-    location: 'London, UK',
+    location: london,
     image_url: 'https://placeholder.com/image111',
     seller: 'Miss Tesla',
     list_date: date,
@@ -68,7 +74,7 @@ describe('EV model', () => {
     });
 
     it('EV model has location', () => {
-        assert.strictEqual(ev.location, 'London, UK', 'ev location is London, UK');
+        assert.strictEqual(`${ev.location.city}, ${ev.location.country}`, 'London, UK', 'ev location is London, UK');
     });
 
     it('EV model has image url', () => {

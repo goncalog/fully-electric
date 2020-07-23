@@ -24,6 +24,7 @@ const s70 = new Model({
 const london = new Location({
     city: 'London',
     country: 'UK',
+    test: 2,
 });
 
 const missTesla = new Seller({
@@ -199,3 +200,24 @@ describe('Model model', () => {
     });
 });
 
+describe('Location model', () => {
+    it('Location model exists', () => {
+        assert.instanceOf(london, Location, 'london is instance of Location');
+    });
+
+    it('Location model has 5 properties', () => {
+        assert.strictEqual(Object.keys(london.schema.tree).length, 5, 'london has 5 properties');
+    });
+
+    it('Location model has city', () => {
+        assert.strictEqual(london.city, 'London', 'london city is London');
+    });
+
+    it('Location model has country', () => {
+        assert.strictEqual(london.country, 'UK', 'london country is UK');
+    });
+
+    it('Location model doesn\'t have test property', () => {
+        assert.notExists(london.test, 'london test property is null or undefined');
+    });
+});

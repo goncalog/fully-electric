@@ -21,4 +21,12 @@ const EVSchema = new Schema({
     full_vehicle_inspection: { type: Boolean, required: true },
 });
 
+// Virtual for ev's url
+// Does not work with arrow function
+EVSchema
+    .virtual('url')
+    .get(function () {
+        return `/content/ev/${this._id}`;
+    });
+
 module.exports = mongoose.model('EV', EVSchema);

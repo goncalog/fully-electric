@@ -8,8 +8,8 @@ const ModelSchema = new Schema({
     secondary_name: { type: String },
     performance: { type: String, required: true },
     charging: { type: String, required: true },
-    original_msrp: { type: Number, required: true },
-    rating: { type: Number, required: true },
+    original_msrp: { type: Number, required: true, min: 0 },
+    rating: { type: Number, required: true, min: 0, max: 5 },
 });
 
 // Virtual property for model's url

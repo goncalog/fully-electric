@@ -16,7 +16,7 @@ const ModelSchema = new Schema({
 ModelSchema
     .virtual('url')
     .get(function () {
-        return `/content/model/${this_id}`;
+        return `/content/model/${this._id}`;
     });
 
 module.exports = mongoose.model('Model', ModelSchema);

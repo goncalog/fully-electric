@@ -18,6 +18,7 @@ const s70 = new Model({
     charging: 'placeholder',
     original_msrp: 85000,
     rating: 4.75,
+    test: 2,
 });
 
 const london = new Location({
@@ -150,3 +151,51 @@ describe('Make model', () => {
         assert.notExists(tesla.test, 'tesla test property is null or undefined');
     });
 });
+
+describe('Model model', () => {
+    it('Model model exists', () => {
+        assert.instanceOf(s70, Model, 's70 is instance of Model');
+    });
+
+    it('Model model has 11 properties', () => {
+        assert.strictEqual(Object.keys(s70.schema.tree).length, 11, 's70 has 11 properties');
+    });
+
+    it('Model model has make', () => {
+        assert.instanceOf(s70.make, Make, 's70 make is instance of Make');
+    });
+
+    it('Model model has name', () => {
+        assert.strictEqual(s70.name, 'S', 's70 name is S');
+    });
+
+    it('Model model has secondary name', () => {
+        assert.strictEqual(s70.secondary_name, '70', 's70 secondary name is 70');
+    });
+    
+    it('Model model has performance', () => {
+        assert.strictEqual(s70.performance, 'placeholder', 's70 performance is placeholder');
+    });
+
+    it('Model model has charging', () => {
+        assert.strictEqual(s70.charging, 'placeholder', 's70 charging is placeholder');
+    });
+
+    it('Model model has original msrp', () => {
+        assert.strictEqual(s70.original_msrp, 85000, 's70 original msrp is 85000');
+    });
+
+    it('Model model has rating', () => {
+        assert.strictEqual(s70.rating, 4.75, 's70 rating is 4.75');
+    });
+
+    it('Model model has url', () => {
+        assert.strictEqual(s70.url, `/content/model/${s70._id}`, 
+                `s70 url is /content/model/${s70._id}`);
+    });
+
+    it('Model model doesn\'t have test property', () => {
+        assert.notExists(s70.test, 's70 test property is null or undefined');
+    });
+});
+

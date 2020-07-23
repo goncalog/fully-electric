@@ -1,10 +1,16 @@
 const assert = require('chai').assert;
 const EV = require('../models/ev');
+const Make = require('../models/make');
+
+const tesla = new Make({
+    name: "Tesla",
+    test: 2,
+});
 
 const date = new Date;
 
 const ev = new EV({
-    make: "Tesla",
+    make: tesla,
     model: "S 70",
     year: 2018,
     price: 50000,
@@ -31,7 +37,7 @@ describe('EV model', () => {
     });
 
     it('EV model has make', () => {
-        assert.strictEqual(ev.make, 'Tesla', 'ev make is Tesla');
+        assert.strictEqual(ev.make.name, 'Tesla', 'ev make is Tesla');
     });
 
     it('EV model has model', () => {

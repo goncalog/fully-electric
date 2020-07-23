@@ -5,14 +5,14 @@ const Schema = mongoose.Schema;
 const currentDate = new Date();
 
 const EVSchema = new Schema({
-    make: { type: Schema.Types.ObjectId, ref: "Make", required: true },
-    model: { type: Schema.Types.ObjectId, ref: "Model", required: true },
+    make: { type: Schema.Types.ObjectId, ref: 'Make', required: true },
+    model: { type: Schema.Types.ObjectId, ref: 'Model', required: true },
     year: { type: Number, required: true, min: 1900, max: currentDate.getFullYear() },
     price: { type: Number, required: true, min: 0 },
     mileage: { type: Number, required: true, min: 0 },
-    location: { type: Schema.Types.ObjectId, ref: "Location", required: true },
+    location: { type: Schema.Types.ObjectId, ref: 'Location', required: true },
     image_url: { type: String, required: true },
-    seller: { type: Schema.Types.ObjectId, ref: "Seller", required: true },
+    seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
     list_date: { type: Date, default: Date.now, required: true },
     equipment_and_options: { type: String, required: true },
     exterior: { type: String, required: true },

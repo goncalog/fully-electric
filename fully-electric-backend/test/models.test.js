@@ -127,3 +127,26 @@ describe('EV model', () => {
         assert.notExists(ev.test, 'ev test property is null or undefined');
     });
 });
+
+describe('Make model', () => {
+    it('Make model exists', () => {
+        assert.instanceOf(tesla, Make, 'tesla is instance of Make');
+    });
+
+    it('Make model has 5 properties', () => {
+        assert.strictEqual(Object.keys(tesla.schema.tree).length, 5, 'tesla has 5 properties');
+    });
+
+    it('Make model has name', () => {
+        assert.strictEqual(tesla.name, 'Tesla', 'ev make is Tesla');
+    });
+
+    it('Make model has url', () => {
+        assert.strictEqual(tesla.url, `/content/make/${tesla._id}`, 
+                `tesla url is /content/make/${tesla._id}`);
+    });
+
+    it('Make model doesn\'t have test property', () => {
+        assert.notExists(tesla.test, 'tesla test property is null or undefined');
+    });
+});

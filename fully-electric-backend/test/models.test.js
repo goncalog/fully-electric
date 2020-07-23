@@ -221,3 +221,30 @@ describe('Location model', () => {
         assert.notExists(london.test, 'london test property is null or undefined');
     });
 });
+
+describe('Seller model', () => {
+    it('Seller model exists', () => {
+        assert.instanceOf(missTesla, Seller, 'missTesla is instance of Seller');
+    });
+
+    it('Seller model has 6 properties', () => {
+        assert.strictEqual(Object.keys(missTesla.schema.tree).length, 6, 'missTesla has 6 properties');
+    });
+
+    it('Seller model has name', () => {
+        assert.strictEqual(missTesla.name, 'Miss Tesla', 'missTesla name is Miss Tesla');
+    });
+
+    it('Seller model has contact', () => {
+        assert.strictEqual(missTesla.contact, 'miss.tesla@gmail.com', 
+                'missTesla contact is miss.tesla@gmail.com');
+    });
+
+    it('Seller model has rating', () => {
+        assert.strictEqual(missTesla.rating, 4.2, 'missTesla rating is 4.2');
+    });
+
+    it('Seller model doesn\'t have test property', () => {
+        assert.notExists(missTesla.test, 'missTesla test property is null or undefined');
+    });
+});

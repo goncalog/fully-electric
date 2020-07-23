@@ -1,6 +1,8 @@
 const assert = require('chai').assert;
 const EV = require('../models/ev');
 
+const date = new Date;
+
 const ev = new EV({
     make: "Tesla",
     model: "S 70",
@@ -10,7 +12,7 @@ const ev = new EV({
     location: "London, UK",
     image_url: "https://placeholder.com/image111",
     seller: "Miss Tesla",
-    list_date: "22/07/2020",
+    list_date: date,
     equipment_and_options: "placeholder",
     exterior: "placeholder",
     interior: "placeholder",
@@ -62,7 +64,7 @@ describe('EV model', () => {
     });
 
     it('EV model has list date', () => {
-        assert.strictEqual(ev.list_date, '22/07/2020', 'ev list date is 22/07/2020');
+        assert.strictEqual(ev.list_date, date, `ev list date is ${date}`);
     });
 
     it('EV model has equipment and options', () => {

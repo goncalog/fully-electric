@@ -251,8 +251,12 @@ describe('Seller model', () => {
 
 // Testing model property validators
 const ev2 = new EV();
+const make2 = new Make();
+const model2 = new Model();
+const location2 = new Location();
+const seller2 = new Seller();
 
-describe('EV model validators are set', () => {
+describe('EV model require validators are set', () => {
     it('EV model requires make', () => {
         ev2.validate((err) => {
             assert.exists(err.errors.make, 'ev make is required');
@@ -334,6 +338,14 @@ describe('EV model validators are set', () => {
     it('EV model requires full vehicle inspection', () => {
         ev2.validate((err) => {
             assert.exists(err.errors.full_vehicle_inspection, 'ev full vehicle inspection is required');
+        });
+    });
+});
+
+describe('Make model require validators are set', () => {
+    it('Make model requires name', () => {
+        make2.validate((err) => {
+            assert.exists(err.errors.name, 'make model requires name');
         });
     });
 });

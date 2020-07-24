@@ -349,3 +349,47 @@ describe('Make model require validators are set', () => {
         });
     });
 });
+
+describe('Model model require validators are set', () => {
+    it('Model model requires make', () => {
+        model2.validate((err) => {
+            assert.exists(err.errors.make, 'model model requires make');
+        });
+    });
+
+    it('Model model requires name', () => {
+        model2.validate((err) => {
+            assert.exists(err.errors.name, 'model model requires name');
+        });
+    });
+
+    it('Model model doesn\'t require secondary name', () => {
+        model2.validate((err) => {
+            assert.notExists(err.errors.secondary_name, 'model model doesn\'t require secondary name');
+        });
+    });
+
+    it('Model model requires performance', () => {
+        model2.validate((err) => {
+            assert.exists(err.errors.performance, 'model model requires performance');
+        });
+    });
+
+    it('Model model requires charging', () => {
+        model2.validate((err) => {
+            assert.exists(err.errors.charging, 'model model requires charging');
+        });
+    });
+
+    it('Model model requires original msrp', () => {
+        model2.validate((err) => {
+            assert.exists(err.errors.original_msrp, 'model model requires original msrp');
+        });
+    });
+
+    it('Model model requires rating', () => {
+        model2.validate((err) => {
+            assert.exists(err.errors.rating, 'model model requires rating');
+        });
+    });
+});

@@ -407,3 +407,23 @@ describe('Location model require validators are set', () => {
         });
     });
 });
+
+describe('Seller model require validators are set', () => {
+    it('Seller model requires name', () => {
+        seller2.validate((err) => {
+            assert.exists(err.errors.name, 'seller model requires name');
+        });
+    });
+
+    it('Seller model requires contact', () => {
+        seller2.validate((err) => {
+            assert.exists(err.errors.contact, 'seller model requires contact');
+        });
+    });
+
+    it('Seller model requires rating', () => {
+        seller2.validate((err) => {
+            assert.exists(err.errors.rating, 'seller model requires rating');
+        });
+    });
+});

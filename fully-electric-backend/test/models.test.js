@@ -277,6 +277,14 @@ const model4 = new Model({
     rating: 5.1,
 });
 
+const seller3 = new Seller({
+    rating: -1,
+});
+
+const seller4 = new Seller({
+    rating: 5.1,
+});
+
 describe('EV model validators are set', () => {
     it('EV model requires make', () => {
         ev2.validate((err) => {
@@ -501,6 +509,18 @@ describe('Seller model require validators are set', () => {
     it('Seller model requires rating', () => {
         seller2.validate((err) => {
             assert.exists(err.errors.rating, 'seller model requires rating');
+        });
+    });
+
+    it('Seller model\'s rating is greater than 0', () => {
+        seller3.validate((err) => {
+            assert.exists(err.errors.rating, 'seller model\'s rating is greater than 0');
+        });
+    });
+
+    it('Seller model\'s rating is less or equal to 0', () => {
+        seller4.validate((err) => {
+            assert.exists(err.errors.rating, 'seller model\'s rating is less or equal to 0');
         });
     });
 });

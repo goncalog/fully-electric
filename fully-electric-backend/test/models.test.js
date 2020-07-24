@@ -268,6 +268,15 @@ const ev4 = new EV({
     vehicle_identification_number: 'xxxxxxxxxxxxxxxxxx',
 });
 
+const model3 = new Model({
+    original_msrp: -1,
+    rating: -1,
+});
+
+const model4 = new Model({
+    rating: 5.1,
+});
+
 describe('EV model validators are set', () => {
     it('EV model requires make', () => {
         ev2.validate((err) => {
@@ -437,9 +446,27 @@ describe('Model model require validators are set', () => {
         });
     });
 
+    it('Model model\'s original msrp is greater than 0', () => {
+        model3.validate((err) => {
+            assert.exists(err.errors.original_msrp, 'model model\'s original msrp is greater than 0');
+        });
+    });
+
     it('Model model requires rating', () => {
         model2.validate((err) => {
             assert.exists(err.errors.rating, 'model model requires rating');
+        });
+    });
+
+    it('Model model\'s rating is greater than 0', () => {
+        model3.validate((err) => {
+            assert.exists(err.errors.rating, 'model model\'s rating is greater than 0');
+        });
+    });
+
+    it('Model model\'s rating is less or equal to 5', () => {
+        model4.validate((err) => {
+            assert.exists(err.errors.rating, 'model model\'s rating is less or equal to 5');
         });
     });
 });

@@ -248,3 +248,92 @@ describe('Seller model', () => {
         assert.notExists(missTesla.test, 'missTesla test property is null or undefined');
     });
 });
+
+// Testing model property validators
+const ev2 = new EV();
+
+describe('EV model validators are set', () => {
+    it('EV model requires make', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.make, 'ev make is required');
+        });
+    });
+
+    it('EV model requires model', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.model, 'ev model is required');
+        });
+    });
+
+    it('EV model requires year', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.year, 'ev year is required');
+        });
+    });
+
+    it('EV model requires price', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.price, 'ev price is required');
+        });
+    });
+
+    it('EV model requires mileage', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.mileage, 'ev mileage is required');
+        });
+    });
+
+    it('EV model requires location', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.location, 'ev location is required');
+        });
+    });
+
+    it('EV model requires image url', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.image_url, 'ev image url is required');
+        });
+    });
+
+    it('EV model requires seller', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.seller, 'ev seller is required');
+        });
+    });
+
+    it('EV model requires list date', () => {
+        ev2.validate((err) => {
+            assert.notExists(err.errors.list_date, 'ev list has default value, so no error occurs');
+        });
+    });
+
+    it('EV model requires equipment and options', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.equipment_and_options, 'ev equipment and options is required');
+        });
+    });
+
+    it('EV model requires exterior', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.exterior, 'ev exterior is required');
+        });
+    });
+
+    it('EV model requires interior', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.interior, 'ev interior is required');
+        });
+    });
+
+    it('EV model requires vehicle identification number', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.vehicle_identification_number, 'ev vehicle identification number is required');
+        });
+    });
+
+    it('EV model requires full vehicle inspection', () => {
+        ev2.validate((err) => {
+            assert.exists(err.errors.full_vehicle_inspection, 'ev full vehicle inspection is required');
+        });
+    });
+});

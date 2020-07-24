@@ -393,3 +393,17 @@ describe('Model model require validators are set', () => {
         });
     });
 });
+
+describe('Location model require validators are set', () => {
+    it('Location model requires city', () => {
+        location2.validate((err) => {
+            assert.exists(err.errors.city, 'location model requires city');
+        });
+    });
+
+    it('Location model requires country', () => {
+        location2.validate((err) => {
+            assert.exists(err.errors.country, 'location model requires country');
+        });
+    });
+});

@@ -64,69 +64,69 @@ describe('EV model', () => {
     });
 
     it('EV model has make', () => {
-        assert.instanceOf(ev.make, Make, 'ev make is instance of Make');
+        assert.instanceOf(ev.make, Make, 'ev\'s make is instance of Make');
     });
 
     it('EV model has model', () => {
-        assert.instanceOf(ev.model, Model, 'ev model is instance of Model');
+        assert.instanceOf(ev.model, Model, 'ev\'s model is instance of Model');
     });
 
     it('EV model has year', () => {
-        assert.strictEqual(ev.year, 2018, 'ev year is 2018');
+        assert.strictEqual(ev.year, 2018, 'ev\'s year is 2018');
     });
 
     it('EV model has price', () => {
-        assert.strictEqual(ev.price, 50000, 'ev price is 50000');
+        assert.strictEqual(ev.price, 50000, 'ev\'s price is 50000');
     });
 
     it('EV model has mileage', () => {
-        assert.strictEqual(ev.mileage, 18000, 'ev year is 18000');
+        assert.strictEqual(ev.mileage, 18000, 'ev\'s year is 18000');
     });
 
     it('EV model has location', () => {
-        assert.instanceOf(ev.location, Location, 'ev location is instance of Location');
+        assert.instanceOf(ev.location, Location, 'ev\'s location is instance of Location');
     });
 
     it('EV model has image url', () => {
         assert.strictEqual(ev.image_url, 'https://placeholder.com/image111', 
-                'ev image url is https://placeholder.com/image111');
+                'ev\'s image url is https://placeholder.com/image111');
     });
 
     it('EV model has seller', () => {
-        assert.instanceOf(ev.seller, Seller, 'ev seller is instance of Seller');
+        assert.instanceOf(ev.seller, Seller, 'ev\'s seller is instance of Seller');
     });
 
     it('EV model has list date', () => {
-        assert.strictEqual(ev.list_date, date, `ev list date is ${date}`);
+        assert.strictEqual(ev.list_date, date, `ev\'s list date is ${date}`);
     });
 
     it('EV model has equipment and options', () => {
-        assert.strictEqual(ev.equipment_and_options, 'placeholder', 'ev equipment and options is placeholder');
+        assert.strictEqual(ev.equipment_and_options, 'placeholder', 'ev\'s equipment and options is placeholder');
     });
 
     it('EV model has exterior', () => {
-        assert.strictEqual(ev.exterior, 'placeholder', 'ev exterior is placeholder');
+        assert.strictEqual(ev.exterior, 'placeholder', 'ev\'s exterior is placeholder');
     });
 
     it('EV model has interior', () => {
-        assert.strictEqual(ev.interior, 'placeholder', 'ev interior is placeholder');
+        assert.strictEqual(ev.interior, 'placeholder', 'ev\'s interior is placeholder');
     });
 
     it('EV model has vehicle identification number', () => {
         assert.strictEqual(ev.vehicle_identification_number, '1M8GDM9AXKP042788', 
-                'ev vehicle identification number is 1M8GDM9AXKP042788');
+                'ev\'s vehicle identification number is 1M8GDM9AXKP042788');
     });
 
     it('EV model has full vehicle inspection', () => {
-        assert.strictEqual(ev.full_vehicle_inspection, true, 'ev full vehicle inspection is true');
+        assert.strictEqual(ev.full_vehicle_inspection, true, 'ev\'s full vehicle inspection is true');
     });
 
     it('EV model has url', () => {
-        assert.strictEqual(ev.url, `/content/ev/${ev._id}`, `ev url is /content/ev/${ev._id}`);
+        assert.strictEqual(ev.url, `/content/ev/${ev._id}`, `ev\'s url is /content/ev/${ev._id}`);
     });
 
     it('EV model doesn\'t have test property', () => {
-        assert.notExists(ev.test, 'ev test property is null or undefined');
+        assert.notExists(ev.test, 'ev\'s test property is null or undefined');
     });
 });
 
@@ -140,16 +140,16 @@ describe('Make model', () => {
     });
 
     it('Make model has name', () => {
-        assert.strictEqual(tesla.name, 'Tesla', 'ev make is Tesla');
+        assert.strictEqual(tesla.name, 'Tesla', 'tesla\'s make is Tesla');
     });
 
     it('Make model has url', () => {
         assert.strictEqual(tesla.url, `/content/make/${tesla._id}`, 
-                `tesla url is /content/make/${tesla._id}`);
+                `tesla\'s url is /content/make/${tesla._id}`);
     });
 
     it('Make model doesn\'t have test property', () => {
-        assert.notExists(tesla.test, 'tesla test property is null or undefined');
+        assert.notExists(tesla.test, 'tesla\'s test property is null or undefined');
     });
 });
 
@@ -163,40 +163,40 @@ describe('Model model', () => {
     });
 
     it('Model model has make', () => {
-        assert.instanceOf(s70.make, Make, 's70 make is instance of Make');
+        assert.instanceOf(s70.make, Make, 's70\'s make is instance of Make');
     });
 
     it('Model model has name', () => {
-        assert.strictEqual(s70.name, 'S', 's70 name is S');
+        assert.strictEqual(s70.name, 'S', 's70\'s name is S');
     });
 
     it('Model model has secondary name', () => {
-        assert.strictEqual(s70.secondary_name, '70', 's70 secondary name is 70');
+        assert.strictEqual(s70.secondary_name, '70', 's70\'s secondary name is 70');
     });
     
     it('Model model has performance', () => {
-        assert.strictEqual(s70.performance, 'placeholder', 's70 performance is placeholder');
+        assert.strictEqual(s70.performance, 'placeholder', 's70\'s performance is placeholder');
     });
 
     it('Model model has charging', () => {
-        assert.strictEqual(s70.charging, 'placeholder', 's70 charging is placeholder');
+        assert.strictEqual(s70.charging, 'placeholder', 's70\'s charging is placeholder');
     });
 
     it('Model model has original msrp', () => {
-        assert.strictEqual(s70.original_msrp, 85000, 's70 original msrp is 85000');
+        assert.strictEqual(s70.original_msrp, 85000, 's70\'s original msrp is 85000');
     });
 
     it('Model model has rating', () => {
-        assert.strictEqual(s70.rating, 4.75, 's70 rating is 4.75');
+        assert.strictEqual(s70.rating, 4.75, 's70\'s rating is 4.75');
     });
 
     it('Model model has url', () => {
         assert.strictEqual(s70.url, `/content/model/${s70._id}`, 
-                `s70 url is /content/model/${s70._id}`);
+                `s70\'s url is /content/model/${s70._id}`);
     });
 
     it('Model model doesn\'t have test property', () => {
-        assert.notExists(s70.test, 's70 test property is null or undefined');
+        assert.notExists(s70.test, 's70\'s test property is null or undefined');
     });
 });
 
@@ -210,15 +210,15 @@ describe('Location model', () => {
     });
 
     it('Location model has city', () => {
-        assert.strictEqual(london.city, 'London', 'london city is London');
+        assert.strictEqual(london.city, 'London', 'london\'s city is London');
     });
 
     it('Location model has country', () => {
-        assert.strictEqual(london.country, 'UK', 'london country is UK');
+        assert.strictEqual(london.country, 'UK', 'london\'s country is UK');
     });
 
     it('Location model doesn\'t have test property', () => {
-        assert.notExists(london.test, 'london test property is null or undefined');
+        assert.notExists(london.test, 'london\'s test property is null or undefined');
     });
 });
 
@@ -232,20 +232,20 @@ describe('Seller model', () => {
     });
 
     it('Seller model has name', () => {
-        assert.strictEqual(missTesla.name, 'Miss Tesla', 'missTesla name is Miss Tesla');
+        assert.strictEqual(missTesla.name, 'Miss Tesla', 'missTesla\'s name is Miss Tesla');
     });
 
     it('Seller model has contact', () => {
         assert.strictEqual(missTesla.contact, 'miss.tesla@gmail.com', 
-                'missTesla contact is miss.tesla@gmail.com');
+                'missTesla\'s contact is miss.tesla@gmail.com');
     });
 
     it('Seller model has rating', () => {
-        assert.strictEqual(missTesla.rating, 4.2, 'missTesla rating is 4.2');
+        assert.strictEqual(missTesla.rating, 4.2, 'missTesla\'s rating is 4.2');
     });
 
     it('Seller model doesn\'t have test property', () => {
-        assert.notExists(missTesla.test, 'missTesla test property is null or undefined');
+        assert.notExists(missTesla.test, 'missTesla\'s test property is null or undefined');
     });
 });
 
@@ -271,19 +271,19 @@ const ev4 = new EV({
 describe('EV model validators are set', () => {
     it('EV model requires make', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.make, 'ev make is required');
+            assert.exists(err.errors.make, 'ev\'s make is required');
         });
     });
 
     it('EV model requires model', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.model, 'ev model is required');
+            assert.exists(err.errors.model, 'ev\'s model is required');
         });
     });
 
     it('EV model requires year', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.year, 'ev year is required');
+            assert.exists(err.errors.year, 'ev\'s year is required');
         });
     });
 
@@ -301,7 +301,7 @@ describe('EV model validators are set', () => {
 
     it('EV model requires price', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.price, 'ev price is required');
+            assert.exists(err.errors.price, 'ev\'s price is required');
         });
     });
 
@@ -313,7 +313,7 @@ describe('EV model validators are set', () => {
 
     it('EV model requires mileage', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.mileage, 'ev mileage is required');
+            assert.exists(err.errors.mileage, 'ev\'s mileage is required');
         });
     });
 
@@ -325,49 +325,49 @@ describe('EV model validators are set', () => {
 
     it('EV model requires location', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.location, 'ev location is required');
+            assert.exists(err.errors.location, 'ev\'s location is required');
         });
     });
 
     it('EV model requires image url', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.image_url, 'ev image url is required');
+            assert.exists(err.errors.image_url, 'ev\'s image url is required');
         });
     });
 
     it('EV model requires seller', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.seller, 'ev seller is required');
+            assert.exists(err.errors.seller, 'ev\'s seller is required');
         });
     });
 
     it('EV model requires list date', () => {
         ev2.validate((err) => {
-            assert.notExists(err.errors.list_date, 'ev list has default value, so no error occurs');
+            assert.notExists(err.errors.list_date, 'ev\'s list date has default value, so no error occurs');
         });
     });
 
     it('EV model requires equipment and options', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.equipment_and_options, 'ev equipment and options is required');
+            assert.exists(err.errors.equipment_and_options, 'ev\'s equipment and options is required');
         });
     });
 
     it('EV model requires exterior', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.exterior, 'ev exterior is required');
+            assert.exists(err.errors.exterior, 'ev\'s exterior is required');
         });
     });
 
     it('EV model requires interior', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.interior, 'ev interior is required');
+            assert.exists(err.errors.interior, 'ev\'s interior is required');
         });
     });
 
     it('EV model requires vehicle identification number', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.vehicle_identification_number, 'ev vehicle identification number is required');
+            assert.exists(err.errors.vehicle_identification_number, 'ev\'s vehicle identification number is required');
         });
     });
 
@@ -387,7 +387,7 @@ describe('EV model validators are set', () => {
 
     it('EV model requires full vehicle inspection', () => {
         ev2.validate((err) => {
-            assert.exists(err.errors.full_vehicle_inspection, 'ev full vehicle inspection is required');
+            assert.exists(err.errors.full_vehicle_inspection, 'ev\'s full vehicle inspection is required');
         });
     });
 });

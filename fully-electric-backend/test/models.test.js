@@ -256,7 +256,19 @@ const model2 = new Model();
 const location2 = new Location();
 const seller2 = new Seller();
 
-describe('EV model require validators are set', () => {
+const ev3 = new EV({
+    year: 1899,
+    price: -1,
+    mileage: -1,
+    vehicle_identification_number: 'xxxxxxxxxxxxxxxx',
+});
+
+const ev4 = new EV({
+    year: date.getFullYear() + 1,
+    vehicle_identification_number: 'xxxxxxxxxxxxxxxxxx',
+});
+
+describe('EV model validators are set', () => {
     it('EV model requires make', () => {
         ev2.validate((err) => {
             assert.exists(err.errors.make, 'ev make is required');
@@ -275,15 +287,39 @@ describe('EV model require validators are set', () => {
         });
     });
 
+    it('EV model\'s year isn\'t lower than 1900', () => {
+        ev3.validate((err) => {
+            assert.exists(err.errors.year, 'ev\'s year isn\'t lower than 1900');
+        });
+    });
+
+    it('EV model\'s year isn\'t greater than current year', () => {
+        ev4.validate((err) => {
+            assert.exists(err.errors.year, 'ev\'s year isn\'t greater than current year');
+        });
+    });
+
     it('EV model requires price', () => {
         ev2.validate((err) => {
             assert.exists(err.errors.price, 'ev price is required');
         });
     });
 
+    it('EV model\'s price isn\'t lower than 0', () => {
+        ev3.validate((err) => {
+            assert.exists(err.errors.price, 'ev\'s price isn\'t lower than 0');
+        });
+    });
+
     it('EV model requires mileage', () => {
         ev2.validate((err) => {
             assert.exists(err.errors.mileage, 'ev mileage is required');
+        });
+    });
+
+    it('EV model\'s mileage isn\'t lower than 0', () => {
+        ev3.validate((err) => {
+            assert.exists(err.errors.mileage, 'ev\'s mileage isn\'t lower than 0');
         });
     });
 
@@ -332,6 +368,20 @@ describe('EV model require validators are set', () => {
     it('EV model requires vehicle identification number', () => {
         ev2.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 'ev vehicle identification number is required');
+        });
+    });
+
+    it('EV model\'s vehicle identification number has lenght of 17', () => {
+        ev3.validate((err) => {
+            assert.exists(err.errors.vehicle_identification_number, 
+                    'ev\'s vehicle identification number has lenght of 17');
+        });
+    });
+
+    it('EV model\'s vehicle identification number has lenght of 17', () => {
+        ev4.validate((err) => {
+            assert.exists(err.errors.vehicle_identification_number, 
+                    'ev\'s vehicle identification number has lenght of 17');
         });
     });
 

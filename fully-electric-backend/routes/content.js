@@ -8,6 +8,9 @@ router.get('/', evController.index);
 // GET list of all evs
 router.get('/ev', evController.getEvs);
 
+// GET unique ev
+router.get('/ev/:ev_id', evController.getUniqueEv);
+
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);
 

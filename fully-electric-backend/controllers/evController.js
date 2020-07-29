@@ -7,6 +7,11 @@ exports.index = (req, res, next) => {
 exports.getEvs = (req, res, next) => {
     res.json({ title: 'List of all EVs' })
 }
+
+// GET unique ev
+exports.getUniqueEv = (req, res, next) => {
+    res.json({ title: `Unique EV with id ${req.params.ev_id}` })
+}
   
 // Placeholder code for testing POST routes.
 const testArray = [];

@@ -35,7 +35,7 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
-    it('unique ev route works 1', () => {
+    it('unique ev route works (1)', () => {
         return request(app)
             .get('/content/ev/12345')
             .expect('Content-type', /json/)
@@ -43,7 +43,7 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
-    it('unique ev route works 2', () => {
+    it('unique ev route works (2)', () => {
         return request(app)
             .get('/content/ev/678910')
             .expect('Content-type', /json/)

@@ -1,21 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const evController = require('../controllers/evController');
 
 // GET home page.
-router.get('/', function (req, res, next) {
-  res.json({ title: 'Fully Electric' });
-});
+router.get('/', evController.index);
 
 // Placeholder code for testing POST routes.
-const testArray = [];
+router.get('/test', evController.getTest);
 
-router.get('/test', function (req, res, next) {
-  res.json({ testArray });
-});
-
-router.post('/test', function (req, res, next) {
-  testArray.push(req.body.item);
-  res.send('Success!');
-});
+router.post('/test', evController.postTest);
 
 module.exports = router;

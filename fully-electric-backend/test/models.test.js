@@ -250,160 +250,160 @@ describe('Seller model', () => {
 });
 
 // Testing model property validators
-const ev2 = new EV();
-const make2 = new Make();
-const model2 = new Model();
-const location2 = new Location();
-const seller2 = new Seller();
+const evEmpty = new EV();
+const makeEmpty = new Make();
+const modelEmpty = new Model();
+const locationEmpty = new Location();
+const sellerEmpty = new Seller();
 
-const ev3 = new EV({
+const evMinValidation = new EV({
     year: 1899,
     price: -1,
     mileage: -1,
     vehicle_identification_number: 'xxxxxxxxxxxxxxxx',
 });
 
-const ev4 = new EV({
+const evMaxValidation = new EV({
     year: date.getFullYear() + 1,
     vehicle_identification_number: 'xxxxxxxxxxxxxxxxxx',
 });
 
-const model3 = new Model({
+const modelMinValidation = new Model({
     original_msrp: -1,
     rating: -1,
 });
 
-const model4 = new Model({
+const modelMaxValidation = new Model({
     rating: 5.1,
 });
 
-const seller3 = new Seller({
+const sellerMinValidation = new Seller({
     rating: -1,
 });
 
-const seller4 = new Seller({
+const sellerMaxValidation = new Seller({
     rating: 5.1,
 });
 
 describe('EV model validators are set', () => {
     it('EV model requires make', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.make, 'ev\'s make is required');
         });
     });
 
     it('EV model requires model', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.model, 'ev\'s model is required');
         });
     });
 
     it('EV model requires year', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.year, 'ev\'s year is required');
         });
     });
 
     it('EV model\'s year isn\'t lower than 1900', () => {
-        ev3.validate((err) => {
+        evMinValidation.validate((err) => {
             assert.exists(err.errors.year, 'ev\'s year isn\'t lower than 1900');
         });
     });
 
     it('EV model\'s year isn\'t greater than current year', () => {
-        ev4.validate((err) => {
+        evMaxValidation.validate((err) => {
             assert.exists(err.errors.year, 'ev\'s year isn\'t greater than current year');
         });
     });
 
     it('EV model requires price', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.price, 'ev\'s price is required');
         });
     });
 
     it('EV model\'s price isn\'t lower than 0', () => {
-        ev3.validate((err) => {
+        evMinValidation.validate((err) => {
             assert.exists(err.errors.price, 'ev\'s price isn\'t lower than 0');
         });
     });
 
     it('EV model requires mileage', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.mileage, 'ev\'s mileage is required');
         });
     });
 
     it('EV model\'s mileage isn\'t lower than 0', () => {
-        ev3.validate((err) => {
+        evMinValidation.validate((err) => {
             assert.exists(err.errors.mileage, 'ev\'s mileage isn\'t lower than 0');
         });
     });
 
     it('EV model requires location', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.location, 'ev\'s location is required');
         });
     });
 
     it('EV model requires image url', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.image_url, 'ev\'s image url is required');
         });
     });
 
     it('EV model requires seller', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.seller, 'ev\'s seller is required');
         });
     });
 
     it('EV model requires list date', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.notExists(err.errors.list_date, 'ev\'s list date has default value, so no error occurs');
         });
     });
 
     it('EV model requires equipment and options', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.equipment_and_options, 'ev\'s equipment and options is required');
         });
     });
 
     it('EV model requires exterior', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.exterior, 'ev\'s exterior is required');
         });
     });
 
     it('EV model requires interior', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.interior, 'ev\'s interior is required');
         });
     });
 
     it('EV model requires vehicle identification number', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 'ev\'s vehicle identification number is required');
         });
     });
 
     it('EV model\'s vehicle identification number has lenght of 17', () => {
-        ev3.validate((err) => {
+        evMinValidation.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 
                     'ev\'s vehicle identification number has lenght of 17');
         });
     });
 
     it('EV model\'s vehicle identification number has lenght of 17', () => {
-        ev4.validate((err) => {
+        evMaxValidation.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 
                     'ev\'s vehicle identification number has lenght of 17');
         });
     });
 
     it('EV model requires full vehicle inspection', () => {
-        ev2.validate((err) => {
+        evEmpty.validate((err) => {
             assert.exists(err.errors.full_vehicle_inspection, 'ev\'s full vehicle inspection is required');
         });
     });
@@ -411,7 +411,7 @@ describe('EV model validators are set', () => {
 
 describe('Make model require validators are set', () => {
     it('Make model requires name', () => {
-        make2.validate((err) => {
+        makeEmpty.validate((err) => {
             assert.exists(err.errors.name, 'make model requires name');
         });
     });
@@ -419,61 +419,61 @@ describe('Make model require validators are set', () => {
 
 describe('Model model require validators are set', () => {
     it('Model model requires make', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.exists(err.errors.make, 'model model requires make');
         });
     });
 
     it('Model model requires name', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.exists(err.errors.name, 'model model requires name');
         });
     });
 
     it('Model model doesn\'t require secondary name', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.notExists(err.errors.secondary_name, 'model model doesn\'t require secondary name');
         });
     });
 
     it('Model model requires performance', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.exists(err.errors.performance, 'model model requires performance');
         });
     });
 
     it('Model model requires charging', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.exists(err.errors.charging, 'model model requires charging');
         });
     });
 
     it('Model model requires original msrp', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.exists(err.errors.original_msrp, 'model model requires original msrp');
         });
     });
 
     it('Model model\'s original msrp is greater than 0', () => {
-        model3.validate((err) => {
+        modelMinValidation.validate((err) => {
             assert.exists(err.errors.original_msrp, 'model model\'s original msrp is greater than 0');
         });
     });
 
     it('Model model requires rating', () => {
-        model2.validate((err) => {
+        modelEmpty.validate((err) => {
             assert.exists(err.errors.rating, 'model model requires rating');
         });
     });
 
     it('Model model\'s rating is greater than 0', () => {
-        model3.validate((err) => {
+        modelMinValidation.validate((err) => {
             assert.exists(err.errors.rating, 'model model\'s rating is greater than 0');
         });
     });
 
     it('Model model\'s rating is less or equal to 5', () => {
-        model4.validate((err) => {
+        modelMaxValidation.validate((err) => {
             assert.exists(err.errors.rating, 'model model\'s rating is less or equal to 5');
         });
     });
@@ -481,13 +481,13 @@ describe('Model model require validators are set', () => {
 
 describe('Location model require validators are set', () => {
     it('Location model requires city', () => {
-        location2.validate((err) => {
+        locationEmpty.validate((err) => {
             assert.exists(err.errors.city, 'location model requires city');
         });
     });
 
     it('Location model requires country', () => {
-        location2.validate((err) => {
+        locationEmpty.validate((err) => {
             assert.exists(err.errors.country, 'location model requires country');
         });
     });
@@ -495,31 +495,31 @@ describe('Location model require validators are set', () => {
 
 describe('Seller model require validators are set', () => {
     it('Seller model requires name', () => {
-        seller2.validate((err) => {
+        sellerEmpty.validate((err) => {
             assert.exists(err.errors.name, 'seller model requires name');
         });
     });
 
     it('Seller model requires contact', () => {
-        seller2.validate((err) => {
+        sellerEmpty.validate((err) => {
             assert.exists(err.errors.contact, 'seller model requires contact');
         });
     });
 
     it('Seller model requires rating', () => {
-        seller2.validate((err) => {
+        sellerEmpty.validate((err) => {
             assert.exists(err.errors.rating, 'seller model requires rating');
         });
     });
 
     it('Seller model\'s rating is greater than 0', () => {
-        seller3.validate((err) => {
+        sellerMinValidation.validate((err) => {
             assert.exists(err.errors.rating, 'seller model\'s rating is greater than 0');
         });
     });
 
     it('Seller model\'s rating is less or equal to 0', () => {
-        seller4.validate((err) => {
+        sellerMaxValidation.validate((err) => {
             assert.exists(err.errors.rating, 'seller model\'s rating is less or equal to 0');
         });
     });

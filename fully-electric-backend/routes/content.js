@@ -6,7 +6,7 @@ const evController = require('../controllers/evController');
 router.get('/', evController.index);
 
 // GET list of all evs
-router.get('/ev', evController.getEvs);
+router.get('/evs', evController.getEvs);
 
 // GET unique ev
 router.get('/ev/:ev_id', evController.getUniqueEv);

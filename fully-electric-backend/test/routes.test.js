@@ -29,7 +29,7 @@ describe('Routes testing', () => {
 
     it('all evs route works', () => {
         return request(app)
-            .get('/content/ev')
+            .get('/content/evs')
             .expect('Content-type', /json/)
             .expect({ title: 'List of all EVs' })
             .expect(200)
@@ -50,7 +50,7 @@ describe('Routes testing', () => {
             .expect({ title: 'Unique EV with id 678910' })
             .expect(200)
     });
-    
+
     it('testing route works', () => {
         return request(app)
             .post('/content/test')

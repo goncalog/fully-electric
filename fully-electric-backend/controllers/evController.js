@@ -10,7 +10,7 @@ exports.getEvs = (req, res, next) => {
 
 // GET unique ev
 exports.getUniqueEv = (req, res, next) => {
-    res.json({ title: `Unique EV with id ${req.params.ev_id}` })
+    res.json({ title: `Unique EV with id ${req.params.id}` })
 }
   
 // Placeholder code for testing POST routes.

@@ -29,9 +29,9 @@ describe('Routes testing', () => {
 
     it('all evs route works', () => {
         return request(app)
-            .get('/content/evs')
+            .get('/content/ev')
             .expect('Content-type', /json/)
-            .expect({ title: 'List of all evs' })
+            .expect({ title: 'List of all EVs' })
             .expect(200)
     });
     

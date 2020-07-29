@@ -34,6 +34,22 @@ describe('Routes testing', () => {
             .expect({ title: 'List of all EVs' })
             .expect(200)
     });
+
+    it('unique ev route works 1', () => {
+        return request(app)
+            .get('/content/ev/12345')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Unique EV with id 12345' })
+            .expect(200)
+    });
+
+    it('unique ev route works 2', () => {
+        return request(app)
+            .get('/content/ev/678910')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Unique EV with id 678910' })
+            .expect(200)
+    });
     
     it('testing route works', () => {
         return request(app)

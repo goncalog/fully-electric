@@ -26,6 +26,14 @@ describe('Routes testing', () => {
             .expect({ title: 'Fully Electric' })
             .expect(200)
     });
+
+    it('all evs route works', () => {
+        return request(app)
+            .get('/content/evs')
+            .expect('Content-type', /json/)
+            .expect({ title: 'List of all evs' })
+            .expect(200)
+    });
     
     it('testing route works', () => {
         return request(app)

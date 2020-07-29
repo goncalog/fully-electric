@@ -14,6 +14,7 @@ const LocalStrategy = require("passport-local").Strategy;
 require('./database/mongoConfig');
 
 const indexRouter = require('./routes/index');
+const contentRouter = require('./routes/content');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/content', contentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

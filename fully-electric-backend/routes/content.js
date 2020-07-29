@@ -8,6 +8,12 @@ router.get('/', evController.index);
 // GET list of all evs
 router.get('/evs', evController.getEvs);
 
+// GET data to create new ev
+router.get('/ev/create', evController.getCreateEv);
+
+// POST to create new ev
+router.post('/ev/create', evController.postCreateEv);
+
 // GET unique ev
 router.get('/ev/:id', evController.getUniqueEv);
 

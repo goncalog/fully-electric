@@ -35,6 +35,9 @@ router.get('/model/:id', modelController.getModel);
 // GET seller contact form
 router.get('/seller/:id', sellerController.getSellerContactForm);
 
+// POST request to contact seller
+router.post('/seller/:id', sellerController.postContactSeller);
+
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);
 

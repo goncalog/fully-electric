@@ -115,6 +115,22 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
+    it('model route works (1)', () => {
+        return request(app)
+            .get('/content/model/12345')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Model with id 12345' })
+            .expect(200)
+    });
+
+    it('model route works (2)', () => {
+        return request(app)
+            .get('/content/model/678910')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Model with id 678910' })
+            .expect(200)
+    });
+
     it('testing route works', () => {
         return request(app)
             .post('/content/test')

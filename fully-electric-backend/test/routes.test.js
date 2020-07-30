@@ -131,6 +131,22 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
+    it('route for getting seller contact form works (1)', () => {
+        return request(app)
+            .get('/content/seller/12345')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Contact form from seller with id 12345' })
+            .expect(200)
+    });
+
+    it('route for getting seller contact form works (2)', () => {
+        return request(app)
+            .get('/content/seller/678910')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Contact form from seller with id 678910' })
+            .expect(200)
+    });
+
     it('testing route works', () => {
         return request(app)
             .post('/content/test')

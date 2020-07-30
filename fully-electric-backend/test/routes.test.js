@@ -67,6 +67,22 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
+    it('route to get data to update ev works (1)', () => {
+        return request(app)
+            .get('/content/ev/12345/update')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Data to update EV with id 12345' })
+            .expect(200)
+    });
+
+    it('route to get data to update ev works (2)', () => {
+        return request(app)
+            .get('/content/ev/678910/update')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Data to update EV with id 678910' })
+            .expect(200)
+    });
+    
     it('route to update ev works (1)', () => {
         return request(app)
             .put('/content/ev/12345/update')

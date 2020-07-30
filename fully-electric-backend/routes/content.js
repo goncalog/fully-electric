@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const evController = require('../controllers/evController');
+const makeController = require('../controllers/makeController');
 
 // GET home page
 router.get('/', evController.index);
@@ -22,6 +23,9 @@ router.put('/ev/:id/update', evController.putUpdateEv);
 
 // DELETE ev
 router.delete('/ev/:id/delete', evController.deleteEv);
+
+// GET make
+router.get('/make/:id', makeController.getMake);
 
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);

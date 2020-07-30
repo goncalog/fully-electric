@@ -22,6 +22,11 @@ exports.getCreateEv = (req, res, next) => {
 exports.postCreateEv = (req, res, next) => {
     res.json({ title: 'Create new EV' });
 }
+
+// PUT to update ev
+exports.putUpdateEv = (req, res, next) => {
+    res.json({ title: `Update EV with id ${req.params.id}` });
+}
   
 // Placeholder code for testing POST routes.
 const testArray = [];

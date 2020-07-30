@@ -17,6 +17,9 @@ router.post('/ev/create', evController.postCreateEv);
 // GET unique ev
 router.get('/ev/:id', evController.getUniqueEv);
 
+// PUT to update ev
+router.put('/ev/:id/update', evController.putUpdateEv);
+
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);
 

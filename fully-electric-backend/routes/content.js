@@ -20,6 +20,9 @@ router.get('/ev/:id', evController.getUniqueEv);
 // PUT to update ev
 router.put('/ev/:id/update', evController.putUpdateEv);
 
+// DELETE ev
+router.delete('/ev/:id/delete', evController.deleteEv);
+
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);
 

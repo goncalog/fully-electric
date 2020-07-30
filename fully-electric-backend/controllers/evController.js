@@ -27,7 +27,12 @@ exports.postCreateEv = (req, res, next) => {
 exports.putUpdateEv = (req, res, next) => {
     res.json({ title: `Update EV with id ${req.params.id}` });
 }
-  
+
+// DELETE ev
+exports.deleteEv = (req, res, next) => {
+    res.json({ title: `Delete EV with id ${req.params.id}` });
+}
+
 // Placeholder code for testing POST routes.
 const testArray = [];
 

@@ -1,5 +1,5 @@
-// GET seller contact form
-exports.getSellerContactForm = (req, res, next) => {
+// GET request to contact seller
+exports.getContactSeller = (req, res, next) => {
     res.json({ title: `Contact form from seller with id ${req.params.id}` });
 }
 

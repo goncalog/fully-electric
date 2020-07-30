@@ -32,8 +32,8 @@ router.get('/make/:id', makeController.getMake);
 // GET model
 router.get('/model/:id', modelController.getModel);
 
-// GET seller contact form
-router.get('/seller/:id', sellerController.getSellerContactForm);
+// GET request to contact seller
+router.get('/seller/:id', sellerController.getContactSeller);
 
 // POST request to contact seller
 router.post('/seller/:id', sellerController.postContactSeller);

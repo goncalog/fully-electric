@@ -5,34 +5,34 @@ const makeController = require('../controllers/makeController');
 const modelController = require('../controllers/modelController');
 const sellerController = require('../controllers/sellerController');
 
-// GET home page
+// GET request for home page
 router.get('/', evController.index);
 
-// GET list of all evs
+// GET request for list of all evs
 router.get('/evs', evController.getEvs);
 
-// GET data to create new ev
+// GET request for data to create new ev
 router.get('/ev/create', evController.getCreateEv);
 
-// POST to create new ev
+// POST request to create new ev
 router.post('/ev/create', evController.postCreateEv);
 
-// GET unique ev
+// GET request for unique ev
 router.get('/ev/:id', evController.getUniqueEv);
 
 // GET request to update ev
 router.get('/ev/:id/update', evController.getUpdateEv);
 
-// PUT to update ev
+// PUT request to update ev
 router.put('/ev/:id/update', evController.putUpdateEv);
 
-// DELETE ev
+// DELETE request to delete ev
 router.delete('/ev/:id/delete', evController.deleteEv);
 
-// GET make
+// GET request for make
 router.get('/make/:id', makeController.getMake);
 
-// GET model
+// GET request for model
 router.get('/model/:id', modelController.getModel);
 
 // GET request to contact seller

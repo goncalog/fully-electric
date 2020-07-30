@@ -99,6 +99,22 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
+    it('make route works (1)', () => {
+        return request(app)
+            .get('/content/make/12345')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Make with id 12345' })
+            .expect(200)
+    });
+
+    it('make route works (2)', () => {
+        return request(app)
+            .get('/content/make/678910')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Make with id 678910' })
+            .expect(200)
+    });
+
     it('testing route works', () => {
         return request(app)
             .post('/content/test')

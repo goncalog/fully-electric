@@ -51,7 +51,7 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
-    it('route to get data to create new ev', () => {
+    it('route to get data to create new ev works', () => {
         return request(app)
             .get('/content/ev/create')
             .expect('Content-type', /json/)
@@ -59,11 +59,27 @@ describe('Routes testing', () => {
             .expect(200)
     });
 
-    it('route to create new ev', () => {
+    it('route to create new ev works', () => {
         return request(app)
             .post('/content/ev/create')
             .expect('Content-type', /json/)
             .expect({ title: 'Create new EV' })
+            .expect(200)
+    });
+
+    it('route to update ev works (1)', () => {
+        return request(app)
+            .put('/content/ev/12345/update')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Update EV with id 12345' })
+            .expect(200)
+    });
+
+    it('route to update ev works (2)', () => {
+        return request(app)
+            .put('/content/ev/678910/update')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Update EV with id 678910' })
             .expect(200)
     });
 

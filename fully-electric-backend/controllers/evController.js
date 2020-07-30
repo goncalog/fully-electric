@@ -23,6 +23,11 @@ exports.postCreateEv = (req, res, next) => {
     res.json({ title: 'Create new EV' });
 }
 
+// GET request to update ev
+exports.getUpdateEv = (req, res, next) => {
+    res.json({ title: `Data to update EV with id ${req.params.id}` });
+}
+
 // PUT to update ev
 exports.putUpdateEv = (req, res, next) => {
     res.json({ title: `Update EV with id ${req.params.id}` });

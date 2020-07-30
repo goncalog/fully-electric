@@ -20,6 +20,9 @@ router.post('/ev/create', evController.postCreateEv);
 // GET unique ev
 router.get('/ev/:id', evController.getUniqueEv);
 
+// GET request to update ev
+router.get('/ev/:id/update', evController.getUpdateEv);
+
 // PUT to update ev
 router.put('/ev/:id/update', evController.putUpdateEv);
 

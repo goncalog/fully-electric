@@ -3,6 +3,7 @@ const router = express.Router();
 const evController = require('../controllers/evController');
 const makeController = require('../controllers/makeController');
 const modelController = require('../controllers/modelController');
+const sellerController = require('../controllers/sellerController');
 
 // GET home page
 router.get('/', evController.index);
@@ -30,6 +31,9 @@ router.get('/make/:id', makeController.getMake);
 
 // GET model
 router.get('/model/:id', modelController.getModel);
+
+// GET seller contact form
+router.get('/seller/:id', sellerController.getSellerContactForm);
 
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);

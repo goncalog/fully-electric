@@ -1,4 +1,6 @@
 import React from 'react';
+import logo from '../logo.svg';
+import '../css/Navigation.css';
 import { Link, withRouter } from 'react-router-dom';
 
 function Navigation(props) {
@@ -7,6 +9,7 @@ function Navigation(props) {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
+                        <img src={logo} className="App-logo" alt="logo" />
                         Fully Electric
                     </Link>
                     <button        

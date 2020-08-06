@@ -38,3 +38,10 @@ it('renders Contact link correctly', () => {
     expect(contactLink).toBeInTheDocument();
     expect(contactLink.getAttribute('href')).toBe('/contact');
 });
+
+it('renders the logo correctly', () => {
+    const { getByText } = render(<Router><Navigation /></Router>);
+    const titleLink = getByText(/Fully Electric/);
+    expect(titleLink.firstChild.getAttribute('class')).toBe('App-logo');
+    expect(titleLink.firstChild.getAttribute('src')).toBe('logo.svg');
+});

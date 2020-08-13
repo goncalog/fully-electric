@@ -28,8 +28,3 @@ test('renders Routes component', () => {
   const wrapper = shallow(<App />);
   expect(wrapper.find(Routes).length).toBe(1);
 });
-
-test('renders the Switch component', () => {
-  const wrapper = shallow(<App />);
-  expect(wrapper.find(Switch).length).toBe(1);
-});

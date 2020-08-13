@@ -1,11 +1,11 @@
 import React from 'react';
 import Footer from './Footer';
-import Routes from './Routes';
+import AppRouter from './AppRouter';
 
 function App() {
   return (
     <div className="App">
-      <Routes />
+      <AppRouter />
       <Footer />
     </div>
   );

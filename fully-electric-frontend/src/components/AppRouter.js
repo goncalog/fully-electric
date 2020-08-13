@@ -5,7 +5,7 @@ import EVs from './EVs';
 import Contact from './Contact';
 import Navigation from './Navigation';
 
-function Routes() {
+function AppRouter() {
     return (
         <Router>
             <Navigation />
@@ -18,4 +18,4 @@ function Routes() {
     );
 }
 
-export default Routes;
+export default AppRouter;

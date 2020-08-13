@@ -5,7 +5,6 @@ import Home from '../components/Home';
 import EVs from '../components/EVs';
 import Contact from '../components/Contact';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });

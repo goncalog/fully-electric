@@ -32,3 +32,21 @@ test('renders three Route components', () => {
   const wrapper = shallow(<App />);
   expect(wrapper.find(Route).length).toBe(3);
 });
+
+test('renders Home Route component with correct path', () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(Route)
+      .contains(<Route path='/' exact component={ () => { <Home /> } }></Route>)).toBe(true);
+});
+
+test('renders EVs Route component with correct path', () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(Route)
+      .contains(<Route path='/content/evs' exact component={ () => { <EVs /> } }></Route>)).toBe(true);
+});
+
+test('renders Contact Route component with correct path', () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(Route)
+      .contains(<Route path='/contact' exact component={ () => { <Contact /> } }></Route>)).toBe(true);
+});

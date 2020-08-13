@@ -4,11 +4,16 @@ import Routes from '../components/Routes';
 import Home from '../components/Home';
 import EVs from '../components/EVs';
 import Contact from '../components/Contact';
-import { BrowserRouter as Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
+
+test('renders the Router component', () => {
+    const wrapper = shallow(<Routes />);
+    expect(wrapper.find(Router).length).toBe(1);
+  });
 
 it('renders two children', () => {
     const wrapper = shallow(<Routes />);

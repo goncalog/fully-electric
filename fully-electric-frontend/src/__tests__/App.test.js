@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import App from '../components/App';
 import Navigation from '../components/Navigation';

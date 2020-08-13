@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from './Footer';
 
@@ -8,6 +8,10 @@ function App() {
     <div className="App">
       <Router>
         <Navigation />
+        
+        <Switch>
+
+        </Switch>
 
         <Footer />
       </Router>

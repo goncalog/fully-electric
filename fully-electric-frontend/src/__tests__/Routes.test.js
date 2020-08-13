@@ -3,7 +3,7 @@ import Routes from '../components/Routes';
 import Home from '../components/Home';
 import EVs from '../components/EVs';
 import Contact from '../components/Contact';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Route, Switch } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -11,8 +11,13 @@ configure({ adapter: new Adapter() });
 
 it('renders one child', () => {
     const wrapper = shallow(<Routes />);
-    expect(React.Children.count(wrapper.children())).toEqual(3);
+    expect(React.Children.count(wrapper.children())).toEqual(1);
 });
+
+test('renders the Switch component', () => {
+    const wrapper = shallow(<Routes />);
+    expect(wrapper.find(Switch).length).toBe(1);
+  });
 
 test('renders three Route components', () => {
     const wrapper = shallow(<Routes />);

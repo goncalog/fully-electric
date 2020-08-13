@@ -22,3 +22,8 @@ test('renders the Footer component', () => {
   const wrapper = shallow(<App />);
   expect(wrapper.find(Footer).length).toBe(1);
 });
+
+test('renders the Switch component', () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(Switch).length).toBe(1);
+});

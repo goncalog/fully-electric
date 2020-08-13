@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from './Footer';
+import Routes from './Routes';
 
 function App() {
   return (
@@ -10,9 +11,7 @@ function App() {
         <Navigation />
         
         <Switch>
-          <Route></Route>
-          <Route></Route>
-          <Route></Route>
+          <Routes />
         </Switch>
 
         <Footer />

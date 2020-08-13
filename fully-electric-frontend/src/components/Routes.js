@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 function Routes() {
     return (
         <Router>
+            <Navigation />
             <Switch>
                 <Route path='/' exact component={Home}></Route>
                 <Route path='/content/evs' exact component={EVs}></Route>

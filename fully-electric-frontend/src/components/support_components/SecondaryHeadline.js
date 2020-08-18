@@ -2,8 +2,10 @@ import React from 'react';
 
 class SecondaryHeadline extends React.Component {
     render() {
+        const secondaryHeadlineText = this.props.secondaryHeadline;
+
         return (
-            <h3 className="secondary-headline">Test drive it for FREE for one week before purchasing</h3>
+            <h3 className="secondary-headline">{secondaryHeadlineText}</h3>
         );
     }
 }

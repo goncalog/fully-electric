@@ -4,14 +4,34 @@ import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-test('SecondaryHeadline component has one child', () => {
-    const wrapper = shallow(<SecondaryHeadline />);
-    expect(wrapper.children().length).toEqual(1);
-});
+describe('SecondaryHeadline', () => {
+    let props;
+    let shallowSecondaryHeadline;
+    const secondaryHeadline = () => {
+        if (!shallowSecondaryHeadline) {
+            shallowSecondaryHeadline = shallow(<SecondaryHeadline {...props}/>);
+        }
+        return shallowSecondaryHeadline;
+    }
 
-test('SecondaryHeadline has h3 HTML element with some text', () => {
-    const wrapper = shallow(<SecondaryHeadline />);
-    const shallowWrapper = wrapper.find('h3.secondary-headline');
-    expect(shallowWrapper.length).toEqual(1);
-    expect(shallowWrapper.text()).toBe('Test drive it for FREE for one week before purchasing');
+    // This reset the props and shallowSecondaryHeadline variables before every test. 
+    // Otherwise, state from one test would leak into another. 
+    // By setting shallowSecondaryHeadline to undefined here, when the next test runs, 
+    // if it calls secondaryHeadline, a new SecondaryHeadline will be created with the current props
+    beforeEach(() => {
+        props = {
+            secondaryHeadline: 'Text to test SecondaryHeadline',
+        };
+        shallowSecondaryHeadline = undefined;
+    });
+
+    test('has one child', () => {
+        expect(secondaryHeadline().children().length).toEqual(1);
+    });
+    
+    test('has h3 HTML element with some text', () => {
+        const shallowWrapper = secondaryHeadline().find('h3.secondary-headline');
+        expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.text()).toBe(props.secondaryHeadline);
+    });
 });

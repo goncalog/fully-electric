@@ -1,6 +1,7 @@
 import React from 'react';
 import HeadlineContainer from './support_components/HeadlineContainer';
 import background from '../media/headline-background.jpg';
+import '../css/Home.css';
 
 export default class Home extends React.Component {
     render() {

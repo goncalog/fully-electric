@@ -1,5 +1,5 @@
 import React from 'react';
-import BenefitContainer from '../../components/support_components/BenefitContainer';
+import BenefitsContainer from '../../components/support_components/BenefitsContainer';
 import Benefit from '../../components/support_components/Benefit';
 import CallToActionButton from '../../components/support_components/CallToActionButton';
 import { configure, shallow } from 'enzyme';
@@ -11,7 +11,7 @@ describe('BenefitContainer', () => {
     let shallowBenefitContainer;
     const benefitContainer = () => {
         if (!shallowBenefitContainer) {
-            shallowBenefitContainer = shallow(<BenefitContainer {...props} />);
+            shallowBenefitContainer = shallow(<BenefitsContainer {...props} />);
         }
         return shallowBenefitContainer;
     }
@@ -19,7 +19,7 @@ describe('BenefitContainer', () => {
     // This reset the props and shallowBenefitContainer variables before every test. 
     // Otherwise, state from one test would leak into another. 
     // By setting shallowBenefitContainer to undefined here, when the next test runs, 
-    // if it calls benefitContainer, a new BenefitContainer will be created with the current props
+    // if it calls benefitContainer, a new BenefitsContainer will be created with the current props
     beforeEach(() => {
         props = {
             benefits: [

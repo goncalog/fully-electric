@@ -30,7 +30,7 @@ describe('EVFeatureValue', () => {
     });
 
     test('has one p HTML element with some text passed as a property', () => {
-        const shallowWrapper = evFeatureValue().find('p.feature-value');
+        const shallowWrapper = evFeatureValue().find('p.feature-value.small');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.text()).toBe(props.value);
     });

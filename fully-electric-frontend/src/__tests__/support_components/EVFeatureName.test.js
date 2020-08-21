@@ -29,8 +29,8 @@ describe('EVFeatureName', () => {
         expect(evFeatureName().children().length).toEqual(1);
     });
 
-    test('has one h5 HTML element with some text passed as a property', () => {
-        const shallowWrapper = evFeatureName().find('h5.feature-name');
+    test('has one p HTML element with some text passed as a property', () => {
+        const shallowWrapper = evFeatureName().find('p.feature-name');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.text()).toBe(props.name);
     });

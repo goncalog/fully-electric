@@ -2,6 +2,7 @@ import React from 'react';
 import Home from '../components/Home';
 import HeadlineContainer from '../components/support_components/HeadlineContainer';
 import BenefitsContainer from '../components/support_components/BenefitsContainer';
+import SellerContainer from '../components/support_components/SellerContainer';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -23,8 +24,8 @@ describe('Home', () => {
         shallowHome = undefined;
     });
 
-    test('has two children', () => {
-        expect(home().children().length).toEqual(2);
+    test('has three children', () => {
+        expect(home().children().length).toEqual(3);
     });
 
     test('has one HeadlineContainer', () => {
@@ -48,5 +49,18 @@ describe('Home', () => {
         const shallowWrapper = home().find(BenefitsContainer);
         expect(shallowWrapper.prop('benefits').length).toEqual(3);
         expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s GO!');
+    });
+
+    test('has one SellerContainer', () => {
+        expect(home().find(SellerContainer).length).toEqual(1);
+    });
+    
+    test('renders SellerContainer with passed properties', () => {
+        const shallowWrapper = home().find(SellerContainer);
+        expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('mainHeadline')).toBe('Sell your EV for more');
+        expect(shallowWrapper.prop('secondaryHeadline'))
+                .toBe('Get £1000 to £3000 more than if you sold to a car dealer');
+        expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s SELL!');
     });
 });

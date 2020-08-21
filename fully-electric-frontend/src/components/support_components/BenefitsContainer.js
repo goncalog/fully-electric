@@ -5,7 +5,7 @@ import CallToActionButton from './CallToActionButton';
 export default class BenefitsContainer extends React.Component {
     render() {
         return (
-            <div className="benefit-container">
+            <div className="benefits-container">
                 {this.props.benefits.map((benefit, index) => {
                     return (
                         <Benefit benefitTitle={benefit.title} benefitText={benefit.text} key={index} />

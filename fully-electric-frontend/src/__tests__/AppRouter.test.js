@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation';
 import AppRouter from '../components/AppRouter';
 import Home from '../components/Home';
 import EVs from '../components/EVs';
+import EV from '../components/EV';
 import Contact from '../components/Contact';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { shallow, configure } from 'enzyme';
@@ -29,9 +30,9 @@ test('renders the Switch component', () => {
     expect(wrapper.find(Switch).length).toBe(1);
 });
 
-test('renders three Route components', () => {
+test('renders 4 Route components', () => {
     const wrapper = shallow(<AppRouter />);
-    expect(wrapper.find(Route).length).toBe(3);
+    expect(wrapper.find(Route).length).toBe(4);
 });
 
 test('renders all Route components with correct paths', () => {
@@ -43,6 +44,7 @@ test('renders all Route components with correct paths', () => {
     }, {});
     expect(pathMap['/']).toBe(Home);
     expect(pathMap['/content/evs']).toBe(EVs);
+    expect(pathMap['/content/ev/:id']).toBe(EV);
     expect(pathMap['/contact']).toBe(Contact);
 });
   

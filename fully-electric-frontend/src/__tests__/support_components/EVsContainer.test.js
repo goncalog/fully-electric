@@ -1,6 +1,7 @@
 import React from 'react';
 import EVsContainer from '../../components/support_components/EVsContainer';
 import EVIntroCard from '../../components/support_components/EVIntroCard';
+import { Link } from 'react-router-dom';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -107,6 +108,16 @@ describe('EVsContainer', () => {
         expect(evsContainer().children().length).toEqual(4);
     });
 
+    test('has 4 Link components rendered with passed properties', () => {
+        const shallowWrapper = evsContainer().find(Link);
+        expect(shallowWrapper.length).toEqual(4);
+
+        shallowWrapper.forEach((link, i) => {
+            expect(link.prop('to')).toBe(`/content/ev/${i}`);
+            expect(link.children().key()).toBe(i.toString());
+        });
+    });
+
     test('has 4 EVIntroCard components rendered with passed properties', () => {
         const shallowWrapper = evsContainer().find(EVIntroCard);
         expect(shallowWrapper.length).toEqual(4);
@@ -116,6 +127,7 @@ describe('EVsContainer', () => {
             expect(ev.prop('title')).toBe(props.evs[i].title);
             expect(ev.prop('price')).toBe(props.evs[i].price);
             expect(ev.prop('evFeatures')).toBe(props.evs[i].evFeatures);
+            expect(ev.key()).toBe(i.toString());
         });
     });
 });

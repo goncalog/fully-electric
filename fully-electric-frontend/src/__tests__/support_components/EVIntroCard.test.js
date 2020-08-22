@@ -29,16 +29,16 @@ describe('EVIntroCard', () => {
             price: '11900',
             evFeatures: [
                 { 
-                    name: 'Text to test benefit name property #1',
-                    value: 'Text to test benefit value property #1',
+                    name: 'Text to test name property #1',
+                    value: 'Text to test value property #1',
                 },
                 { 
-                    name: 'Text to test benefit name property #2',
-                    value: 'Text to test benefit value property #2',
+                    name: 'Text to test name property #2',
+                    value: 'Text to test value property #2',
                 },
                 { 
-                    name: 'Text to test benefit name property #3',
-                    value: 'Text to test benefit value property #3',
+                    name: 'Text to test name property #3',
+                    value: 'Text to test value property #3',
                 },
             ],
         }

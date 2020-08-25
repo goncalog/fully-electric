@@ -5,7 +5,7 @@ export default class CallToActionButton extends React.Component {
         const callToActionText = this.props.callToActionText;
 
         return (
-            <button className='headline-callToActionButton'>{callToActionText}</button>
+            <button className='callToActionButton'>{callToActionText}</button>
         );
     }
 }

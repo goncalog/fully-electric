@@ -30,7 +30,7 @@ describe('CallToActionButton', () => {
     });
 
     test('has one HTML button with some text', () => {
-        const shallowWrapper = callToActionButton().find('button.headline-callToActionButton');
+        const shallowWrapper = callToActionButton().find('button.callToActionButton');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.text()).toBe(props.callToActionText);
     });

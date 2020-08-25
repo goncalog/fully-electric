@@ -30,7 +30,7 @@ describe('ExpandButton', () => {
     });
 
     test('has one HTML button with some text', () => {
-        const shallowWrapper = expandButton().find('button');
+        const shallowWrapper = expandButton().find('button.expand-button');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.text()).toBe(props.expandButtonText);
     });

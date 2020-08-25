@@ -51,7 +51,8 @@ describe('EVAdditionalFeatures', () => {
         expect(shallowWrapper.length).toEqual(4);
 
         shallowWrapper.forEach((evFeature, i) => {
-            expect(evFeature.text()).toBe(`- ${props.evFeatures[i].name}: ${props.evFeatures[i].value}`)
+            expect(evFeature.text()).toBe(`- ${props.evFeatures[i].name}: ${props.evFeatures[i].value}`);
+            expect(evFeature.key()).toBe(i.toString());
         });
     });
 });

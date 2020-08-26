@@ -1,7 +1,7 @@
 import formatRating from '../../utils/formatRating';
 
 describe('formatRating', () => {
-    const star = '&#11088';
+    const star = '\u2605';
     test('correctly formats ratings with integer values', () => {
         expect(formatRating('3')).toBe(`3.0${star}`);
     });

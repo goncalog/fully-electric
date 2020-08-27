@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../logo.svg';
+import logo from '../media/logo.svg';
 import '../css/Navigation.css';
 import { Link, withRouter } from 'react-router-dom';
 

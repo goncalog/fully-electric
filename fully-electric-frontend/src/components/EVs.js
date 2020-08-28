@@ -2,6 +2,17 @@ import React from 'react';
 import EVsContainer from './support_components/EVsContainer';
 
 export default class EVs extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { message: 'Initial message' };
+    }
+
+    componentDidMount() {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/content/evs`)
+            .then(res => res.json())
+            .then((res) => { this.setState({ message: res.title }) })
+    }
+
     render() {
         const evs = [
             {
@@ -84,6 +95,7 @@ export default class EVs extends React.Component {
 
         return (
             <div className="evs">
+                <h1>{this.state.message}</h1>
                 <EVsContainer evs={evs} />
             </div>
         );

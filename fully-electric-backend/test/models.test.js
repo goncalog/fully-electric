@@ -14,7 +14,12 @@ const s70 = new Model({
     make: tesla,
     name: 'S',
     secondary_name: '70',
-    performance: 'placeholder',
+    performance: {
+        horsepower: 500,
+        miles_per_kwh: 3.5,
+        top_speed_mph: 155,
+        zero_to_sixty_mph: 2.3,
+    },
     charging: 'placeholder',
     original_msrp: 85000,
     rating: 4.75,
@@ -59,7 +64,7 @@ describe('EV model', () => {
         assert.instanceOf(ev, EV, 'ev is instance of EV');
     });
 
-    it('EV model has 17 properties', () => {
+    it('EV model has 18 properties', () => {
         assert.strictEqual(Object.keys(ev.schema.tree).length, 18, 'ev has 18 properties');
     });
 
@@ -174,8 +179,17 @@ describe('Model model', () => {
         assert.strictEqual(s70.secondary_name, '70', 's70\'s secondary name is 70');
     });
     
-    it('Model model has performance', () => {
-        assert.strictEqual(s70.performance, 'placeholder', 's70\'s performance is placeholder');
+    it('has performance object', () => {
+        assert.instanceOf(s70.performance, Object, 's70\'s performance is an object');
+    });
+
+    it('has performance object with 4 children', () => {
+        assert.strictEqual(Object.keys(s70.performance).length, 4, 's70\'s performance has 4 children');
+        assert.strictEqual(s70.performance.horsepower, 500, 's70\'s horsepower is 500');
+        assert.strictEqual(s70.performance.miles_per_kwh, 3.5, 's70\'s miles per kwh is 3.5');
+        assert.strictEqual(s70.performance.top_speed_mph, 155, 's70\'s top speed mph is 155');
+        assert.strictEqual(s70.performance.zero_to_sixty_mph, 2.3, 's70\'s 0-60mph is 2.3');
+    
     });
 
     it('Model model has charging', () => {
@@ -269,6 +283,12 @@ const evMaxValidation = new EV({
 });
 
 const modelMinValidation = new Model({
+    performance: {
+        horsepower: -1,
+        miles_per_kwh: -1,
+        top_speed_mph: -1,
+        zero_to_sixty_mph: -1,
+    },
     original_msrp: -1,
     rating: -1,
 });
@@ -436,9 +456,41 @@ describe('Model model require validators are set', () => {
         });
     });
 
-    it('Model model requires performance', () => {
+    it('Model model requires performance\'s 3 properties', () => {
         modelEmpty.validate((err) => {
-            assert.exists(err.errors.performance, 'model model requires performance');
+            assert.exists(err.errors['performance.horsepower'], 'model model requires horsepower');
+            assert.exists(err.errors['performance.top_speed_mph'], 'model model requires top speed mph');
+            assert.exists(err.errors['performance.zero_to_sixty_mph'], 'model model requires 0-60mph');
+        });
+    });
+
+    it('Model model doesn\'t require performance\'s miles per kwh', () => {
+        modelEmpty.validate((err) => {
+            assert.notExists(err.errors['performance.miles_per_kwh'], 'model model doesn\'t require miles per kwh');
+        });
+    });
+
+    it('Model model has horsepower with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.horsepower'], 'model model\'s horsepower is greater than 0');
+        });
+    });
+
+    it('Model model has miles per kwh with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.miles_per_kwh'], 'model model\'s miles per kwh is greater than 0');
+        });
+    });
+
+    it('Model model has top speed mph with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.top_speed_mph'], 'model model\'s top speed mph is greater than 0');
+        });
+    });
+
+    it('Model model has 0-60mph with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.zero_to_sixty_mph'], 'model model\'s 0-60mph is greater than 0');
         });
     });
 

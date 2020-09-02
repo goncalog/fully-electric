@@ -46,6 +46,7 @@ const missTesla = new Seller({
 
 const date = new Date;
 const equipmentAndOptions = ['Air conditioning', 'Heated seats', 'Brake assist'];
+const imageUrls = ['https://placeholder.com/image111', 'https://placeholder.com/image222']; 
 
 const ev = new EV({
     make: tesla,
@@ -54,7 +55,7 @@ const ev = new EV({
     price: 50000,
     mileage: 18000,
     location: london,
-    image_url: 'https://placeholder.com/image111',
+    image_urls: imageUrls,
     seller: missTesla,
     list_date: date,
     equipment_and_options: equipmentAndOptions,
@@ -104,9 +105,13 @@ describe('EV model', () => {
         assert.instanceOf(ev.location, Location, 'ev\'s location is instance of Location');
     });
 
-    it('EV model has image url', () => {
-        assert.strictEqual(ev.image_url, 'https://placeholder.com/image111', 
-                'ev\'s image url is https://placeholder.com/image111');
+    it('has image urls array', () => {
+        assert.instanceOf(ev.image_urls, Array, 'ev\'s image urls is an Array');
+        assert.strictEqual(ev.image_urls.length, 2, 'ev\'s image urls has 2 items');
+        ev.image_urls.forEach((url, index) => {
+            assert.strictEqual(url, imageUrls[index], 
+                    'ev\'s image urls is an array with https://placeholder.com/image111 and https://placeholder.com/image222');
+        });
     });
 
     it('EV model has seller', () => {
@@ -410,9 +415,9 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model requires image url', () => {
+    it('EV model requires image urls', () => {
         evEmpty.validate((err) => {
-            assert.exists(err.errors.image_url, 'ev\'s image url is required');
+            assert.exists(err.errors.image_urls, 'ev\'s image urls is required');
         });
     });
 

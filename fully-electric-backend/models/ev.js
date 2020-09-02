@@ -19,7 +19,10 @@ const EVSchema = new Schema({
         body_style: { type: String },
         colour: { type: String, required: true },
     }, 
-    interior: { type: String, required: true },
+    interior: {
+        seating: { type: Number, required: true, min: 1 },
+        colour: { type: String, required: true },
+    },
     vehicle_identification_number: { type: String, minlength: 17, maxlength: 17, required: true },
     full_vehicle_inspection: { type: Boolean, required: true },
 });

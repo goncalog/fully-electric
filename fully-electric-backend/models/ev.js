@@ -15,7 +15,10 @@ const EVSchema = new Schema({
     seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
     list_date: { type: Date, default: Date.now, required: true },
     equipment_and_options: { type: String, required: true },
-    exterior: { type: String, required: true },
+    exterior: {
+        body_style: { type: String },
+        colour: { type: String, required: true },
+    }, 
     interior: { type: String, required: true },
     vehicle_identification_number: { type: String, minlength: 17, maxlength: 17, required: true },
     full_vehicle_inspection: { type: Boolean, required: true },

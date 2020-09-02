@@ -20,7 +20,12 @@ const s70 = new Model({
         top_speed_mph: 155,
         zero_to_sixty_mph: 2.3,
     },
-    charging: 'placeholder',
+    charging: {
+        range_miles: 250,
+        battery_size_kwh: 65,
+        charge_cost: 5,
+        hours_to_charge: 7,
+    },
     original_msrp: 85000,
     rating: 4.75,
     test: 2,
@@ -192,8 +197,17 @@ describe('Model model', () => {
     
     });
 
-    it('Model model has charging', () => {
-        assert.strictEqual(s70.charging, 'placeholder', 's70\'s charging is placeholder');
+    it('has charging object', () => {
+        assert.instanceOf(s70.charging, Object, 's70\'s charging is an object');
+    });
+
+    it('has charging object with 4 children', () => {
+        assert.strictEqual(Object.keys(s70.charging).length, 4, 's70\'s charging has 4 children');
+        assert.strictEqual(s70.charging.range_miles, 250, 's70\'s range is 250');
+        assert.strictEqual(s70.charging.battery_size_kwh, 65, 's70\'s battery size is 65');
+        assert.strictEqual(s70.charging.charge_cost, 5, 's70\'s charge cost is 5');
+        assert.strictEqual(s70.charging.hours_to_charge, 7, 's70\'s hours to charge is 7');
+    
     });
 
     it('Model model has original msrp', () => {
@@ -288,6 +302,12 @@ const modelMinValidation = new Model({
         miles_per_kwh: -1,
         top_speed_mph: -1,
         zero_to_sixty_mph: -1,
+    },
+    charging: {
+        range: -1,
+        battery_size_kwh: -1,
+        charge_cost: -1,
+        hours_to_charge: -1,
     },
     original_msrp: -1,
     rating: -1,
@@ -494,9 +514,36 @@ describe('Model model require validators are set', () => {
         });
     });
 
-    it('Model model requires charging', () => {
+    it('Model model requires charging\'s 4 properties', () => {
         modelEmpty.validate((err) => {
-            assert.exists(err.errors.charging, 'model model requires charging');
+            assert.exists(err.errors['charging.range_miles'], 'model model requires range');
+            assert.exists(err.errors['charging.battery_size_kwh'], 'model model requires battery size');
+            assert.exists(err.errors['charging.charge_cost'], 'model model requires charge cost');
+            assert.exists(err.errors['charging.hours_to_charge'], 'model model requires hours to charge');
+        });
+    });
+
+    it('Model model has range with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.range_miles'], 'model model\'s range is greater than 0');
+        });
+    });
+
+    it('Model model has battery size with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.battery_size_kwh'], 'model model\'s battery size is greater than 0');
+        });
+    });
+
+    it('Model model has charge cost with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.charge_cost'], 'model model\'s charge cost is greater than 0');
+        });
+    });
+
+    it('Model model has hours to charge with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.hours_to_charge'], 'model model\'s hours to charge is greater than 0');
         });
     });
 

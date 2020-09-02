@@ -45,6 +45,7 @@ const missTesla = new Seller({
 });
 
 const date = new Date;
+const equipmentAndOptions = ['Air conditioning', 'Heated seats', 'Brake assist'];
 
 const ev = new EV({
     make: tesla,
@@ -56,7 +57,7 @@ const ev = new EV({
     image_url: 'https://placeholder.com/image111',
     seller: missTesla,
     list_date: date,
-    equipment_and_options: 'placeholder',
+    equipment_and_options: equipmentAndOptions,
     exterior: {
         body_style: 'Sedan',
         colour: 'Blue',
@@ -116,8 +117,13 @@ describe('EV model', () => {
         assert.strictEqual(ev.list_date, date, `ev\'s list date is ${date}`);
     });
 
-    it('EV model has equipment and options', () => {
-        assert.strictEqual(ev.equipment_and_options, 'placeholder', 'ev\'s equipment and options is placeholder');
+    it('has equipment and options array', () => {
+        assert.instanceOf(ev.equipment_and_options, Array, 'ev\'s equipment and options is an Array');
+        assert.strictEqual(ev.equipment_and_options.length, 3, 'ev\'s equipment and options has 3 items');
+        ev.equipment_and_options.forEach((item, index) => {
+            assert.strictEqual(item, equipmentAndOptions[index], 
+                    'ev\'s equipment and options is an array with Air conditioning, Heated seats and Brake assist');
+        });
     });
 
     it('has exterior object', () => {

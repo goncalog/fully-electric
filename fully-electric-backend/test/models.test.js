@@ -57,7 +57,10 @@ const ev = new EV({
     seller: missTesla,
     list_date: date,
     equipment_and_options: 'placeholder',
-    exterior: 'placeholder',
+    exterior: {
+        body_style: 'Sedan',
+        colour: 'Blue',
+    },
     interior: 'placeholder',
     vehicle_identification_number: '1M8GDM9AXKP042788',
     full_vehicle_inspection: true,
@@ -114,8 +117,14 @@ describe('EV model', () => {
         assert.strictEqual(ev.equipment_and_options, 'placeholder', 'ev\'s equipment and options is placeholder');
     });
 
-    it('EV model has exterior', () => {
-        assert.strictEqual(ev.exterior, 'placeholder', 'ev\'s exterior is placeholder');
+    it('has exterior object', () => {
+        assert.instanceOf(ev.exterior, Object, 'ev\'s exterior is an object');
+    });
+
+    it('has exterior object with 2 children', () => {
+        assert.strictEqual(Object.keys(ev.exterior).length, 2, 'ev\'s exterior has 2 children');
+        assert.strictEqual(ev.exterior.body_style, 'Sedan', 'ev\'s body style is Sedan');
+        assert.strictEqual(ev.exterior.colour, 'Blue', 'ev\'s exterior colour is Blue');    
     });
 
     it('EV model has interior', () => {
@@ -410,9 +419,15 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model requires exterior', () => {
+    it('EV model requires exterior\'s colour property', () => {
         evEmpty.validate((err) => {
-            assert.exists(err.errors.exterior, 'ev\'s exterior is required');
+            assert.exists(err.errors['exterior.colour'], 'ev\'s exterior colour is required');
+        });
+    });
+
+    it('EV model doesn\'t requires exterior\'s body style property', () => {
+        evEmpty.validate((err) => {
+            assert.notExists(err.errors['exterior.body_style'], 'ev\'s body style isn\'t required');
         });
     });
 

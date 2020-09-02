@@ -309,34 +309,34 @@ function createLocations(cb) {
 function createSellers(cb) {
     async.series([
         function (callback) {
-            sellerCreate('Emily P.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Emily P.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('John A.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('John A.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Mike C.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Mike C.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Laura S.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Laura S.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Miles D.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Miles D.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Zoe Q.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Zoe Q.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Clara F.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Clara F.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Bella T.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Bella T.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Chris C.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Chris C.', process.env.CONTACT_EMAIL, 5, callback);
         },
         function (callback) {
-            sellerCreate('Alex B.', proc.env.CONTACT_EMAIL, 5, callback);
+            sellerCreate('Alex B.', process.env.CONTACT_EMAIL, 5, callback);
         },
     ],
     // Optional callback

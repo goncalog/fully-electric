@@ -12,7 +12,12 @@ const ModelSchema = new Schema({
         top_speed_mph: { type: Number, required: true, min: 0 },
         zero_to_sixty_mph: { type: Number, required: true, min: 0 },
     },
-    charging: { type: String, required: true },
+    charging: {
+        range_miles: { type: Number, required: true, min: 0 },
+        battery_size_kwh: { type: Number, required: true, min: 0 },
+        charge_cost: { type: Number, required: true, min: 0 },
+        hours_to_charge: { type: Number, required: true, min: 0 },
+    },
     original_msrp: { type: Number, required: true, min: 0 },
     rating: { type: Number, required: true, min: 0, max: 5 },
 });

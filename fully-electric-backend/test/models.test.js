@@ -61,7 +61,10 @@ const ev = new EV({
         body_style: 'Sedan',
         colour: 'Blue',
     },
-    interior: 'placeholder',
+    interior: {
+        seating: 5,
+        colour: 'Black',
+    },
     vehicle_identification_number: '1M8GDM9AXKP042788',
     full_vehicle_inspection: true,
     test: 2,
@@ -127,8 +130,11 @@ describe('EV model', () => {
         assert.strictEqual(ev.exterior.colour, 'Blue', 'ev\'s exterior colour is Blue');    
     });
 
-    it('EV model has interior', () => {
-        assert.strictEqual(ev.interior, 'placeholder', 'ev\'s interior is placeholder');
+    it('has interior object with 2 children', () => {
+        assert.instanceOf(ev.interior, Object, 'ev\'s interior is an object');
+        assert.strictEqual(Object.keys(ev.interior).length, 2, 'ev\'s interior has 2 children');
+        assert.strictEqual(ev.interior.seating, 5, 'ev\'s seating is 5');
+        assert.strictEqual(ev.interior.colour, 'Black', 'ev\'s interior colour is Black');    
     });
 
     it('EV model has vehicle identification number', () => {
@@ -297,6 +303,9 @@ const evMinValidation = new EV({
     year: 1899,
     price: -1,
     mileage: -1,
+    interior: {
+        seating: 0,
+    },
     vehicle_identification_number: 'xxxxxxxxxxxxxxxx',
 });
 
@@ -431,9 +440,16 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model requires interior', () => {
+    it('EV model requires interior\'s properties', () => {
         evEmpty.validate((err) => {
-            assert.exists(err.errors.interior, 'ev\'s interior is required');
+            assert.exists(err.errors['interior.seating'], 'ev\'s seating is required');
+            assert.exists(err.errors['interior.colour'], 'ev\'s interior colour is required');
+        });
+    });
+
+    it('EV model\'s seating isn\'t lower than 1', () => {
+        evMinValidation.validate((err) => {
+            assert.exists(err.errors['interior.seating'], 'ev\'s seating isn\'t lower than 1');
         });
     });
 

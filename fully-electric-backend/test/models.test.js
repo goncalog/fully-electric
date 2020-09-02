@@ -459,17 +459,17 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model\'s vehicle identification number has lenght of 17', () => {
+    it('EV model\'s vehicle identification number has length of 17', () => {
         evMinValidation.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 
-                    'ev\'s vehicle identification number has lenght of 17');
+                    'ev\'s vehicle identification number has length of 17');
         });
     });
 
-    it('EV model\'s vehicle identification number has lenght of 17', () => {
+    it('EV model\'s vehicle identification number has length of 17', () => {
         evMaxValidation.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 
-                    'ev\'s vehicle identification number has lenght of 17');
+                    'ev\'s vehicle identification number has length of 17');
         });
     });
 

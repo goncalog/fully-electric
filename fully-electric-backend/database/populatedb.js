@@ -300,6 +300,9 @@ function createLocations(cb) {
         function (callback) {
             locationCreate('York', 'UK', callback);
         },
+        function (callback) {
+            locationCreate('Reading', 'UK', callback);
+        },
     ],
     // Optional callback
     cb
@@ -337,6 +340,12 @@ function createSellers(cb) {
         },
         function (callback) {
             sellerCreate('Alex B.', process.env.CONTACT_EMAIL, 5, callback);
+        },
+        function (callback) {
+            sellerCreate('Meredith H.', process.env.CONTACT_EMAIL, 5, callback);
+        },
+        function (callback) {
+            sellerCreate('Jules O.', process.env.CONTACT_EMAIL, 5, callback);
         },
     ],
     // Optional callback

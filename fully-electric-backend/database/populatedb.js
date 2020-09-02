@@ -1,7 +1,7 @@
 console.log('This script populates some test EVs, makes, models, locations and sellers to the database');
 
 const async = require('async');
-require('./mongoConfig');
+const mongooseConnection = require('./mongoConfig');
 
 // Import mongoose models
 const EV = require('../models/ev');
@@ -597,5 +597,5 @@ function(err, results) {
         console.log(`EVs: ${evs}`); 
     }
     // All done, disconnect from database
-    mongoose.connection.close();
+    mongooseConnection.close();
 });

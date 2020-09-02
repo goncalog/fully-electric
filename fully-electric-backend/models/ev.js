@@ -14,7 +14,7 @@ const EVSchema = new Schema({
     image_url: { type: String, required: true },
     seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
     list_date: { type: Date, default: Date.now, required: true },
-    equipment_and_options: { type: String, required: true },
+    equipment_and_options: { type: [String], required: true, default: undefined }, // by default this would be an empty array which would affect the way we then create new instances of this model (i.e. it would require using array.push(item))
     exterior: {
         body_style: { type: String },
         colour: { type: String, required: true },

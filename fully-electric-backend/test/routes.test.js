@@ -1,7 +1,9 @@
 const indexRouter = require('../routes/index');
 const contentRouter = require('../routes/content');
 
-require('../database/mongoConfigTesting');
+const mongooseConnection = require('../database/mongoConfigTesting');
+const createDatabaseItems = require('../database/createDatabaseItems');
+require('dotenv').config({ path: __dirname + '/../.env' });
 
 const request = require('supertest');
 const express = require('express');
@@ -13,6 +15,12 @@ app.use('/', indexRouter);
 app.use('/content', contentRouter);
 
 describe('Routes testing', () => {
+    // Since the tests are starting with a fresh database, it's useful 
+    // to use a beforeAll function to add a few items to the database before running tests.
+    before(() => {
+        let evs = createDatabaseItems(mongooseConnection);
+    });
+
     it('index route redirects to content route', () => {
         return request(app)
             .get('/')

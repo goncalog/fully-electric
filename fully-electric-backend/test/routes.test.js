@@ -1,6 +1,8 @@
 const indexRouter = require('../routes/index');
 const contentRouter = require('../routes/content');
 
+require('../database/mongoConfigTesting');
+
 const request = require('supertest');
 const express = require('express');
 

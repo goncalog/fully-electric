@@ -22,7 +22,17 @@ exports.getEvs = (req, res, next) => {
 
 // GET request for unique ev
 exports.getUniqueEv = (req, res, next) => {
-    res.json({ title: `Unique EV with id ${req.params.id}` });
+    EV.findById(req.params.id)
+        .populate('location')
+        .populate('make')
+        .populate('model')
+        .populate('seller')
+        .exec(function (err, ev) {
+            if (err) { return next(err); }
+
+            // Successful, so send data
+            res.json({ title: `Unique EV with id ${ev._id}`, ev: ev });
+        });
 }
 
 // GET request for data to create new ev

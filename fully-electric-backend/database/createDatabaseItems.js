@@ -1,5 +1,5 @@
 function createDatabaseItems(mongooseConnection) {
-    console.log('This script populates some test EVs, makes, models, locations and sellers to the database');
+    // console.log('This script populates some test EVs, makes, models, locations and sellers to the database');
 
     const async = require('async');
     
@@ -27,7 +27,7 @@ function createDatabaseItems(mongooseConnection) {
                 return;
             }
     
-            console.log(`New Make: ${make}`);
+            // console.log(`New Make: ${make}`);
             makes.push(make);
             cb(null, make);
         });
@@ -54,7 +54,7 @@ function createDatabaseItems(mongooseConnection) {
                 return;
             }
     
-            console.log(`New Model: ${model}`);
+            // console.log(`New Model: ${model}`);
             models.push(model);
             cb(null, model);
         });
@@ -74,7 +74,7 @@ function createDatabaseItems(mongooseConnection) {
                 return;
             }
     
-            console.log(`New Location: ${location}`);
+            // console.log(`New Location: ${location}`);
             locations.push(location);
             cb(null, location);
         });
@@ -95,7 +95,7 @@ function createDatabaseItems(mongooseConnection) {
                 return;
             }
     
-            console.log(`New Seller: ${seller}`);
+            // console.log(`New Seller: ${seller}`);
             sellers.push(seller);
             cb(null, seller);
         });
@@ -129,7 +129,7 @@ function createDatabaseItems(mongooseConnection) {
                 return;
             }
     
-            console.log(`New EV: ${ev}`);
+            // console.log(`New EV: ${ev}`);
             evs.push(ev);
             cb(null, ev);
         });
@@ -356,7 +356,7 @@ function createDatabaseItems(mongooseConnection) {
     function createEvs(cb) {
         const currentDate = new Date();
     
-        async.parallel([
+        async.series([
             function (callback) {
                 evCreate(
                     makes[0], 
@@ -598,18 +598,15 @@ function createDatabaseItems(mongooseConnection) {
         createModels,
         createLocations,
         createSellers,
-        createEvs
+        createEvs,
     ],
     // Optional callback
-    function(err, results) {
+    function (err, results) {
         if (err) {
             console.log(`FINAL ERR: ${err}`);
         } else {
-            console.log(`EVs: ${evs}`);
-            return evs; 
+            // console.log(`EVs: ${evs}`);
         }
-        // All done, disconnect from database
-        mongooseConnection.close();
     });
 }
 

@@ -27,6 +27,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Add headers
+app.use(function (req, res, next) {
+  // Website allowed to request content
+  res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/content', contentRouter);
 

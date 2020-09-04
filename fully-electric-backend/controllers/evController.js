@@ -1,3 +1,5 @@
+const EV = require('../models/ev');
+
 // GET request for home page.
 exports.index = (req, res, next) => {
     res.json({ title: 'Fully Electric' });
@@ -5,12 +7,32 @@ exports.index = (req, res, next) => {
 
 // GET request for list of all evs
 exports.getEvs = (req, res, next) => {
-    res.json({ title: 'List of all EVs' });
+    EV.find({})
+        .populate('location')
+        .populate('make')
+        .populate('model')
+        .populate('seller')
+        .exec(function (err, evs) {
+            if (err) { return next(err); }
+
+            // Successful, so send data
+            res.json({ title: 'List of all EVs', evs: evs });
+        });
 }
 
 // GET request for unique ev
 exports.getUniqueEv = (req, res, next) => {
-    res.json({ title: `Unique EV with id ${req.params.id}` });
+    EV.findById(req.params.id)
+        .populate('location')
+        .populate('make')
+        .populate('model')
+        .populate('seller')
+        .exec(function (err, ev) {
+            if (err) { return next(err); }
+
+            // Successful, so send data
+            res.json({ title: `Unique EV with id ${ev._id}`, ev: ev });
+        });
 }
 
 // GET request for data to create new ev

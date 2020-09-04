@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+let db = mongoose.connection;
 
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
@@ -16,23 +17,26 @@ mongoServer.getConnectionString().then(mongoUri => {
     };
 
     mongoose.connect(mongoUri, mongooseOpts);
-
-    mongoose.connection.on('error', e => {
+    db = mongoose.connection;
+    db.on('error', e => {
         if (e.message.code === 'ETIMEOUT') {
             console.log(e);
             mongoose.connect(mongoUri, mongooseOpts);
+            db = mongoose.connection;
         }
         console.log(e);
     });
 
-    mongoose.connection.once('open', () => {
+    db.once('open', () => {
         console.log(`MongoDB successfully connected to ${mongoUri}`);
     });
 });
+
+module.exports = db;
 
 // Require this file at the top of the testing file when testing operations 
 // that work on the mongo database. This way, a testing database will be used 
 // instead of the real one.
 
-// Since the tests are starting with a fresh database, it's useful to use a beforeAll function 
+// Since the tests are starting with a fresh database, it's useful to use a before function 
 // in the testing suite to add a couple of items to the database before running tests.

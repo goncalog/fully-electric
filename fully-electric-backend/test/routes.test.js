@@ -1,6 +1,10 @@
 const indexRouter = require('../routes/index');
 const contentRouter = require('../routes/content');
 
+const mongooseConnection = require('../database/mongoConfigTesting');
+const createDatabaseItems = require('../database/createDatabaseItems');
+require('dotenv').config({ path: __dirname + '/../.env' });
+
 const request = require('supertest');
 const express = require('express');
 
@@ -10,7 +14,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/content', contentRouter);
 
-describe('Routes testing', () => {
+before(function () {
+    createDatabaseItems(mongooseConnection);
+});
+
+after(function () {
+    mongooseConnection.close();
+});
+
+describe('Routes testing', function () {
     it('index route redirects to content route', () => {
         return request(app)
             .get('/')
@@ -31,24 +43,60 @@ describe('Routes testing', () => {
         return request(app)
             .get('/content/evs')
             .expect('Content-type', /json/)
-            .expect({ title: 'List of all EVs' })
+            .expect(hasTitle)
+            .expect(hasEvs)
+            .expect(isEv)
             .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all EVs')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasEvs(res) {
+            if (!(Object.keys(res.body.evs).length === 12)) {
+                throw new Error("Doesn\'t have all the db evs");
+            }
+        }
+
+        function isEv(res) {
+            for (let key in res.body.evs) {
+                if (!(Object.keys(res.body.evs[key]).length === 16)) {
+                    throw new Error("Not an instance of EV");
+                }
+            }
+        }
     });
 
-    it('unique ev route works (1)', () => {
+    it('unique ev route works', () => {
         return request(app)
-            .get('/content/ev/12345')
+            .get(`/content/evs`)
             .expect('Content-type', /json/)
-            .expect({ title: 'Unique EV with id 12345' })
             .expect(200)
-    });
+            .then((res) => {
+                let keys = Object.keys(res.body.evs);
+                let id = res.body.evs[keys[0]]._id;
 
-    it('unique ev route works (2)', () => {
-        return request(app)
-            .get('/content/ev/678910')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Unique EV with id 678910' })
-            .expect(200)
+                return request(app)
+                .get(`/content/ev/${id}`)
+                .expect('Content-type', /json/)
+                .expect(hasTitle)
+                .expect(isEv)
+                .expect(200)
+            });
+
+            function hasTitle(res) {
+                if (!(res.body.title === `Unique EV with id ${res.body.ev._id}`)) {
+                    throw new Error("Wrong title");  
+                } 
+            }
+    
+            function isEv(res) {
+                if (!(Object.keys(res.body.ev).length === 16)) {
+                    throw new Error("Not an instance of EV");
+                }
+            }
     });
 
     it('route to get data to create new ev works', () => {

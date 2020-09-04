@@ -14,8 +14,18 @@ const s70 = new Model({
     make: tesla,
     name: 'S',
     secondary_name: '70',
-    performance: 'placeholder',
-    charging: 'placeholder',
+    performance: {
+        horsepower: 500,
+        miles_per_kwh: 3.5,
+        top_speed_mph: 155,
+        zero_to_sixty_mph: 2.3,
+    },
+    charging: {
+        range_miles: 250,
+        battery_size_kwh: 65,
+        charge_cost: 5,
+        hours_to_charge: 7,
+    },
     original_msrp: 85000,
     rating: 4.75,
     test: 2,
@@ -35,6 +45,8 @@ const missTesla = new Seller({
 });
 
 const date = new Date;
+const equipmentAndOptions = ['Air conditioning', 'Heated seats', 'Brake assist'];
+const imageUrls = ['https://placeholder.com/image111', 'https://placeholder.com/image222']; 
 
 const ev = new EV({
     make: tesla,
@@ -43,12 +55,18 @@ const ev = new EV({
     price: 50000,
     mileage: 18000,
     location: london,
-    image_url: 'https://placeholder.com/image111',
+    image_urls: imageUrls,
     seller: missTesla,
     list_date: date,
-    equipment_and_options: 'placeholder',
-    exterior: 'placeholder',
-    interior: 'placeholder',
+    equipment_and_options: equipmentAndOptions,
+    exterior: {
+        body_style: 'Sedan',
+        colour: 'Blue',
+    },
+    interior: {
+        seating: 5,
+        colour: 'Black',
+    },
     vehicle_identification_number: '1M8GDM9AXKP042788',
     full_vehicle_inspection: true,
     test: 2,
@@ -59,7 +77,7 @@ describe('EV model', () => {
         assert.instanceOf(ev, EV, 'ev is instance of EV');
     });
 
-    it('EV model has 17 properties', () => {
+    it('EV model has 18 properties', () => {
         assert.strictEqual(Object.keys(ev.schema.tree).length, 18, 'ev has 18 properties');
     });
 
@@ -87,9 +105,13 @@ describe('EV model', () => {
         assert.instanceOf(ev.location, Location, 'ev\'s location is instance of Location');
     });
 
-    it('EV model has image url', () => {
-        assert.strictEqual(ev.image_url, 'https://placeholder.com/image111', 
-                'ev\'s image url is https://placeholder.com/image111');
+    it('has image urls array', () => {
+        assert.instanceOf(ev.image_urls, Array, 'ev\'s image urls is an Array');
+        assert.strictEqual(ev.image_urls.length, 2, 'ev\'s image urls has 2 items');
+        ev.image_urls.forEach((url, index) => {
+            assert.strictEqual(url, imageUrls[index], 
+                    'ev\'s image urls is an array with https://placeholder.com/image111 and https://placeholder.com/image222');
+        });
     });
 
     it('EV model has seller', () => {
@@ -100,16 +122,30 @@ describe('EV model', () => {
         assert.strictEqual(ev.list_date, date, `ev\'s list date is ${date}`);
     });
 
-    it('EV model has equipment and options', () => {
-        assert.strictEqual(ev.equipment_and_options, 'placeholder', 'ev\'s equipment and options is placeholder');
+    it('has equipment and options array', () => {
+        assert.instanceOf(ev.equipment_and_options, Array, 'ev\'s equipment and options is an Array');
+        assert.strictEqual(ev.equipment_and_options.length, 3, 'ev\'s equipment and options has 3 items');
+        ev.equipment_and_options.forEach((item, index) => {
+            assert.strictEqual(item, equipmentAndOptions[index], 
+                    'ev\'s equipment and options is an array with Air conditioning, Heated seats and Brake assist');
+        });
     });
 
-    it('EV model has exterior', () => {
-        assert.strictEqual(ev.exterior, 'placeholder', 'ev\'s exterior is placeholder');
+    it('has exterior object', () => {
+        assert.instanceOf(ev.exterior, Object, 'ev\'s exterior is an object');
     });
 
-    it('EV model has interior', () => {
-        assert.strictEqual(ev.interior, 'placeholder', 'ev\'s interior is placeholder');
+    it('has exterior object with 2 children', () => {
+        assert.strictEqual(Object.keys(ev.exterior).length, 2, 'ev\'s exterior has 2 children');
+        assert.strictEqual(ev.exterior.body_style, 'Sedan', 'ev\'s body style is Sedan');
+        assert.strictEqual(ev.exterior.colour, 'Blue', 'ev\'s exterior colour is Blue');    
+    });
+
+    it('has interior object with 2 children', () => {
+        assert.instanceOf(ev.interior, Object, 'ev\'s interior is an object');
+        assert.strictEqual(Object.keys(ev.interior).length, 2, 'ev\'s interior has 2 children');
+        assert.strictEqual(ev.interior.seating, 5, 'ev\'s seating is 5');
+        assert.strictEqual(ev.interior.colour, 'Black', 'ev\'s interior colour is Black');    
     });
 
     it('EV model has vehicle identification number', () => {
@@ -174,12 +210,30 @@ describe('Model model', () => {
         assert.strictEqual(s70.secondary_name, '70', 's70\'s secondary name is 70');
     });
     
-    it('Model model has performance', () => {
-        assert.strictEqual(s70.performance, 'placeholder', 's70\'s performance is placeholder');
+    it('has performance object', () => {
+        assert.instanceOf(s70.performance, Object, 's70\'s performance is an object');
     });
 
-    it('Model model has charging', () => {
-        assert.strictEqual(s70.charging, 'placeholder', 's70\'s charging is placeholder');
+    it('has performance object with 4 children', () => {
+        assert.strictEqual(Object.keys(s70.performance).length, 4, 's70\'s performance has 4 children');
+        assert.strictEqual(s70.performance.horsepower, 500, 's70\'s horsepower is 500');
+        assert.strictEqual(s70.performance.miles_per_kwh, 3.5, 's70\'s miles per kwh is 3.5');
+        assert.strictEqual(s70.performance.top_speed_mph, 155, 's70\'s top speed mph is 155');
+        assert.strictEqual(s70.performance.zero_to_sixty_mph, 2.3, 's70\'s 0-60mph is 2.3');
+    
+    });
+
+    it('has charging object', () => {
+        assert.instanceOf(s70.charging, Object, 's70\'s charging is an object');
+    });
+
+    it('has charging object with 4 children', () => {
+        assert.strictEqual(Object.keys(s70.charging).length, 4, 's70\'s charging has 4 children');
+        assert.strictEqual(s70.charging.range_miles, 250, 's70\'s range is 250');
+        assert.strictEqual(s70.charging.battery_size_kwh, 65, 's70\'s battery size is 65');
+        assert.strictEqual(s70.charging.charge_cost, 5, 's70\'s charge cost is 5');
+        assert.strictEqual(s70.charging.hours_to_charge, 7, 's70\'s hours to charge is 7');
+    
     });
 
     it('Model model has original msrp', () => {
@@ -260,6 +314,9 @@ const evMinValidation = new EV({
     year: 1899,
     price: -1,
     mileage: -1,
+    interior: {
+        seating: 0,
+    },
     vehicle_identification_number: 'xxxxxxxxxxxxxxxx',
 });
 
@@ -269,6 +326,18 @@ const evMaxValidation = new EV({
 });
 
 const modelMinValidation = new Model({
+    performance: {
+        horsepower: -1,
+        miles_per_kwh: -1,
+        top_speed_mph: -1,
+        zero_to_sixty_mph: -1,
+    },
+    charging: {
+        range: -1,
+        battery_size_kwh: -1,
+        charge_cost: -1,
+        hours_to_charge: -1,
+    },
     original_msrp: -1,
     rating: -1,
 });
@@ -346,9 +415,9 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model requires image url', () => {
+    it('EV model requires image urls', () => {
         evEmpty.validate((err) => {
-            assert.exists(err.errors.image_url, 'ev\'s image url is required');
+            assert.exists(err.errors.image_urls, 'ev\'s image urls is required');
         });
     });
 
@@ -370,15 +439,28 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model requires exterior', () => {
+    it('EV model requires exterior\'s colour property', () => {
         evEmpty.validate((err) => {
-            assert.exists(err.errors.exterior, 'ev\'s exterior is required');
+            assert.exists(err.errors['exterior.colour'], 'ev\'s exterior colour is required');
         });
     });
 
-    it('EV model requires interior', () => {
+    it('EV model doesn\'t requires exterior\'s body style property', () => {
         evEmpty.validate((err) => {
-            assert.exists(err.errors.interior, 'ev\'s interior is required');
+            assert.notExists(err.errors['exterior.body_style'], 'ev\'s body style isn\'t required');
+        });
+    });
+
+    it('EV model requires interior\'s properties', () => {
+        evEmpty.validate((err) => {
+            assert.exists(err.errors['interior.seating'], 'ev\'s seating is required');
+            assert.exists(err.errors['interior.colour'], 'ev\'s interior colour is required');
+        });
+    });
+
+    it('EV model\'s seating isn\'t lower than 1', () => {
+        evMinValidation.validate((err) => {
+            assert.exists(err.errors['interior.seating'], 'ev\'s seating isn\'t lower than 1');
         });
     });
 
@@ -388,17 +470,17 @@ describe('EV model validators are set', () => {
         });
     });
 
-    it('EV model\'s vehicle identification number has lenght of 17', () => {
+    it('EV model\'s vehicle identification number has length of 17', () => {
         evMinValidation.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 
-                    'ev\'s vehicle identification number has lenght of 17');
+                    'ev\'s vehicle identification number has length of 17');
         });
     });
 
-    it('EV model\'s vehicle identification number has lenght of 17', () => {
+    it('EV model\'s vehicle identification number has length of 17', () => {
         evMaxValidation.validate((err) => {
             assert.exists(err.errors.vehicle_identification_number, 
-                    'ev\'s vehicle identification number has lenght of 17');
+                    'ev\'s vehicle identification number has length of 17');
         });
     });
 
@@ -436,15 +518,74 @@ describe('Model model require validators are set', () => {
         });
     });
 
-    it('Model model requires performance', () => {
+    it('Model model requires performance\'s 3 properties', () => {
         modelEmpty.validate((err) => {
-            assert.exists(err.errors.performance, 'model model requires performance');
+            assert.exists(err.errors['performance.horsepower'], 'model model requires horsepower');
+            assert.exists(err.errors['performance.top_speed_mph'], 'model model requires top speed mph');
+            assert.exists(err.errors['performance.zero_to_sixty_mph'], 'model model requires 0-60mph');
         });
     });
 
-    it('Model model requires charging', () => {
+    it('Model model doesn\'t require performance\'s miles per kwh', () => {
         modelEmpty.validate((err) => {
-            assert.exists(err.errors.charging, 'model model requires charging');
+            assert.notExists(err.errors['performance.miles_per_kwh'], 'model model doesn\'t require miles per kwh');
+        });
+    });
+
+    it('Model model has horsepower with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.horsepower'], 'model model\'s horsepower is greater than 0');
+        });
+    });
+
+    it('Model model has miles per kwh with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.miles_per_kwh'], 'model model\'s miles per kwh is greater than 0');
+        });
+    });
+
+    it('Model model has top speed mph with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.top_speed_mph'], 'model model\'s top speed mph is greater than 0');
+        });
+    });
+
+    it('Model model has 0-60mph with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['performance.zero_to_sixty_mph'], 'model model\'s 0-60mph is greater than 0');
+        });
+    });
+
+    it('Model model requires charging\'s 4 properties', () => {
+        modelEmpty.validate((err) => {
+            assert.exists(err.errors['charging.range_miles'], 'model model requires range');
+            assert.exists(err.errors['charging.battery_size_kwh'], 'model model requires battery size');
+            assert.exists(err.errors['charging.charge_cost'], 'model model requires charge cost');
+            assert.exists(err.errors['charging.hours_to_charge'], 'model model requires hours to charge');
+        });
+    });
+
+    it('Model model has range with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.range_miles'], 'model model\'s range is greater than 0');
+        });
+    });
+
+    it('Model model has battery size with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.battery_size_kwh'], 'model model\'s battery size is greater than 0');
+        });
+    });
+
+    it('Model model has charge cost with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.charge_cost'], 'model model\'s charge cost is greater than 0');
+        });
+    });
+
+    it('Model model has hours to charge with value greater than 0', () => {
+        modelMinValidation.validate((err) => {
+            assert.exists(err.errors['charging.hours_to_charge'], 'model model\'s hours to charge is greater than 0');
         });
     });
 

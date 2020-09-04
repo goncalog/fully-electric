@@ -11,12 +11,18 @@ const EVSchema = new Schema({
     price: { type: Number, required: true, min: 0 },
     mileage: { type: Number, required: true, min: 0 },
     location: { type: Schema.Types.ObjectId, ref: 'Location', required: true },
-    image_url: { type: String, required: true },
+    image_urls: { type: [String], required: true, default: undefined }, // by default this would be an empty array which would affect the way we then create new instances of this model (i.e. it would require using array.push(item))
     seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
-    list_date: { type: Date, default: Date.now, required: true },
-    equipment_and_options: { type: String, required: true },
-    exterior: { type: String, required: true },
-    interior: { type: String, required: true },
+    list_date: { type: Date, default: currentDate, required: true },
+    equipment_and_options: { type: [String], required: true, default: undefined }, // by default this would be an empty array which would affect the way we then create new instances of this model (i.e. it would require using array.push(item))
+    exterior: {
+        body_style: { type: String },
+        colour: { type: String, required: true },
+    }, 
+    interior: {
+        seating: { type: Number, required: true, min: 1 },
+        colour: { type: String, required: true },
+    },
     vehicle_identification_number: { type: String, minlength: 17, maxlength: 17, required: true },
     full_vehicle_inspection: { type: Boolean, required: true },
 });

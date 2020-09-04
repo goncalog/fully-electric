@@ -69,20 +69,34 @@ describe('Routes testing', function () {
         }
     });
 
-    it('unique ev route works (1)', () => {
+    it('unique ev route works', () => {
         return request(app)
-            .get('/content/ev/12345')
+            .get(`/content/evs`)
             .expect('Content-type', /json/)
-            .expect({ title: 'Unique EV with id 12345' })
             .expect(200)
-    });
+            .then((res) => {
+                let keys = Object.keys(res.body.evs);
+                let id = res.body.evs[keys[0]]._id;
 
-    it('unique ev route works (2)', () => {
-        return request(app)
-            .get('/content/ev/678910')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Unique EV with id 678910' })
-            .expect(200)
+                return request(app)
+                .get(`/content/ev/${id}`)
+                .expect('Content-type', /json/)
+                .expect(hasTitle)
+                .expect(isEv)
+                .expect(200)
+            });
+
+            function hasTitle(res) {
+                if (!(res.body.title === `Unique EV with id ${res.body.ev._id}`)) {
+                    throw new Error("Wrong title");  
+                } 
+            }
+    
+            function isEv(res) {
+                if (!(Object.keys(res.body.ev).length === 16)) {
+                    throw new Error("Not an instance of EV");
+                }
+            }
     });
 
     it('route to get data to create new ev works', () => {

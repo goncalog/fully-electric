@@ -14,13 +14,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/content', contentRouter);
 
-describe('Routes testing', () => {
-    // Since the tests are starting with a fresh database, it's useful 
-    // to use a beforeAll function to add a few items to the database before running tests.
-    before(() => {
-        let evs = createDatabaseItems(mongooseConnection);
-    });
+before(function () {
+    createDatabaseItems(mongooseConnection);
+});
 
+after(function () {
+    mongooseConnection.close();
+});
+
+describe('Routes testing', function () {
     it('index route redirects to content route', () => {
         return request(app)
             .get('/')
@@ -41,8 +43,30 @@ describe('Routes testing', () => {
         return request(app)
             .get('/content/evs')
             .expect('Content-type', /json/)
-            .expect({ title: 'List of all EVs' })
+            .expect(hasTitle)
+            .expect(hasEvs)
+            .expect(isEv)
             .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all EVs')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasEvs(res) {
+            if (!(Object.keys(res.body.evs).length === 12)) {
+                throw new Error("Doesn\'t have all the db evs");
+            }
+        }
+
+        function isEv(res) {
+            for (let key in res.body.evs) {
+                if (!(Object.keys(res.body.evs[key]).length === 16)) {
+                    throw new Error("Not an instance of EV");
+                }
+            }
+        }
     });
 
     it('unique ev route works (1)', () => {

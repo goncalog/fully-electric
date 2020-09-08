@@ -43,7 +43,7 @@ function createDatabaseItems(mongooseConnection) {
             rating: rating,
         };
         if (secondaryName != false) {
-            makeDetail.secondary_name = secondaryName;
+            modelDetail.secondary_name = secondaryName;
         }
     
         const model = new Model(modelDetail);

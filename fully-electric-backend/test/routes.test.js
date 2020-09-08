@@ -15,7 +15,7 @@ app.use('/', indexRouter);
 app.use('/content', contentRouter);
 
 before(function () {
-    createDatabaseItems(mongooseConnection);
+    createDatabaseItems();
 });
 
 after(function () {

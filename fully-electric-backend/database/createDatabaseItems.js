@@ -1,5 +1,5 @@
 function createDatabaseItems(mongooseConnection) {
-    // console.log('This script populates some test EVs, makes, models, locations and sellers to the database');
+    console.log('This script populates some test EVs, makes, models, locations and sellers to the database');
 
     const async = require('async');
     
@@ -606,6 +606,11 @@ function createDatabaseItems(mongooseConnection) {
             console.log(`FINAL ERR: ${err}`);
         } else {
             // console.log(`EVs: ${evs}`);
+
+            // All done, so close connection to database in case one was passed to this function
+            if (mongooseConnection) {
+                mongooseConnection.close();
+            }
         }
     });
 }

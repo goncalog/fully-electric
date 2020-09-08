@@ -20,21 +20,22 @@ export default class EVs extends React.Component {
                 title: (item.model.secondary_name) ? 
                         `${item.make.name} ${item.model.name} ${item.model.secondary_name}` : 
                         `${item.make.name} ${item.model.name}`,
-                price: item.price.toString(),
+                price: item.price,
                 evFeatures: [
                     { 
                         name: 'Year',
-                        value: item.year.toString(),
+                        value: item.year,
                     },
                     { 
                         name: 'Mileage',
-                        value: item.mileage.toString(),
+                        value: item.mileage,
                     },
                     { 
                         name: 'Range',
-                        value: item.model.charging.range_miles.toString(),
+                        value: item.model.charging.range_miles,
                     },
-                ],                
+                ],
+                id: item._id,                
             };
             return ev;
         });

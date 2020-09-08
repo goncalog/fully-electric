@@ -18,7 +18,6 @@ export default function EVsContainer(props) {
                             title={ev.title} 
                             price={ev.price.toString()} 
                             evFeatures={evFeatures}
-                            id={ev.id} 
                             key={index} 
                         />
                     </Link> 

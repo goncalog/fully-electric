@@ -135,7 +135,6 @@ describe('EVsContainer', () => {
                 expect(feature.value).toBe(props.evs[i].evFeatures[j].value.toString());
             });
             expect(ev.key()).toBe(i.toString());
-            expect(ev.prop('id')).toBe(props.evs[i].id);
         });
     });
 });

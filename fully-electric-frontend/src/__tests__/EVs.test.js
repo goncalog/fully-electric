@@ -32,10 +32,13 @@ describe('EVs', () => {
         expect(shallowWrapper.length).toEqual(1);
 
         shallowWrapper.prop('evs').forEach((ev) => {
-            expect(ev.imagePath).toBeTruthy();
-            expect(ev.title).toBeTruthy();
-            expect(ev.price).toBeTruthy();
+            expect(ev.imagePath).toBeInstanceOf(Array);
+            expect(ev.title).toBeInstanceOf(String);
+            expect(ev.price).toBeInstanceOf(String);
             expect(ev.evFeatures).toBeTruthy();
         });
+
+    // TODO: test API call within EVs React component (and how that affects props passed to EVsContainer)
+
     });
 });

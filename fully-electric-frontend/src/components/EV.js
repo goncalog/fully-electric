@@ -9,7 +9,7 @@ import getFullEvTitle from '../utils/getFullEvTitle';
 export default class EV extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ev: {} };
+        this.state = { ev: {}, currentImage: 0 };
     }
 
     componentDidMount() {
@@ -25,7 +25,7 @@ export default class EV extends React.Component {
             title: '', 
             price: '',
             seller: { name: '', rating: '', callToActionText: '', },
-            detail: { imageUrls: [], evFeatures: [], sections: [], },     
+            detail: { imagePath: '', evFeatures: [], sections: [], },     
         }
 
         if (Object.keys(this.state.ev).length > 0) {
@@ -38,7 +38,7 @@ export default class EV extends React.Component {
                     callToActionText: 'Contact Seller',
                 },
                 detail: {
-                    imageUrls: this.state.ev.image_urls,
+                    imagePath: this.state.ev.image_urls[this.state.currentImage],
                     evFeatures: [
                         { 
                             name: 'Year',

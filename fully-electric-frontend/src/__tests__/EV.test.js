@@ -63,7 +63,7 @@ describe('EV', () => {
     test('has one EVDetail component rendered with passed properties', () => {
         const shallowWrapper = ev().find(EVDetail);
         expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.prop('imageUrls')).toBeTruthy();
+        expect(Object.keys(shallowWrapper.props())).toContain('imagePath');
         expect(shallowWrapper.prop('evFeatures')).toBeTruthy();
         expect(shallowWrapper.prop('sections')).toBeTruthy();
     });

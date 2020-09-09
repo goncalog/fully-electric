@@ -5,6 +5,7 @@ import SellerContact from './support_components/SellerContact';
 import EVDetail from './support_components/EVDetail';
 import formatRating from '../utils/formatRating';
 import getFullEvTitle from '../utils/getFullEvTitle';
+import getEvFeaturesArray from '../utils/getEvFeaturesArray';
 
 export default class EV extends React.Component {
     constructor(props) {
@@ -65,16 +66,7 @@ export default class EV extends React.Component {
                         {
                             name: 'Equipment and options',
                             expandButtonText: '+',
-                            evFeatures: [
-                                { 
-                                    name: 'Equipment',
-                                    value: 'Premium',
-                                },
-                                { 
-                                    name: 'Options',
-                                    value: 'Standard',
-                                },
-                            ],    
+                            evFeatures: getEvFeaturesArray(this.state.ev.equipment_and_options),    
                         },
                         {
                             name: 'Exterior',

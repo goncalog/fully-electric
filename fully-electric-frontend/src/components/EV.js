@@ -109,12 +109,22 @@ export default class EV extends React.Component {
                             expandButtonText: '+',
                             evFeatures: [
                                 { 
-                                    name: '0-60mph',
-                                    value: '4.0sec',
+                                    name: 'Horsepower',
+                                    value: `${this.state.ev.model.performance.horsepower}hp`,
                                 },
                                 { 
                                     name: 'Top speed',
-                                    value: '162mph',
+                                    value: `${this.state.ev.model.performance.top_speed_mph}mph`,
+                                },
+                                { 
+                                    name: '0-60mph',
+                                    value: `${this.state.ev.model.performance.zero_to_sixty_mph}sec`,
+                                },
+                                { 
+                                    name: 'Miles per kWh',
+                                    value: (this.state.ev.model.performance.miles_per_kwh) ? 
+                                            `${this.state.ev.model.performance.miles_per_kwh}` : 
+                                            'N/a',
                                 },
                             ],    
                         },

@@ -81,12 +81,12 @@ export default class EV extends React.Component {
                             expandButtonText: '+',
                             evFeatures: [
                                 { 
-                                    name: 'Colour',
-                                    value: 'Red',
+                                    name: 'Body style',
+                                    value: 'N/a',
                                 },
                                 { 
-                                    name: 'Doors',
-                                    value: '5',
+                                    name: 'Colour',
+                                    value: this.state.ev.exterior.colour,
                                 },
                             ],    
                         },
@@ -95,12 +95,12 @@ export default class EV extends React.Component {
                             expandButtonText: '+',
                             evFeatures: [
                                 { 
-                                    name: 'Seats',
-                                    value: 'Leather',
+                                    name: 'Seating',
+                                    value: this.state.ev.interior.seating,
                                 },
                                 { 
-                                    name: 'Screen',
-                                    value: 'Touch',
+                                    name: 'Colour',
+                                    value: this.state.ev.interior.colour,
                                 },
                             ],    
                         },

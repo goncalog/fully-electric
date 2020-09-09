@@ -1,5 +1,6 @@
 import React from 'react';
 import EVsContainer from './support_components/EVsContainer';
+import getFullEvTitle from '../utils/getFullEvTitle';
 
 export default class EVs extends React.Component {
     constructor(props) {
@@ -17,9 +18,7 @@ export default class EVs extends React.Component {
         const evs = this.state.evs.map((item) => {
             let ev = {
                 imageUrls: item.image_urls,
-                title: (item.model.secondary_name) ? 
-                        `${item.make.name} ${item.model.name} ${item.model.secondary_name}` : 
-                        `${item.make.name} ${item.model.name}`,
+                title: getFullEvTitle(item),
                 price: item.price,
                 evFeatures: [
                     { 

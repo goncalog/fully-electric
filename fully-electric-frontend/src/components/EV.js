@@ -82,7 +82,9 @@ export default class EV extends React.Component {
                             evFeatures: [
                                 { 
                                     name: 'Body style',
-                                    value: 'N/a',
+                                    value: (this.state.ev.exterior.body_style) ? 
+                                    `${this.state.ev.exterior.body_style}` : 
+                                    'N/a',
                                 },
                                 { 
                                     name: 'Colour',

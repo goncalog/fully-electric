@@ -33,26 +33,20 @@ describe('EV', () => {
         shallowEV = undefined;
     });
 
-    test('has 6 children', () => {
-        expect(ev().children().length).toEqual(6);
-    });
-
-    test('has one h1 HTML element rendered with id parameter', () => {
-        const shallowWrapper = ev().find('h1');
-        expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.text()).toBe(`EV - ${props.match.params.id}`);
+    test('has 5 children', () => {
+        expect(ev().children().length).toEqual(5);
     });
 
     test('has one EVTitle component rendered with passed properties', () => {
         const shallowWrapper = ev().find(EVTitle);
         expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.prop('title')).toBeTruthy();
+        expect(Object.keys(shallowWrapper.props())).toContain('title');
     });
 
     test('has one EVPrice component rendered with passed properties', () => {
         const shallowWrapper = ev().find(EVPrice);
         expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.prop('price')).toBeTruthy();
+        expect(Object.keys(shallowWrapper.props())).toContain('price');
     });
 
     test('has 2 SellerContact components rendered with passed properties', () => {
@@ -60,17 +54,20 @@ describe('EV', () => {
         expect(shallowWrapper.length).toEqual(2);
 
         shallowWrapper.forEach((node) => {
-            expect(node.prop('name')).toBeTruthy();
-            expect(node.prop('rating')).toBeTruthy();
-            expect(node.prop('callToActionText')).toBeTruthy();
+            expect(Object.keys(node.props())).toContain('name');
+            expect(Object.keys(node.props())).toContain('rating');
+            expect(Object.keys(node.props())).toContain('callToActionText');
         });
     });
 
     test('has one EVDetail component rendered with passed properties', () => {
         const shallowWrapper = ev().find(EVDetail);
         expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.prop('imagePath')).toBeTruthy();
+        expect(Object.keys(shallowWrapper.props())).toContain('imagePath');
         expect(shallowWrapper.prop('evFeatures')).toBeTruthy();
         expect(shallowWrapper.prop('sections')).toBeTruthy();
     });
+
+    // TODO: test API call within EV React component (and how that affects props passed to its children)
+
 });

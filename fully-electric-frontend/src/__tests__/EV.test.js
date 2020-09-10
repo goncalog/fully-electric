@@ -11,6 +11,7 @@ configure({ adapter: new Adapter() });
 describe('EV', () => {
     let props;
     let shallowEV;
+    const mockFunction = jest.fn();
     const ev = () => {
         if (!shallowEV) {
             shallowEV = shallow(<EV {...props}/>);
@@ -28,7 +29,7 @@ describe('EV', () => {
                 params: {
                     id: 12345,
                 }
-            }
+            },
         }
         shallowEV = undefined;
     });
@@ -66,6 +67,7 @@ describe('EV', () => {
         expect(Object.keys(shallowWrapper.props())).toContain('imagePath');
         expect(shallowWrapper.prop('evFeatures')).toBeTruthy();
         expect(shallowWrapper.prop('sections')).toBeTruthy();
+        expect(Object.keys(shallowWrapper.props())).toContain('onChangeImageButtonClick');
     });
 
     // TODO: test API call within EV React component (and how that affects props passed to its children)

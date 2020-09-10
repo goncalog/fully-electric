@@ -9,6 +9,7 @@ configure({ adapter: new Adapter() });
 describe('EVImageSlider', () => {
     let props;
     let shallowEVImageSlider;
+    const mockFunction = jest.fn();
     const evImageSlider = () => {
         if (!shallowEVImageSlider) {
             shallowEVImageSlider = shallow(<EVImageSlider {...props} />);
@@ -20,9 +21,10 @@ describe('EVImageSlider', () => {
     // Otherwise, state from one test would leak into another. 
     // By setting shallowEVImageSlider to undefined here, when the next test runs, 
     // if it calls evImageSlider, a new EVImageSlider will be created with the current props
-    beforeEach(() => {
+    beforeEach(() => {        
         props = {
             imagePath: '/path/to/ev/image',
+            onChangeImageButtonClick: mockFunction,
         }
         shallowEVImageSlider = undefined;
     });
@@ -43,6 +45,15 @@ describe('EVImageSlider', () => {
         const type = ['previous', 'next'];
         shallowWrapper.forEach((node, i) => {
             expect(node.prop('type')).toBe(type[i]);
+        });
+    });
+
+    test('should call mockFunction onChangeImageButtonClick', () => {
+        const shallowWrapper = evImageSlider().find(ChangeImageButton);
+        expect(shallowWrapper.length).toEqual(2);
+        shallowWrapper.forEach((node) => {
+            node.props().onChangeImageButtonClick();
+            expect(mockFunction).toHaveBeenCalled();
         });
     });
 });

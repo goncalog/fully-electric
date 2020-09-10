@@ -10,6 +10,7 @@ configure({ adapter: new Adapter() });
 describe('EVDetail', () => {
     let props;
     let shallowEVDetail;
+    const mockFunction = jest.fn();
     const evDetail = () => {
         if (!shallowEVDetail) {
             shallowEVDetail = shallow(<EVDetail {...props} />);
@@ -96,6 +97,7 @@ describe('EVDetail', () => {
                     ],    
                 },
             ],
+            onChangeImageButtonClick: mockFunction,
         }
         shallowEVDetail = undefined;
     });
@@ -120,5 +122,12 @@ describe('EVDetail', () => {
         const shallowWrapper = evDetail().find(EVAdditionalSectionsContainer);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('sections')).toBe(props.sections);
+    });
+
+    test('should have called mockFunction onChangeImageButtonClick', () => {
+        const shallowWrapper = evDetail().find(EVImageSlider);
+        shallowWrapper.props().onChangeImageButtonClick();
+        shallowWrapper.props().onChangeImageButtonClick();
+        expect(mockFunction).toHaveBeenCalledTimes(2);
     });
 });

@@ -69,7 +69,4 @@ describe('EV', () => {
         expect(shallowWrapper.prop('sections')).toBeTruthy();
         expect(Object.keys(shallowWrapper.props())).toContain('onChangeImageButtonClick');
     });
-
-    // TODO: test API call within EV React component (and how that affects props passed to its children)
-
 });

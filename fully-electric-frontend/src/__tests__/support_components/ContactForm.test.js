@@ -21,6 +21,8 @@ describe('ContactForm', () => {
     beforeEach(() => {
         props = {
             legend: "Text to test legend property",
+            emailText: "Text to test emailText property",
+            messageText: "Text to test messageText property",
         }
         shallowContactForm = undefined;
     });
@@ -39,11 +41,13 @@ describe('ContactForm', () => {
         const shallowWrapper = contactForm().find('div.input input');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('name')).toBe('email');
+        expect(shallowWrapper.prop('value')).toBe(props.emailText);
     });
 
     test('has one HTML textarea element for the message', () => {
         const shallowWrapper = contactForm().find('div.input textarea');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('name')).toBe('message');
+        expect(shallowWrapper.prop('value')).toBe(props.messageText);
     });
 });

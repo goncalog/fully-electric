@@ -9,6 +9,16 @@ export default class Contact extends React.Component {
             emailText: '',
             messageText:'',
         }
+        this.handleEmailTextChange = this.handleEmailTextChange.bind(this);
+        this.handleMessageTextChange = this.handleMessageTextChange.bind(this);
+    }
+
+    handleEmailTextChange(emailText) {
+        this.setState({ emailText })
+    }
+
+    handleMessageTextChange(messageText) {
+        this.setState({ messageText })
     }
 
     render() {
@@ -17,7 +27,9 @@ export default class Contact extends React.Component {
                 <ContactForm 
                     legend="Send your message:" 
                     emailText={this.state.emailText} 
-                    messageText={this.state.messageText} 
+                    messageText={this.state.messageText}
+                    onEmailTextChange={this.handleEmailTextChange} 
+                    onMessageTextChange={this.handleMessageTextChange} 
                 />
                 <CallToActionButton callToActionText="Send Message"></CallToActionButton>
             </div>

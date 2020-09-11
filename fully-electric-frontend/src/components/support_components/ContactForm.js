@@ -8,11 +8,11 @@ export default class ContactForm extends React.Component {
     }
 
     handleEmailTextChange(e) {
-        this.onEmailTextChange(e.target.value);
+        this.props.onEmailTextChange(e.target.value);
     }
 
     handleMessageTextChange(e) {
-        this.onMessageTextChange(e.target.value);
+        this.props.onMessageTextChange(e.target.value);
     }
 
     render() {
@@ -26,7 +26,7 @@ export default class ContactForm extends React.Component {
                             type="email" 
                             placeholder="Your email" 
                             value={this.props.emailText}
-                            onChange={this.props.onEmailTextChange} 
+                            onChange={this.handleEmailTextChange} 
                             required
                         >
                         </input>
@@ -39,7 +39,7 @@ export default class ContactForm extends React.Component {
                             rows="20" 
                             placeholder="Your message"
                             value={this.props.messageText}
-                            onChange={this.props.onMessageTextChange}
+                            onChange={this.handleMessageTextChange}
                         >
                         </textarea>
                     </div>

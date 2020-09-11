@@ -57,13 +57,13 @@ describe('ContactForm', () => {
 
     test('should call mockFunctionEmail onEmailTextChange', () => {
         const shallowWrapper = contactForm().find('div.input input');
-        shallowWrapper.simulate('change');
+        shallowWrapper.simulate('change', { target: { value: 'email' } }); // As noted in the function signature above passing a mock event is optional. It is worth noting that ReactWrapper will pass a SyntheticEvent object to the event handler in your code. Keep in mind that if the code you are testing uses properties that are not included in the SyntheticEvent, for instance event.target.value, you will need to provide a mock event like so .simulate("change", { target: { value: "foo" }}) for it to work.
         expect(mockFunctionEmail).toHaveBeenCalled();
     });
 
     test('should call mockFunctionMessage onMessageTextChange', () => {
         const shallowWrapper = contactForm().find('div.input textarea');
-        shallowWrapper.simulate('change');
+        shallowWrapper.simulate('change', { target: { value: 'message' } }); // As noted in the function signature above passing a mock event is optional. It is worth noting that ReactWrapper will pass a SyntheticEvent object to the event handler in your code. Keep in mind that if the code you are testing uses properties that are not included in the SyntheticEvent, for instance event.target.value, you will need to provide a mock event like so .simulate("change", { target: { value: "foo" }}) for it to work.
         expect(mockFunctionMessage).toHaveBeenCalled();
     });
 });

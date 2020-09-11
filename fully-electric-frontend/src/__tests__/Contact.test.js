@@ -39,5 +39,7 @@ describe('Contact', () => {
         expect(shallowWrapper.prop('legend')).toBe('Send your message:');
         expect(Object.keys(shallowWrapper.props())).toContain('emailText');
         expect(Object.keys(shallowWrapper.props())).toContain('messageText');
+        expect(Object.keys(shallowWrapper.props())).toContain('onEmailTextChange');
+        expect(Object.keys(shallowWrapper.props())).toContain('onMessageTextChange');
     });
 });

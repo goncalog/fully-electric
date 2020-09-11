@@ -7,6 +7,8 @@ configure({ adapter: new Adapter() });
 describe('ContactForm', () => {
     let props;
     let shallowContactForm;
+    const mockFunctionEmail = jest.fn();
+    const mockFunctionMessage = jest.fn();
     const contactForm = () => {
         if (!shallowContactForm) {
             shallowContactForm = shallow(<ContactForm {...props}/>);
@@ -23,6 +25,8 @@ describe('ContactForm', () => {
             legend: "Text to test legend property",
             emailText: "Text to test emailText property",
             messageText: "Text to test messageText property",
+            onEmailTextChange: mockFunctionEmail,
+            onMessageTextChange: mockFunctionMessage,
         }
         shallowContactForm = undefined;
     });
@@ -49,5 +53,17 @@ describe('ContactForm', () => {
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('name')).toBe('message');
         expect(shallowWrapper.prop('value')).toBe(props.messageText);
+    });
+
+    test('should call mockFunctionEmail onEmailTextChange', () => {
+        const shallowWrapper = contactForm().find('div.input input');
+        shallowWrapper.simulate('change');
+        expect(mockFunctionEmail).toHaveBeenCalled();
+    });
+
+    test('should call mockFunctionMessage onMessageTextChange', () => {
+        const shallowWrapper = contactForm().find('div.input textarea');
+        shallowWrapper.simulate('change');
+        expect(mockFunctionMessage).toHaveBeenCalled();
     });
 });

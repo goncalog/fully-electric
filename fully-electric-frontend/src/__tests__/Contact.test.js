@@ -37,5 +37,9 @@ describe('Contact', () => {
         const shallowWrapper = contact().find(ContactForm);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('legend')).toBe('Send your message:');
+        expect(Object.keys(shallowWrapper.props())).toContain('emailText');
+        expect(Object.keys(shallowWrapper.props())).toContain('messageText');
+        expect(Object.keys(shallowWrapper.props())).toContain('onEmailTextChange');
+        expect(Object.keys(shallowWrapper.props())).toContain('onMessageTextChange');
     });
 });

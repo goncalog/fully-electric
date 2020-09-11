@@ -7,10 +7,11 @@ configure({ adapter: new Adapter() });
 describe('ChangeImageButton', () => {
     let props;
     let shallowChangeImageButton;
-    const changeImageButton = (typeStr) => {
+    const changeImageButton = (typeStr, handleClick) => {
         if (!shallowChangeImageButton) {
             props = {
                 type: typeStr,
+                onChangeImageButtonClick: (handleClick) ? handleClick : '',
             }
             shallowChangeImageButton = shallow(<ChangeImageButton {...props} />);
         }
@@ -42,5 +43,13 @@ describe('ChangeImageButton', () => {
     test('has some text depending on the passed property (2)', () => {
         const shallowWrapper = changeImageButton('previous').find('button.change-image');
         expect(shallowWrapper.text()).toBe('<');
+    });
+
+    test('should call mock function when button is clicked', () => {
+        const mockFunction = jest.fn();
+        const shallowWrapper = changeImageButton('next', mockFunction).find('button.change-image');
+        shallowWrapper.simulate('click');
+        expect(mockFunction).toHaveBeenCalled();
+        expect(mockFunction).toHaveBeenCalledWith(props.type);
     });
 });

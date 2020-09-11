@@ -6,11 +6,21 @@ import EVDetail from './support_components/EVDetail';
 import formatRating from '../utils/formatRating';
 import getFullEvTitle from '../utils/getFullEvTitle';
 import getEvFeaturesArray from '../utils/getEvFeaturesArray';
+import getImagePosForSlider from '../utils/getImagePosForSlider';
 
 export default class EV extends React.Component {
     constructor(props) {
         super(props);
         this.state = { ev: {}, currentImage: 0 };
+        this.handleChangeImageButtonClick = this.handleChangeImageButtonClick.bind(this);
+    }
+
+    handleChangeImageButtonClick(buttonType) {
+        if (buttonType === 'next') {
+            this.setState({ currentImage: this.state.currentImage + 1 })
+        } else if (buttonType === 'previous') {
+            this.setState({ currentImage: this.state.currentImage - 1 })
+        }
     }
 
     componentDidMount() {
@@ -20,16 +30,18 @@ export default class EV extends React.Component {
     }
 
     render() {
-        console.log(this.state.ev);
-
         let ev = {
             title: '', 
             price: '',
             seller: { name: '', rating: '', callToActionText: '', },
-            detail: { imagePath: '', evFeatures: [], sections: [], },     
+            detail: { imagePath: '', evFeatures: [], sections: [], onChangeImageButtonClick: this.handleChangeImageButtonClick, },     
         }
 
         if (Object.keys(this.state.ev).length > 0) {
+            const imagePath = this.state.ev.image_urls[
+                getImagePosForSlider(this.state.ev.image_urls.length, this.state.currentImage)
+            ];
+            
             ev = {
                 title: getFullEvTitle(this.state.ev),
                 price: this.state.ev.price.toString(),
@@ -39,7 +51,7 @@ export default class EV extends React.Component {
                     callToActionText: 'Contact Seller',
                 },
                 detail: {
-                    imagePath: this.state.ev.image_urls[this.state.currentImage],
+                    imagePath: imagePath,
                     evFeatures: [
                         { 
                             name: 'Year',
@@ -123,6 +135,7 @@ export default class EV extends React.Component {
                             ],    
                         },
                     ],
+                    onChangeImageButtonClick: this.handleChangeImageButtonClick,
                 },
             }             
         }

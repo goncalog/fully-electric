@@ -6,7 +6,6 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 describe('EVs', () => {
-    let props;
     let shallowEVs;
     const evs = () => {
         if (!shallowEVs) {
@@ -30,8 +29,5 @@ describe('EVs', () => {
     test('has one EVsContainer component rendered with passed properties', () => {
         const shallowWrapper = evs().find(EVsContainer);
         expect(shallowWrapper.length).toEqual(1);
-
-    // TODO: test API call within EVs React component (and how that affects props passed to EVsContainer)
-
     });
 });

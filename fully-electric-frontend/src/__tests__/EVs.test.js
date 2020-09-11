@@ -6,7 +6,6 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 describe('EVs', () => {
-    let props;
     let shallowEVs;
     const evs = () => {
         if (!shallowEVs) {

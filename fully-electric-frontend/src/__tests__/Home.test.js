@@ -37,7 +37,7 @@ describe('Home', () => {
         expect(shallowWrapper.prop('backgroundImagePath')).toBe('headline-background.jpg');
         expect(shallowWrapper.prop('mainHeadline')).toBe('Find your dream EV');
         expect(shallowWrapper.prop('secondaryHeadline'))
-                .toBe('Test drive it for FREE for one week before purchasing');
+                .toBe('Test drive it for one week before purchasing - it\'s FREE');
         expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s GO!');
     });
 

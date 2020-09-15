@@ -25,3 +25,7 @@
     color: white;
     font-weight: 900;
 }
+
+.callToActionButton:hover {
+    background-color: rgb(25, 180, 105);
+}

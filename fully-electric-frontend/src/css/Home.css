@@ -16,6 +16,24 @@
     font-weight: 900;
 }
 
+.benefits-container {
+    text-align: center;
+    padding: 60px 10%;
+}
+
+.benefits {
+    padding-bottom: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 100px;
+}
+
+.benefit-title {
+    padding-bottom: 12px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .callToActionButton {
     height: 50px;
     width: 150px;

@@ -41,8 +41,8 @@ describe('BenefitContainer', () => {
         shallowBenefitContainer = undefined;
     });
 
-    test('has 4 children', () => {
-        expect(benefitContainer().children().length).toEqual(4);
+    test('has 2 children', () => {
+        expect(benefitContainer().children().length).toEqual(2);
     });
 
     test('has 3 Benefit React components rendered with passed properties', () => {

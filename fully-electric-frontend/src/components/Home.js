@@ -10,7 +10,7 @@ export default class Home extends React.Component {
         const headlineProps = {
             backgroundImagePath: background,
             mainHeadline: 'Find your dream EV',
-            secondaryHeadline: 'Test drive it for FREE for one week before purchasing',
+            secondaryHeadline: 'Test drive it for one week before purchasing - it\'s FREE',
             callToActionText: 'Let\'s GO!',
         }
 

@@ -17,6 +17,10 @@
     font-weight: 900;
 }
 
+.secondary-headline {
+    padding-right: 10%;
+}
+
 .benefits-container {
     text-align: center;
     padding: 60px 10%;

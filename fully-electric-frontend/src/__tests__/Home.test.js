@@ -58,6 +58,7 @@ describe('Home', () => {
     test('renders SellerContainer with passed properties', () => {
         const shallowWrapper = home().find(SellerContainer);
         expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('backgroundImagePath')).toBe('seller-container-background.jpg');
         expect(shallowWrapper.prop('mainHeadline')).toBe('Sell your EV for more');
         expect(shallowWrapper.prop('secondaryHeadline'))
                 .toBe('Get £1000 to £3000 more than if you sold to a car dealer');

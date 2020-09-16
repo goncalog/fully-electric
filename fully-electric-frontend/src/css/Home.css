@@ -7,6 +7,7 @@
     background-position: center center;
     color: white;
 }
+
 .headline {
     padding-bottom: 15px;
 }
@@ -32,6 +33,15 @@
     padding-bottom: 12px;
     font-size: 25px;
     font-weight: 600;
+}
+
+.seller-container {
+    padding: 5% 45% 5% 10%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgb(41, 41, 41);
+    color: white;
 }
 
 .callToActionButton {

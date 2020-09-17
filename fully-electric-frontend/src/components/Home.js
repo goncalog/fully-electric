@@ -2,15 +2,16 @@ import React from 'react';
 import HeadlineContainer from './support_components/HeadlineContainer';
 import BenefitsContainer from './support_components/BenefitsContainer';
 import SellerContainer from './support_components/SellerContainer';
-import background from '../media/headline-background.jpg';
+import backgroundHeadlineContainer from '../media/headline-background.jpg';
+import backgroundSellerContainer from '../media/seller-container-background.jpg';
 import '../css/Home.css';
 
 export default class Home extends React.Component {
     render() {
         const headlineProps = {
-            backgroundImagePath: background,
+            backgroundImagePath: backgroundHeadlineContainer,
             mainHeadline: 'Find your dream EV',
-            secondaryHeadline: 'Test drive it for FREE for one week before purchasing',
+            secondaryHeadline: 'Test drive it for one week before purchasing - it\'s FREE',
             callToActionText: 'Let\'s GO!',
         }
 
@@ -33,6 +34,7 @@ export default class Home extends React.Component {
         }
 
         const sellerProps = {
+            backgroundImagePath: backgroundSellerContainer,
             mainHeadline: 'Sell your EV for more',
             secondaryHeadline: 'Get £1000 to £3000 more than if you sold to a car dealer',
             callToActionText: 'Let\'s SELL!',

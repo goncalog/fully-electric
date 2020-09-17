@@ -1,6 +1,7 @@
 import React from 'react';
 import EVsContainer from './support_components/EVsContainer';
 import getFullEvTitle from '../utils/getFullEvTitle';
+import '../css/EVs.css';
 
 export default class EVs extends React.Component {
     constructor(props) {

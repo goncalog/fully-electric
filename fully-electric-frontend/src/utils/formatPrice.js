@@ -6,5 +6,7 @@ export default function formatPrice(country, price) {
                 return `£${array.splice(0, array.length - 3).join('')},${array.join('')}`;
             }
             return `£${price}`;
+        default:
+            return price;
     }
 }

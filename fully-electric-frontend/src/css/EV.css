@@ -1,0 +1,95 @@
+.ev {
+    text-align: center;
+    padding: 40px 10% 0px 10%;
+}
+
+.ev .ev-title {
+    font-size: 40px;
+    margin: 0 18%;
+}
+
+.ev .price {
+    font-size: 30px;
+}
+
+.seller-contact {
+    padding-top: 30px;
+    padding-bottom: 40px;
+    border-top: 1px solid gray;
+    margin: 0 18%;
+}
+
+.image-slider {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    padding: 0 10% 40px 10%;
+}
+
+.image-slider .ev-image {
+    max-width: 100%;
+}
+
+.change-image {
+    font-size: 50px;
+    font-weight: 600;
+    background-color: white;
+    border: 0;
+}
+
+.change-image:hover {
+    font-size: 60px;
+    color:  rgb(25, 180, 105);
+}
+
+.change-image:active {
+    font-size: 60px;
+    color:  rgb(25, 180, 105);
+}
+
+.ev .ev-key-features {
+    padding: 0 20% 50px 20%;
+    row-gap: 20px;
+}
+
+.ev .ev-key-features .feature-name {
+    font-size: 25px;
+}
+
+.ev .ev-key-features .feature-value {
+    font-size: 15px;
+}
+
+.ev-additional-section {
+    margin: 0 30% 25px 30%;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    row-gap: 5px;
+}
+
+.section-name {
+    height: 100%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.expand-button {
+    background-color: white;
+    font-size: 30px;
+    border: 0;
+}
+
+.expand-button:hover {
+    color: rgb(25, 180, 105);
+    font-weight: 600;
+}
+
+.expand-button:active {
+    color: rgb(25, 180, 105);
+    font-weight: 600;
+}
+
+.additional-features {
+    grid-column: 1 / 3;
+}

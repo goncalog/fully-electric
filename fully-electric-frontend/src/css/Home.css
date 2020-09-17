@@ -1,7 +1,63 @@
 .headline-container {
     height: 600px;
     width: 100%;
+    padding: 5% 45% 0 10%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    color: white;
+}
+
+.headline {
+    padding-bottom: 15px;
+}
+
+.main-headline {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.secondary-headline {
+    padding-right: 10%;
+}
+
+.benefits-container {
+    text-align: center;
+    padding: 60px 10%;
+}
+
+.benefits {
+    padding-bottom: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 120px;
+}
+
+.benefit-title {
+    padding-bottom: 12px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.seller-container {
+    padding: 5% 45% 5% 10%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgb(41, 41, 41);
+    color: white;
+}
+
+.callToActionButton {
+    height: 50px;
+    width: 150px;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(52, 215, 137);
+    color: white;
+    font-weight: 900;
+}
+
+.callToActionButton:hover {
+    background-color: rgb(25, 180, 105);
 }

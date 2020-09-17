@@ -1,0 +1,15 @@
+.contact {
+    padding: 30px 30%;
+}
+
+.contact-form {
+    padding-bottom: 20px;
+}
+
+.input input {
+    width: 75%;
+}
+
+.input textarea {
+    width: 100%;
+}

@@ -17,7 +17,7 @@ export default class ContactForm extends React.Component {
 
     render() {
         return (
-            <form className="contact">
+            <form className="contact-form">
                 <fieldset>
                     <legend>{this.props.legend}</legend>
                     <div className="input">

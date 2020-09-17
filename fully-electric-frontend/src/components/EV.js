@@ -7,6 +7,7 @@ import formatRating from '../utils/formatRating';
 import getFullEvTitle from '../utils/getFullEvTitle';
 import getEvFeaturesArray from '../utils/getEvFeaturesArray';
 import getImagePosForSlider from '../utils/getImagePosForSlider';
+import '../css/EV.css';
 
 export default class EV extends React.Component {
     constructor(props) {

@@ -67,6 +67,8 @@
 .section-name {
     height: 100%;
     font-size: 25px;
+    display: flex;
+    align-items: center;
 }
 
 .expand-button {

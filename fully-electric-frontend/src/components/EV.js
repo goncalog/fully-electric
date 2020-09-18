@@ -4,6 +4,8 @@ import EVPrice from './support_components/EVPrice';
 import SellerContact from './support_components/SellerContact';
 import EVDetail from './support_components/EVDetail';
 import formatRating from '../utils/formatRating';
+import formatMiles from '../utils/formatMiles';
+import formatNumber from '../utils/formatNumber';
 import getFullEvTitle from '../utils/getFullEvTitle';
 import getEvFeaturesArray from '../utils/getEvFeaturesArray';
 import getImagePosForSlider from '../utils/getImagePosForSlider';
@@ -60,11 +62,11 @@ export default class EV extends React.Component {
                         },
                         { 
                             name: 'Mileage',
-                            value: this.state.ev.mileage,
+                            value: formatNumber(this.state.ev.mileage),
                         },
                         { 
                             name: 'Range',
-                            value: this.state.ev.model.charging.range_miles,
+                            value: formatMiles(this.state.ev.model.charging.range_miles),
                         },
                         { 
                             name: 'Location',

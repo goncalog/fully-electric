@@ -76,6 +76,10 @@ export default class EV extends React.Component {
                             name: 'Rating',
                             value: formatRating(this.state.ev.model.rating),
                         },
+                        { 
+                            name: 'Full Charge',
+                            value: `${this.state.ev.model.charging.hours_to_charge}h`,
+                        },
                     ],
                     sections: [
                         {

@@ -2,6 +2,8 @@ import React from 'react';
 import EVsContainer from './support_components/EVsContainer';
 import getFullEvTitle from '../utils/getFullEvTitle';
 import '../css/EVs.css';
+import formatMiles from '../utils/formatMiles';
+import formatNumber from '../utils/formatNumber';
 
 export default class EVs extends React.Component {
     constructor(props) {
@@ -28,11 +30,11 @@ export default class EVs extends React.Component {
                     },
                     { 
                         name: 'Mileage',
-                        value: item.mileage,
+                        value: formatNumber(item.mileage),
                     },
                     { 
                         name: 'Range',
-                        value: item.model.charging.range_miles,
+                        value: formatMiles(item.model.charging.range_miles),
                     },
                 ],
                 id: item._id,                

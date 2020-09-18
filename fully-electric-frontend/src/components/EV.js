@@ -18,9 +18,9 @@ export default class EV extends React.Component {
 
     handleChangeImageButtonClick(buttonType) {
         if (buttonType === 'next') {
-            this.setState({ currentImage: this.state.currentImage + 1 })
+            this.setState((state) => ({ currentImage: state.currentImage + 1 }));
         } else if (buttonType === 'previous') {
-            this.setState({ currentImage: this.state.currentImage - 1 })
+            this.setState((state) => ({ currentImage: state.currentImage - 1 }));
         }
     }
 

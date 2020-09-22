@@ -25,7 +25,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '../fully-electric-frontend/build')));
 
 // Add headers
 app.use(function (req, res, next) {
@@ -35,8 +37,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/content', contentRouter);
+
+// Handles any requests that doesn't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../fully-electric-frontend/build/index.html'))
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

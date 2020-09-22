@@ -1,12 +1,16 @@
 {
   "name": "fully-electric-backend",
   "version": "0.0.0",
+  "engines": {
+    "node": "14.7.0"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=fully-electric-backend:* npm run devstart",
-    "test": "mocha"
+    "test": "mocha",
+    "heroku-postbuild": "cd .. && cd fully-electric-frontend && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
     "async": "^3.2.0",

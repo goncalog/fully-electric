@@ -1,0 +1,13 @@
+{
+  "name": "fully-electric",
+  "version": "0.0.0",
+  "engines": {
+    "node": "14.7.0"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node ./fully-electric-backend/bin/www",
+    "heroku-postbuild": "cd fully-electric-frontend && npm install --only=dev && npm install && npm run build"
+  },
+  "dependencies": {}
+}

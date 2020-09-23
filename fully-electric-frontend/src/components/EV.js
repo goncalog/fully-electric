@@ -27,7 +27,15 @@ export default class EV extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/content/ev/${this.props.match.params.id}`)
+        let evUrl;
+        
+        if (process.env.NODE_ENV === 'production') {
+            evUrl = `/content/ev/${this.props.match.params.id}`;
+        } else {
+            evUrl = `${process.env.REACT_APP_SERVER_URL}/content/ev/${this.props.match.params.id}`;
+        }
+
+        fetch(evUrl)
             .then((res) => res.json())
             .then((res) => { this.setState({ ev: res.ev }) })
     }

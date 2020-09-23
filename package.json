@@ -7,7 +7,10 @@
   "private": true,
   "scripts": {
     "start": "node ./fully-electric-backend/bin/www",
-    "heroku-postbuild": "cd fully-electric-frontend && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd fully-electric-frontend && npm run build"
   },
-  "dependencies": {}
+  "dependencies": {
+    "fully-electric-backend": "file:fully-electric-backend",
+    "fully-electric-frontend": "file:fully-electric-frontend"
+  }
 }

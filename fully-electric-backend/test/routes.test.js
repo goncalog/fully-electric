@@ -1,4 +1,3 @@
-const indexRouter = require('../routes/index');
 const contentRouter = require('../routes/content');
 
 const mongooseConnection = require('../database/mongoConfigTesting');
@@ -11,7 +10,6 @@ const express = require('express');
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
-app.use('/', indexRouter);
 app.use('/content', contentRouter);
 
 before(function () {
@@ -23,14 +21,6 @@ after(function () {
 });
 
 describe('Routes testing', function () {
-    it('index route redirects to content route', () => {
-        return request(app)
-            .get('/')
-            .expect('Content-type', 'text/plain; charset=utf-8')
-            .expect('Location', '/content')
-            .expect(302)
-    });
-
     it('content route works', () => {
         return request(app)
             .get('/content')

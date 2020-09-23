@@ -13,7 +13,6 @@ const LocalStrategy = require("passport-local").Strategy;
 
 require('./database/mongoConfig');
 
-const indexRouter = require('./routes/index');
 const contentRouter = require('./routes/content');
 
 const app = express();
@@ -37,7 +36,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.use('/', indexRouter);
 app.use('/content', contentRouter);
 
 // Handles any requests that doesn't match the ones above

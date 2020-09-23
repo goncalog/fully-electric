@@ -12,7 +12,15 @@ export default class EVs extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/content/evs`)
+        let evsUrl;
+        
+        if (process.env.NODE_ENV === 'production') {
+            evsUrl = '/content/evs';
+        } else {
+            evsUrl = `${process.env.REACT_APP_SERVER_URL}/content/evs`;
+        }
+
+        fetch(evsUrl)
             .then(res => res.json())
             .then((res) => { this.setState({ evs: res.evs }) })
     }

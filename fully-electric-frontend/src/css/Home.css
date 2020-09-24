@@ -18,7 +18,7 @@
 }
 
 .secondary-headline {
-    padding-right: 10%;
+    padding-right: 15%;
 }
 
 .benefits-container {
@@ -40,11 +40,10 @@
 }
 
 .seller-container {
-    padding: 5% 45% 5% 10%;
+    padding: 5% 40% 5% 10%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: rgb(41, 41, 41);
     color: white;
 }
 
@@ -60,4 +59,31 @@
 
 .callToActionButton:hover {
     background-color: rgb(25, 180, 105);
+}
+
+/* Responsive layout - when the screen is less than 1250px wide */
+@media screen and (max-width: 1250px) {    
+    .headline-container {
+        padding: 5% 25% 0 10%;
+    }
+    
+    .secondary-headline {
+        padding-right: 25%;
+    }
+    
+    .benefits {
+        column-gap: 7%;
+    }
+    
+    .benefit-title {
+        font-size: 23px;
+    }
+
+    .benefit-text {
+        font-size: 15px;
+    }
+    
+    .seller-container {
+        padding: 5% 27% 5% 10%;
+    }
 }

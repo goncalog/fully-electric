@@ -118,3 +118,49 @@
         padding-right: 27%;
     }
 }
+
+/* Responsive layout - when the screen is less than 800px wide (tablet portrait) */
+@media screen and (max-width: 800px) {    
+    .headline-container {
+        height: 400px;
+        padding: 10% 10% 0 10%;
+    }
+
+    .main-headline {
+        font-size: 40px;
+    }
+    
+    .secondary-headline {
+        font-size: 26px;
+        padding-right: 10%;
+    }
+    
+    .benefits {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap: 7%;
+        padding-bottom: 90px;
+    }
+    
+    .benefit-title {
+        font-size: 28px;
+    }
+
+    .benefit-text {
+        padding: 0 30%;
+        font-size: 16px;
+    }
+    
+    .seller-container {
+        padding: 10% 10%;
+    }
+
+    .seller-container .main-headline {
+        font-size: 38px;
+    }
+
+    .seller-container .secondary-headline {
+        padding-right: 20%;
+        font-size: 24px;
+    }
+}

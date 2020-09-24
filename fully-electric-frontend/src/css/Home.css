@@ -87,3 +87,34 @@
         padding: 5% 27% 5% 10%;
     }
 }
+
+/* Responsive layout - when the screen is less than 1000px wide */
+@media screen and (max-width: 1000px) {    
+    .headline-container {
+        padding: 6% 15% 0 10%;
+    }
+    
+    .secondary-headline {
+        padding-right: 17%;
+    }
+    
+    .benefits {
+        column-gap: 6%;
+    }
+    
+    .benefit-title {
+        font-size: 18px;
+    }
+
+    .benefit-text {
+        font-size: 14px;
+    }
+    
+    .seller-container {
+        padding: 5% 10% 5% 10%;
+    }
+
+    .seller-container .secondary-headline {
+        padding-right: 27%;
+    }
+}

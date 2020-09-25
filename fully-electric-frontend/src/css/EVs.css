@@ -41,6 +41,7 @@
 
 .ev-title {
     font-weight: 900;
+    padding: 0 5%;
 }
 
 .price {
@@ -99,5 +100,21 @@
     
     .ev-intro-card:hover {
         height: 59vh;
+    }
+}
+
+/* Responsive layout - when the screen is less than 800px wide (tablet portrait) */
+@media screen and (max-width: 800px) {
+    .evs-container {
+        grid-auto-rows: 58vh;
+        gap: 20px 10%;
+    }
+    
+    .ev-intro-card {
+        height: 53vh;
+    }
+    
+    .ev-intro-card:hover {
+        height: 54vh;
     }
 }

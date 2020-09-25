@@ -67,3 +67,20 @@
     color:rgb(52, 215, 137);
     padding-bottom: 5px;
 }
+
+/* Responsive layout - when the screen is less than 1250px wide */
+@media screen and (max-width: 1250px) {
+    .evs-container {
+        grid-auto-rows: 58vh;
+        gap: 20px 8%;
+    }
+    
+    .ev-intro-card {
+        grid-template-rows: 15fr 2fr 2fr 6fr;
+        height: 53vh;
+    }
+    
+    .ev-intro-card:hover {
+        height: 54vh;
+    }
+}

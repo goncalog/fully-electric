@@ -41,6 +41,7 @@
 
 .ev-title {
     font-weight: 900;
+    padding: 0 5%;
 }
 
 .price {
@@ -66,4 +67,66 @@
     margin: 0;
     color:rgb(52, 215, 137);
     padding-bottom: 5px;
+}
+
+/* Responsive layout - when the screen is less than 1250px wide */
+@media screen and (max-width: 1250px) {
+    .evs-container {
+        grid-auto-rows: 58vh;
+        gap: 20px 8%;
+    }
+    
+    .ev-intro-card {
+        grid-template-rows: 15fr 2fr 2fr 6fr;
+        height: 53vh;
+    }
+    
+    .ev-intro-card:hover {
+        height: 54vh;
+    }
+}
+
+/* Responsive layout - when the screen is less than 1000px wide */
+@media screen and (max-width: 1000px) {
+    .evs-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 63vh;
+        gap: 20px 20%;
+    }
+    
+    .ev-intro-card {
+        height: 58vh;
+    }
+    
+    .ev-intro-card:hover {
+        height: 59vh;
+    }
+}
+
+/* Responsive layout - when the screen is less than 800px wide (tablet portrait) */
+@media screen and (max-width: 800px) {
+    .evs-container {
+        grid-auto-rows: 58vh;
+        gap: 20px 10%;
+    }
+    
+    .ev-intro-card {
+        height: 53vh;
+    }
+    
+    .ev-intro-card:hover {
+        height: 54vh;
+    }
+}
+
+/* Responsive layout - when the screen is less than 600px wide (mobile) */
+@media screen and (max-width: 600px) {
+    .evs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ev-intro-card {
+        margin: 0 auto;
+        max-width: 260px;
+    }
 }

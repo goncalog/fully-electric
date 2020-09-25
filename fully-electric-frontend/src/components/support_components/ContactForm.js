@@ -36,7 +36,7 @@ export default class ContactForm extends React.Component {
                         <textarea 
                             name="message" 
                             cols="50" 
-                            rows="20" 
+                            rows="16" 
                             placeholder="Your message"
                             value={this.props.messageText}
                             onChange={this.handleMessageTextChange}

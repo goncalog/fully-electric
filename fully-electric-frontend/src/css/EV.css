@@ -37,12 +37,12 @@
 }
 
 .change-image:hover {
-    font-size: 60px;
+    font-size: 50px;
     color: rgb(52, 215, 137);
 }
 
 .change-image:active {
-    font-size: 60px;
+    font-size: 50px;
     color:  rgb(52, 215, 137);
 }
 
@@ -99,5 +99,24 @@
     .ev-additional-section {
         grid-template-columns: 5fr 1fr;
         margin: 0 25% 25px 25%;
+    }
+}
+
+/* Responsive layout - when the screen is less than 1000px wide */
+@media screen and (max-width: 1000px) {    
+    .image-slider {
+        padding: 0 0% 40px 0%;
+    }
+    
+    .ev .ev-key-features .feature-name {
+        font-size: 21px;
+    }
+    
+    .section-name {
+        font-size: 21px;
+    }
+    
+    .expand-button {
+        font-size: 25px;
     }
 }

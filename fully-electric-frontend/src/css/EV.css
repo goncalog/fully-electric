@@ -93,3 +93,11 @@
 .additional-features {
     grid-column: 1 / 3;
 }
+
+/* Responsive layout - when the screen is less than 1250px wide */
+@media screen and (max-width: 1250px) {
+    .ev-additional-section {
+        grid-template-columns: 5fr 1fr;
+        margin: 0 25% 25px 25%;
+    }
+}

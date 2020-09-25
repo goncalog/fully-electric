@@ -84,3 +84,20 @@
         height: 54vh;
     }
 }
+
+/* Responsive layout - when the screen is less than 1000px wide */
+@media screen and (max-width: 1000px) {
+    .evs-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 63vh;
+        gap: 20px 20%;
+    }
+    
+    .ev-intro-card {
+        height: 58vh;
+    }
+    
+    .ev-intro-card:hover {
+        height: 59vh;
+    }
+}

@@ -118,3 +118,15 @@
         height: 54vh;
     }
 }
+
+/* Responsive layout - when the screen is less than 600px wide (mobile) */
+@media screen and (max-width: 600px) {
+    .evs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ev-intro-card {
+        margin: 0 auto;
+        max-width: 260px;
+    }
+}

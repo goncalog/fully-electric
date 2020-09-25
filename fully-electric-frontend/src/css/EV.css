@@ -120,3 +120,38 @@
         font-size: 25px;
     }
 }
+
+/* Responsive layout - when the screen is less than 800px wide (tablet portrait) */
+@media screen and (max-width: 800px) {    
+    .ev .ev-title {
+        font-size: 30px;
+    }
+    
+    .ev .price {
+        font-size: 25px;
+    }
+    
+    .ev .ev-key-features {
+        padding: 0 15% 50px 15%;
+    }
+    
+    .ev .ev-key-features .feature-name {
+        font-size: 18px;
+    }
+    
+    .ev-additional-section {
+        margin: 0 20% 25px 20%;
+    }
+    
+    .section-name {
+        font-size: 18px;
+    }
+    
+    .expand-button {
+        font-size: 22px;
+    }
+
+    .additional-feature {
+        font-size: 12px;
+    }
+}

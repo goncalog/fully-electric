@@ -39,6 +39,7 @@ describe('Home', () => {
         expect(shallowWrapper.prop('secondaryHeadline'))
                 .toBe('Test drive it for one week before purchasing - it\'s FREE');
         expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s GO!');
+        expect(Object.keys(shallowWrapper.props())).toContain('onButtonClick');
     });
 
     test('has one BenefitsContainer', () => {

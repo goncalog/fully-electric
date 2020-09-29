@@ -50,6 +50,8 @@ describe('Home', () => {
         const shallowWrapper = home().find(BenefitsContainer);
         expect(shallowWrapper.prop('benefits').length).toEqual(3);
         expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s GO!');
+        expect(Object.keys(shallowWrapper.props())).toContain('onButtonClick');
+
     });
 
     test('has one SellerContainer', () => {

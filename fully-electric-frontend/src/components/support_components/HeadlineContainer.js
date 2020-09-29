@@ -2,18 +2,19 @@ import React from 'react';
 import Headline from './Headline';
 import CallToActionButton from './CallToActionButton';
 
-export default class HeadlineContainer extends React.Component {
-    render() {
-        const backgroundImagePath = this.props.backgroundImagePath;
-        const mainHeadlineText = this.props.mainHeadline;
-        const secondaryHeadlineText = this.props.secondaryHeadline;
-        const callToActionText = this.props.callToActionText;
+export default function HeadlineContainer(props) {
+    const backgroundImagePath = props.backgroundImagePath;
+    const mainHeadlineText = props.mainHeadline;
+    const secondaryHeadlineText = props.secondaryHeadline;
+    const callToActionText = props.callToActionText;     
 
-        return (
-            <div className="headline-container" style={{backgroundImage: `url(${backgroundImagePath})`}}>
-                <Headline mainHeadline={mainHeadlineText} secondaryHeadline={secondaryHeadlineText} />
-                <CallToActionButton callToActionText={callToActionText} />
-            </div>
-        );
-    }
+    return (
+        <div className="headline-container" style={{backgroundImage: `url(${backgroundImagePath})`}}>
+            <Headline mainHeadline={mainHeadlineText} secondaryHeadline={secondaryHeadlineText} />
+            <CallToActionButton 
+                callToActionText={callToActionText} 
+                onButtonClick={props.onButtonClick}
+            />
+        </div>
+    );
 }

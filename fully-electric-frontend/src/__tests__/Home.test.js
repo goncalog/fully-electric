@@ -51,7 +51,6 @@ describe('Home', () => {
         expect(shallowWrapper.prop('benefits').length).toEqual(3);
         expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s GO!');
         expect(Object.keys(shallowWrapper.props())).toContain('onButtonClick');
-
     });
 
     test('has one SellerContainer', () => {
@@ -66,5 +65,6 @@ describe('Home', () => {
         expect(shallowWrapper.prop('secondaryHeadline'))
                 .toBe('Get £1000 to £3000 more than if you sold to a car dealer');
         expect(shallowWrapper.prop('callToActionText')).toBe('Let\'s SELL!');
+        expect(Object.keys(shallowWrapper.props())).toContain('onContactSellerClick');
     });
 });

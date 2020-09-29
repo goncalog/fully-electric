@@ -9,6 +9,7 @@ configure({ adapter: new Adapter() });
 describe('BenefitContainer', () => {
     let props;
     let shallowBenefitContainer;
+    const mockFunction = jest.fn();
     const benefitContainer = () => {
         if (!shallowBenefitContainer) {
             shallowBenefitContainer = shallow(<BenefitsContainer {...props} />);
@@ -37,6 +38,7 @@ describe('BenefitContainer', () => {
                 },
             ],
             callToActionText: 'Text to test callToActionText property',
+            onButtonClick: mockFunction,
         }
         shallowBenefitContainer = undefined;
     });
@@ -55,9 +57,10 @@ describe('BenefitContainer', () => {
         });
     });
 
-    test('has one CallToActionButton React component rendered with passed property', () => {
+    test('has one CallToActionButton React component rendered with passed properties', () => {
         const shallowWrapper = benefitContainer().find(CallToActionButton);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('callToActionText')).toBe(props.callToActionText);
+        expect(shallowWrapper.prop('onButtonClick')).toBe(props.onButtonClick);
     });
 });

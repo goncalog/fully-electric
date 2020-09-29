@@ -12,6 +12,10 @@ export default class EVs extends React.Component {
     }
 
     componentDidMount() {
+        // Scroll to top of page
+        window.scrollTo(0, 0);
+
+        // Upload database data
         let evsUrl;
         
         if (process.env.NODE_ENV === 'production') {

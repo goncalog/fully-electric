@@ -38,6 +38,7 @@ export default function Home() {
             },
         ],
         callToActionText: 'Let\'s GO!',
+        onButtonClick: onButtonClick,
     }
 
     const sellerProps = {

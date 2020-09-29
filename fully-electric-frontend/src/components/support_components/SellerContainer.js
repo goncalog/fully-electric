@@ -11,7 +11,7 @@ export default function SellerContainer(props) {
             />
             <CallToActionButton 
                 callToActionText={props.callToActionText} 
-                onButtonClick={props.onContactSellerClick} 
+                onButtonClick={props.onButtonClick} 
             />
         </div>
     );

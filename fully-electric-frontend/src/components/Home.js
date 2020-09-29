@@ -10,11 +10,11 @@ import { useHistory } from 'react-router-dom';
 export default function Home() {
     let history = useHistory();
 
-    function onButtonClick() {
+    function onEvsButtonClick() {
         history.push('/content/evs');
     }
 
-    function onContactSellerClick() {
+    function onContactSellerButtonClick() {
         history.push('/contact');
     }
     
@@ -23,7 +23,7 @@ export default function Home() {
         mainHeadline: 'Find your dream EV',
         secondaryHeadline: 'Test drive it for one week before purchasing - it\'s FREE',
         callToActionText: 'Let\'s GO!',
-        onButtonClick: onButtonClick,
+        onButtonClick: onEvsButtonClick,
     }
 
     const benefitsProps = {
@@ -42,7 +42,7 @@ export default function Home() {
             },
         ],
         callToActionText: 'Let\'s GO!',
-        onButtonClick: onButtonClick,
+        onButtonClick: onEvsButtonClick,
     }
 
     const sellerProps = {
@@ -50,7 +50,7 @@ export default function Home() {
         mainHeadline: 'Sell your EV for more',
         secondaryHeadline: 'Get £1000 to £3000 more than if you sold to a car dealer',
         callToActionText: 'Let\'s SELL!',
-        onContactSellerClick: onContactSellerClick,
+        onButtonClick: onContactSellerButtonClick,
     }
 
     return (

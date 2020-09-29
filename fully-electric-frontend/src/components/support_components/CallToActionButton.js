@@ -1,11 +1,9 @@
 import React from 'react';
 
-export default class CallToActionButton extends React.Component {
-    render() {
-        const callToActionText = this.props.callToActionText;
+export default function CallToActionButton(props) {
+    const callToActionText = props.callToActionText;
 
-        return (
-            <button className='callToActionButton'>{callToActionText}</button>
-        );
-    }
+    return (
+        <button className='callToActionButton' onClick={props.onButtonClick}>{callToActionText}</button>
+    );
 }

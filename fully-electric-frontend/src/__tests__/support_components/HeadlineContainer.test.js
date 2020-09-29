@@ -9,6 +9,7 @@ configure({ adapter: new Adapter() });
 describe('HeadlineContainer', () => {
     let props;
     let shallowHeadlineContainer;
+    const mockFunction = jest.fn();
     const headlineContainer = () => {
         if (!shallowHeadlineContainer) {
             shallowHeadlineContainer = shallow(<HeadlineContainer {...props} />);
@@ -26,6 +27,7 @@ describe('HeadlineContainer', () => {
             mainHeadline: 'Text to test mainHeadline property',
             secondaryHeadline: 'Text to test secondaryHeadline property',
             callToActionText: 'Text to test callToActionText property',
+            onButtonClick: mockFunction,
         };
         shallowHeadlineContainer = undefined;
     });
@@ -49,5 +51,6 @@ describe('HeadlineContainer', () => {
        const shalowWrapper = headlineContainer().find(CallToActionButton);
        expect(shalowWrapper.length).toEqual(1);
        expect(shalowWrapper.prop('callToActionText')).toBe(props.callToActionText);
+       expect(shalowWrapper.prop('onButtonClick')).toBe(props.onButtonClick);
     });
 });

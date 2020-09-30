@@ -7,21 +7,30 @@ export default class EVDetail extends React.Component {
     constructor(props) {
         super(props);
         this.handleChangeImageButtonClick = this.handleChangeImageButtonClick.bind(this);
+        this.handleChangeSectionsVisibility = this.handleChangeSectionsVisibility.bind(this);
     }
 
     handleChangeImageButtonClick(buttonType) {
         this.props.onChangeImageButtonClick(buttonType);
     }
 
+    handleChangeSectionsVisibility(section) {
+        this.props.onChangeSectionsVisibility(section);
+    }
+
     render() {
         return (
             <div className="ev-detail">
                 <EVImageSlider 
-                        imagePath={this.props.imagePath} 
-                        onChangeImageButtonClick={this.handleChangeImageButtonClick}
+                    imagePath={this.props.imagePath} 
+                    onChangeImageButtonClick={this.handleChangeImageButtonClick}
                 />
                 <EVKeyFeatures evFeatures={this.props.evFeatures} />
-                <EVAdditionalSectionsContainer sections={this.props.sections} />
+                <EVAdditionalSectionsContainer
+                    sectionsVisibility={this.props.sectionsVisibility} 
+                    sections={this.props.sections} 
+                    onChangeSectionsVisibility={this.handleChangeSectionsVisibility}
+                />
             </div>
         );
     }

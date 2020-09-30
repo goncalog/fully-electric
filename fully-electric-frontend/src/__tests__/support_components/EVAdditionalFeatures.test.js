@@ -38,6 +38,7 @@ describe('EVAdditionalFeatures', () => {
                     value: 'Text to test value property #4',
                 },
             ],
+            sectionVisibility: false,
         }
         shallowEVAdditionalFeatures = undefined;
     });
@@ -54,5 +55,10 @@ describe('EVAdditionalFeatures', () => {
             expect(evFeature.text()).toBe(`- ${props.evFeatures[i].name}: ${props.evFeatures[i].value}`);
             expect(evFeature.key()).toBe(i.toString());
         });
+    });
+
+    test('has class based on passed property', () => {
+        expect(evAdditionalFeatures().hasClass(`additional-features${props.sectionVisibility ? "" : " hidden"}`))
+            .toBe(true);
     });
 });

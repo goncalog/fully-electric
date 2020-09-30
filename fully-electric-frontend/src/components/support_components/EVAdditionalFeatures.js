@@ -6,7 +6,7 @@ export default function EVAdditionalFeatures(props) {
             {props.evFeatures.map((evFeature, i) => {
                 return (
                     <p className="additional-feature" key={i}>
-                        {`- ${evFeature.name}: ${evFeature.value}`}
+                        {`- ${evFeature.name}${evFeature.value ? `: ${evFeature.value}`: ""}`}
                     </p>
                 );
             })}

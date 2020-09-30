@@ -50,5 +50,6 @@ describe('SellerContact', () => {
         const shallowWrapper = sellerContact().find(CallToActionButton);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('callToActionText')).toBe(props.callToActionText);
+        expect(Object.keys(shallowWrapper.props())).toContain('onButtonClick');
     });
 });

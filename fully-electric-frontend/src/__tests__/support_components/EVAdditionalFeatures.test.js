@@ -23,7 +23,6 @@ describe('EVAdditionalFeatures', () => {
             evFeatures: [
                 { 
                     name: 'Text to test name property #1',
-                    value: 'Text to test value property #1',
                 },
                 { 
                     name: 'Text to test name property #2',
@@ -38,6 +37,7 @@ describe('EVAdditionalFeatures', () => {
                     value: 'Text to test value property #4',
                 },
             ],
+            sectionVisibility: false,
         }
         shallowEVAdditionalFeatures = undefined;
     });
@@ -51,8 +51,17 @@ describe('EVAdditionalFeatures', () => {
         expect(shallowWrapper.length).toEqual(4);
 
         shallowWrapper.forEach((evFeature, i) => {
-            expect(evFeature.text()).toBe(`- ${props.evFeatures[i].name}: ${props.evFeatures[i].value}`);
+            if (i === 0) {
+                expect(evFeature.text()).toBe(`- ${props.evFeatures[i].name}`);
+            } else {
+                expect(evFeature.text()).toBe(`- ${props.evFeatures[i].name}: ${props.evFeatures[i].value}`);                
+            }
             expect(evFeature.key()).toBe(i.toString());
         });
+    });
+
+    test('has class based on passed property', () => {
+        expect(evAdditionalFeatures().hasClass(`additional-features${props.sectionVisibility ? "" : " hidden"}`))
+            .toBe(true);
     });
 });

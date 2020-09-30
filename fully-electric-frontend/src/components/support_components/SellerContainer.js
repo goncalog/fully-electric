@@ -9,7 +9,10 @@ export default function SellerContainer(props) {
                 mainHeadline={props.mainHeadline} 
                 secondaryHeadline={props.secondaryHeadline} 
             />
-            <CallToActionButton callToActionText={props.callToActionText} />
+            <CallToActionButton 
+                callToActionText={props.callToActionText} 
+                onButtonClick={props.onButtonClick} 
+            />
         </div>
     );
 }

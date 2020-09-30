@@ -11,6 +11,7 @@ describe('EVDetail', () => {
     let props;
     let shallowEVDetail;
     const mockFunction = jest.fn();
+    const mockFunctionTwo = jest.fn();
     const evDetail = () => {
         if (!shallowEVDetail) {
             shallowEVDetail = shallow(<EVDetail {...props} />);
@@ -39,6 +40,7 @@ describe('EVDetail', () => {
                     value: 'Text to test value property #3',
                 },
             ],
+            sectionsVisibiliy: [false, true, false, true],
             sections: [
                 {
                     name: 'Text to test name property #1',
@@ -98,6 +100,7 @@ describe('EVDetail', () => {
                 },
             ],
             onChangeImageButtonClick: mockFunction,
+            onChangeSectionsVisibility: mockFunctionTwo,
         }
         shallowEVDetail = undefined;
     });
@@ -118,9 +121,10 @@ describe('EVDetail', () => {
         expect(shallowWrapper.prop('evFeatures')).toBe(props.evFeatures);
     });
 
-    test('has one EVAdditionalSectionsContainer with passed property', () => {
+    test('has one EVAdditionalSectionsContainer with passed properties', () => {
         const shallowWrapper = evDetail().find(EVAdditionalSectionsContainer);
         expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('sectionsVisibility')).toBe(props.sectionsVisibility);
         expect(shallowWrapper.prop('sections')).toBe(props.sections);
     });
 
@@ -129,5 +133,13 @@ describe('EVDetail', () => {
         shallowWrapper.props().onChangeImageButtonClick();
         shallowWrapper.props().onChangeImageButtonClick();
         expect(mockFunction).toHaveBeenCalledTimes(2);
+    });
+
+    test('should have called mockFunction onChangeSectionsVisibility', () => {
+        const shallowWrapper = evDetail().find(EVAdditionalSectionsContainer);
+        shallowWrapper.props().onChangeSectionsVisibility();
+        shallowWrapper.props().onChangeSectionsVisibility();
+        shallowWrapper.props().onChangeSectionsVisibility();
+        expect(mockFunctionTwo).toHaveBeenCalledTimes(3);
     });
 });

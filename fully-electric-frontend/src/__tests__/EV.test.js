@@ -11,7 +11,6 @@ configure({ adapter: new Adapter() });
 describe('EV', () => {
     let props;
     let shallowEV;
-    const mockFunction = jest.fn();
     const ev = () => {
         if (!shallowEV) {
             shallowEV = shallow(<EV {...props}/>);
@@ -32,6 +31,18 @@ describe('EV', () => {
             },
         }
         shallowEV = undefined;
+    });
+
+    // The default test environment for Jest is a browser-like environment provided by jsdom,
+    // which implements most of what an actual browser would provide, but it doesn't implement everything.
+    // Specifically, jsdom doesn't implement window.scrollTo, and instead throws an Error.
+    const jsdomScrollTo = window.scrollTo;  // remember the jsdom scrollTo
+    beforeAll(() => {
+        window.scrollTo = jest.fn(); // provide a mock implementation for window.scrollTo
+    });
+
+    afterAll(() => {
+        window.scrollTo = jsdomScrollTo; // restore the jsdom scrollTo
     });
 
     test('has 5 children', () => {
@@ -66,7 +77,9 @@ describe('EV', () => {
         expect(shallowWrapper.length).toEqual(1);
         expect(Object.keys(shallowWrapper.props())).toContain('imagePath');
         expect(shallowWrapper.prop('evFeatures')).toBeTruthy();
+        expect(shallowWrapper.prop('sectionsVisibility')).toBeTruthy();
         expect(shallowWrapper.prop('sections')).toBeTruthy();
         expect(Object.keys(shallowWrapper.props())).toContain('onChangeImageButtonClick');
+        expect(Object.keys(shallowWrapper.props())).toContain('onChangeSectionsVisibility');
     });
 });

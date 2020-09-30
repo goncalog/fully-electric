@@ -22,6 +22,10 @@ export default class Contact extends React.Component {
         this.setState({ messageText })
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         return (
             <div className="contact">

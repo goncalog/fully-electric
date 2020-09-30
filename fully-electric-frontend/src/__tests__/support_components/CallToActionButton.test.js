@@ -7,6 +7,7 @@ configure({ adapter: new Adapter() });
 describe('CallToActionButton', () => {
     let props;
     let shallowCallToActionButton;
+    const mockFunction = jest.fn();
     const callToActionButton = () => {
         if (!shallowCallToActionButton) {
             shallowCallToActionButton = shallow(<CallToActionButton {...props} />);
@@ -21,6 +22,7 @@ describe('CallToActionButton', () => {
     beforeEach(() => {
         props = {
             callToActionText: 'Text to test callToActionText property',
+            onButtonClick: mockFunction,
         };
         shallowCallToActionButton = undefined;
     });
@@ -33,5 +35,11 @@ describe('CallToActionButton', () => {
         const shallowWrapper = callToActionButton().find('button.callToActionButton');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.text()).toBe(props.callToActionText);
+    });
+
+    test('should call mockFunction on onButtonClick', () => {
+        const shallowWrapper = callToActionButton().find('button.callToActionButton');
+        shallowWrapper.props().onClick();
+        expect(mockFunction).toHaveBeenCalled();
     });
 });

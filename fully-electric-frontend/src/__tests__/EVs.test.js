@@ -22,6 +22,18 @@ describe('EVs', () => {
         shallowEVs = undefined;
     });
 
+        // The default test environment for Jest is a browser-like environment provided by jsdom,
+    // which implements most of what an actual browser would provide, but it doesn't implement everything.
+    // Specifically, jsdom doesn't implement window.scrollTo, and instead throws an Error.
+    const jsdomScrollTo = window.scrollTo;  // remember the jsdom scrollTo
+    beforeAll(() => {
+        window.scrollTo = jest.fn(); // provide a mock implementation for window.scrollTo
+    });
+
+    afterAll(() => {
+        window.scrollTo = jsdomScrollTo; // restore the jsdom scrollTo
+    });
+
     test('has one child', () => {
         expect(evs().children().length).toEqual(1);
     });

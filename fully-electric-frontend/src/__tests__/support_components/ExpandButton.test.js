@@ -7,6 +7,7 @@ configure({ adapter: new Adapter() });
 describe('ExpandButton', () => {
     let props;
     let shallowExpandButton;
+    const mockFunction = jest.fn();
     const expandButton = () => {
         if (!shallowExpandButton) {
             shallowExpandButton = shallow(<ExpandButton {...props} />);
@@ -20,7 +21,9 @@ describe('ExpandButton', () => {
     // if it calls expandButton, a new ExpandButton will be created with the current props
     beforeEach(() => {
         props = {
+            section: 'Text to test section property',
             expandButtonText: 'Text to test expandButtonText property',
+            onChangeSectionVisibility: mockFunction,
         };
         shallowExpandButton = undefined;
     });
@@ -33,5 +36,12 @@ describe('ExpandButton', () => {
         const shallowWrapper = expandButton().find('button.expand-button');
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.text()).toBe(props.expandButtonText);
+    });
+
+    test('should call mockFunction onChangeSectionVisibility', () => {
+        const shallowWrapper = expandButton().find('button.expand-button');
+        shallowWrapper.props().onClick();
+        expect(mockFunction).toHaveBeenCalled();
+        expect(mockFunction).toHaveBeenCalledWith(props.section);
     });
 });

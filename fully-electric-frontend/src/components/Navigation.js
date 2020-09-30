@@ -2,64 +2,55 @@ import React from 'react';
 import logo from '../media/logo.svg';
 import '../css/Navigation.css';
 import { Link, withRouter } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 function Navigation(props) {
     return (
         <div className="navigation">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <Navbar collapseOnSelect bg="dark" variant="dark" expand="lg">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
                         <img src={logo} className="App-logo" alt="logo" />
                         Fully Electric
                     </Link>
-                    <button        
-                        className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarResponsive"
-                        aria-controls="navbarResponsive"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ml-auto">
-                            <li 
-                                className={`nav-item ${
+                    <Navbar.Toggle aria-controls="navbarResponsive"/>
+                    <Navbar.Collapse id="navbarResponsive">
+                        <Nav className="ml-auto">
+                            <Nav.Item
+                                className={`${
                                     props.location.pathname === "/" ? "active" : "" 
                                 }`}
                             >
-                                <Link className="nav-link" to="/">
+                                <Nav.Link href="/">
                                     Home
                                     <span className="sr-only">(current)</span>
-                                </Link>
-                            </li>
+                                </Nav.Link>
+                            </Nav.Item>
 
-                            <li 
-                                className={`nav-item ${
+                            <Nav.Item 
+                                className={`${
                                     props.location.pathname === "/content/evs" ? "active" : "" 
                                 }`}
                             >
-                                <Link className="nav-link" to="/content/evs">
+                                <Nav.Link href="/content/evs">
                                     All EVs
-                                </Link>
-                            </li>
+                                </Nav.Link>
+                            </Nav.Item>
 
-                            <li 
-                                className={`nav-item ${
+                            <Nav.Item 
+                                className={`${
                                     props.location.pathname === "/contact" ? "active" : "" 
                                 }`}
                             >
-                                <Link className="nav-link" to="/contact">
+                                <Nav.Link href="/contact">
                                     Contact
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                                </Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </Navbar.Collapse>
                 </div>
-            </nav>
+            </Navbar>
         </div>
     );
 }

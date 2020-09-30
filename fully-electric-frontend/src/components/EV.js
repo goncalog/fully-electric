@@ -14,8 +14,13 @@ import '../css/EV.css';
 export default class EV extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ev: {}, currentImage: 0 };
+        this.state = { 
+            ev: {}, 
+            currentImage: 0,
+            sectionsVisibility: [false, false, false, false], 
+        };
         this.handleChangeImageButtonClick = this.handleChangeImageButtonClick.bind(this);
+        this.handleChangeSectionsVisibility = this.handleChangeSectionsVisibility.bind(this);
     }
 
     handleChangeImageButtonClick(buttonType) {
@@ -26,7 +31,19 @@ export default class EV extends React.Component {
         }
     }
 
+    handleChangeSectionsVisibility(section) {
+        this.setState((state) => { 
+            let sectionsVisibility = state.sectionsVisibility.slice(); // Creating a new copy
+            sectionsVisibility[section] = !sectionsVisibility[section];
+            return { sectionsVisibility };
+        });
+    }
+
     componentDidMount() {
+        // Scroll to top of page
+        window.scrollTo(0, 0);
+
+        // Upload database data
         let evUrl;
         
         if (process.env.NODE_ENV === 'production') {
@@ -45,7 +62,7 @@ export default class EV extends React.Component {
             title: '', 
             price: '',
             seller: { name: '', rating: '', callToActionText: '', },
-            detail: { imagePath: '', evFeatures: [], sections: [], onChangeImageButtonClick: this.handleChangeImageButtonClick, },     
+            detail: { imagePath: '', evFeatures: [], sectionsVisibility: [], sections: [], onChangeImageButtonClick: this.handleChangeImageButtonClick, onChangeSectionsVisibility: this.handleChangeSectionsVisibility, },     
         }
 
         if (Object.keys(this.state.ev).length > 0) {
@@ -89,15 +106,16 @@ export default class EV extends React.Component {
                             value: `${this.state.ev.model.charging.hours_to_charge}h`,
                         },
                     ],
+                    sectionsVisibility: this.state.sectionsVisibility,
                     sections: [
                         {
                             name: 'Equipment and options',
-                            expandButtonText: '+',
+                            expandButtonText: (this.state.sectionsVisibility[0]) ? '-' : '+',
                             evFeatures: getEvFeaturesArray(this.state.ev.equipment_and_options),    
                         },
                         {
                             name: 'Exterior',
-                            expandButtonText: '+',
+                            expandButtonText: (this.state.sectionsVisibility[1]) ? '-' : '+',
                             evFeatures: [
                                 { 
                                     name: 'Body style',
@@ -113,7 +131,7 @@ export default class EV extends React.Component {
                         },
                         {
                             name: 'Interior',
-                            expandButtonText: '+',
+                            expandButtonText: (this.state.sectionsVisibility[2]) ? '-' : '+',
                             evFeatures: [
                                 { 
                                     name: 'Seating',
@@ -127,7 +145,7 @@ export default class EV extends React.Component {
                         },
                         {
                             name: 'Performance',
-                            expandButtonText: '+',
+                            expandButtonText: (this.state.sectionsVisibility[3]) ? '-' : '+',
                             evFeatures: [
                                 { 
                                     name: 'Horsepower',
@@ -151,6 +169,7 @@ export default class EV extends React.Component {
                         },
                     ],
                     onChangeImageButtonClick: this.handleChangeImageButtonClick,
+                    onChangeSectionsVisibility: this.handleChangeSectionsVisibility,
                 },
             }             
         }

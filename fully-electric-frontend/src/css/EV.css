@@ -57,6 +57,10 @@
     font-size: 15px;
 }
 
+.hidden {
+    display: none;
+}
+
 .ev-additional-section {
     margin: 0 30% 25px 30%;
     text-align: left;

@@ -11,7 +11,6 @@ configure({ adapter: new Adapter() });
 describe('EV', () => {
     let props;
     let shallowEV;
-    const mockFunction = jest.fn();
     const ev = () => {
         if (!shallowEV) {
             shallowEV = shallow(<EV {...props}/>);
@@ -78,7 +77,9 @@ describe('EV', () => {
         expect(shallowWrapper.length).toEqual(1);
         expect(Object.keys(shallowWrapper.props())).toContain('imagePath');
         expect(shallowWrapper.prop('evFeatures')).toBeTruthy();
+        expect(shallowWrapper.prop('sectionsVisibility')).toBeTruthy();
         expect(shallowWrapper.prop('sections')).toBeTruthy();
         expect(Object.keys(shallowWrapper.props())).toContain('onChangeImageButtonClick');
+        expect(Object.keys(shallowWrapper.props())).toContain('onChangeSectionsVisibility');
     });
 });

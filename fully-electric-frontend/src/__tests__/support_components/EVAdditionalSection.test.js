@@ -10,6 +10,7 @@ configure({ adapter: new Adapter() });
 describe('EVAdditionalSection', () => {
     let props;
     let shallowEVAdditionalSection;
+    const mockFunction = jest.fn();
     const evAdditionalSection = () => {
         if (!shallowEVAdditionalSection) {
             shallowEVAdditionalSection = shallow(<EVAdditionalSection {...props} />);
@@ -24,7 +25,9 @@ describe('EVAdditionalSection', () => {
     beforeEach(() => {
         props = {
             name: 'Text to test name property',
+            section: 'Text to test section property',
             expandButtonText: 'Text to test expandButtonText property',
+            onChangeSectionVisibility: mockFunction,
             evFeatures: [
                 { 
                     name: 'Text to test name property #1',
@@ -35,6 +38,7 @@ describe('EVAdditionalSection', () => {
                     value: 'Text to test value property #2',
                 },
             ],
+            sectionVisibility: 'Text to test sectionVisibility property',
         }
         shallowEVAdditionalSection = undefined;
     });
@@ -49,15 +53,23 @@ describe('EVAdditionalSection', () => {
         expect(shallowWrapper.prop('name')).toBe(props.name);
     });
 
-    test('has one ExpandButton component rendered with passed property', () => {
+    test('has one ExpandButton component rendered with passed properties', () => {
         const shallowWrapper = evAdditionalSection().find(ExpandButton);
         expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('section')).toBe(props.section);
         expect(shallowWrapper.prop('expandButtonText')).toBe(props.expandButtonText);
+    });
+
+    test('should call mockFunction onChangeSectionVisibility', () => {
+        const shallowWrapper = evAdditionalSection().find(ExpandButton);
+        shallowWrapper.props().onChangeSectionVisibility();
+        expect(mockFunction).toHaveBeenCalled();
     });
 
     test('has one EVAdditionalFeatures components rendered with passed properties', () => {
         const shallowWrapper = evAdditionalSection().find(EVAdditionalFeatures);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('evFeatures')).toBe(props.evFeatures);
+        expect(shallowWrapper.prop('sectionVisibility')).toBe(props.sectionVisibility);
     });
 });

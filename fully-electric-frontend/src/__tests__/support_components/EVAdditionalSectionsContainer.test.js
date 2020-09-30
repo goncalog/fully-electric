@@ -8,6 +8,7 @@ configure({ adapter: new Adapter() });
 describe('EVAdditionalSectionsContainer', () => {
     let props;
     let shallowEVAdditionalSectionsContainer;
+    const mockFunction = jest.fn();
     const evAdditionalSectionsContainer = () => {
         if (!shallowEVAdditionalSectionsContainer) {
             shallowEVAdditionalSectionsContainer = shallow(<EVAdditionalSectionsContainer {...props} />);
@@ -21,6 +22,7 @@ describe('EVAdditionalSectionsContainer', () => {
     // if it calls evAdditionalSectionsContainer, a new EVAdditionalSectionsContainer will be created with the current props
     beforeEach(() => {
         props = {
+            sectionsVisibility: [false, true, false, true],
             sections: [
                 {
                     name: 'Text to test name property #1',
@@ -80,6 +82,7 @@ describe('EVAdditionalSectionsContainer', () => {
                 },
 
             ],
+            onChangeSectionsVisibility: mockFunction,
         }
         shallowEVAdditionalSectionsContainer = undefined;
     });
@@ -97,6 +100,10 @@ describe('EVAdditionalSectionsContainer', () => {
             expect(section.prop('expandButtonText')).toBe(props.sections[i].expandButtonText);
             expect(section.prop('evFeatures')).toBe(props.sections[i].evFeatures);
             expect(section.key()).toBe(i.toString());
+            expect(section.prop('section')).toBe(i);
+            expect(section.prop('sectionVisibility')).toBe(props.sectionsVisibility[i]);
+            section.props().onChangeSectionVisibility();
+            expect(mockFunction).toHaveBeenCalled();
         });
     });
 });

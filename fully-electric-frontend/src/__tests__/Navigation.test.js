@@ -29,7 +29,7 @@ it('renders EVs link correctly', () => {
     const { getByText } = render(<Router><Navigation /></Router>);
     const evsLink = getByText(/EVs/);
     expect(evsLink).toBeInTheDocument();
-    expect(evsLink.getAttribute('href')).toBe('/content/evs');
+    expect(evsLink.getAttribute('href')).toBe('/evs');
 });
 
 it('renders Contact link correctly', () => {

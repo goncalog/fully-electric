@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../media/logo.svg';
 import '../css/Navigation.css';
 import { Link, withRouter } from 'react-router-dom';
@@ -6,15 +6,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 function Navigation(props) {
+    const [expanded, setExpanded] = useState(false);
     return (
         <div className="navigation">
-            <Navbar collapseOnSelect bg="dark" variant="dark" expand="lg">
+            <Navbar expanded={expanded} bg="dark" variant="dark" expand="lg">
                 <div className="container">
-                    <Link className="navbar-brand" to="/">
+                    <Link className="navbar-brand" to="/" onClick={() => setExpanded(false)}>
                         <img src={logo} className="App-logo" alt="logo" />
                         Fully Electric
                     </Link>
-                    <Navbar.Toggle aria-controls="navbarResponsive"/>
+                    <Navbar.Toggle 
+                        onClick={() => setExpanded(expanded ? false : "expanded")} 
+                        aria-controls="navbarResponsive"
+                    />
                     <Navbar.Collapse id="navbarResponsive">
                         <Nav className="ml-auto">
                             <Nav.Item
@@ -22,10 +26,10 @@ function Navigation(props) {
                                     props.location.pathname === "/" ? "active" : "" 
                                 }`}
                             >
-                                <Nav.Link href="/">
+                                <Link className="nav-link" to="/" onClick={() => setExpanded(false)}>
                                     Home
                                     <span className="sr-only">(current)</span>
-                                </Nav.Link>
+                                </Link>
                             </Nav.Item>
 
                             <Nav.Item 
@@ -33,9 +37,13 @@ function Navigation(props) {
                                     props.location.pathname === "/content/evs" ? "active" : "" 
                                 }`}
                             >
-                                <Nav.Link href="/content/evs">
+                                <Link 
+                                    className="nav-link" 
+                                    to="/content/evs" 
+                                    onClick={() => setExpanded(false)}
+                                >
                                     All EVs
-                                </Nav.Link>
+                                </Link>
                             </Nav.Item>
 
                             <Nav.Item 
@@ -43,9 +51,13 @@ function Navigation(props) {
                                     props.location.pathname === "/contact" ? "active" : "" 
                                 }`}
                             >
-                                <Nav.Link href="/contact">
+                                <Link 
+                                    className="nav-link" 
+                                    to="/contact" 
+                                    onClick={() => setExpanded(false)}
+                                >
                                     Contact
-                                </Nav.Link>
+                                </Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>

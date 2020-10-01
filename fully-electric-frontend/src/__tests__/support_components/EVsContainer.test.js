@@ -117,7 +117,7 @@ describe('EVsContainer', () => {
         expect(shallowWrapper.length).toEqual(4);
 
         shallowWrapper.forEach((link, i) => {
-            expect(link.prop('to')).toBe(`/content/ev/${props.evs[i].id}`);
+            expect(link.prop('to')).toBe(`/ev/${props.evs[i].id}`);
             expect(link.children().key()).toBe(i.toString());
         });
     });

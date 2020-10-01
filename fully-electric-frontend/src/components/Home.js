@@ -11,7 +11,7 @@ export default function Home() {
     let history = useHistory();
 
     function onEvsButtonClick() {
-        history.push('/content/evs');
+        history.push('/evs');
     }
 
     function onContactSellerButtonClick() {

@@ -512,7 +512,7 @@ function createDatabaseItems(mongooseConnection) {
                     38500,
                     12400,
                     locations[7],
-                    ['https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.hdcarwallpapers.com%2Fwalls%2Faudi_e_tron_55_quattro_2019_4k_5-HD.jpg&f=1&nofb=1',
+                    ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fssl.caranddriving.com%2Ff2%2Fimages%2Fnew%2Fbig%2Faudietron0819(2).jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fweb21st.imgix.net%2Fassets%2Fimages%2Fnew-vehicles%2Faudi%2Faudi-e-tron-2019-launch-edition-brilliant-black.png&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fautocarmalaysia.com%2Fwp-content%2Fuploads%2F2019%2F04%2FAudi_e-tron_55quattro-3a.jpg&f=1&nofb=1'],
                     sellers[7],

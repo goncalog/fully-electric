@@ -39,13 +39,14 @@ describe('Contact', () => {
         expect(contact().children().length).toEqual(2);
     });
 
-    test('has one CallToActionButton rendered with passed property', () => {
+    test('has one CallToActionButton rendered with passed properties', () => {
         const shallowWrapper = contact().find(CallToActionButton);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('callToActionText')).toBe('Send Message');
+        expect(Object.keys(shallowWrapper.props())).toContain('onButtonClick');
     });
 
-    test('has one ContactForm rendered with passed property', () => {
+    test('has one ContactForm rendered with passed properties', () => {
         const shallowWrapper = contact().find(ContactForm);
         expect(shallowWrapper.length).toEqual(1);
         expect(shallowWrapper.prop('legend')).toBe('Send your message:');

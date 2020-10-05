@@ -9,7 +9,7 @@ export default class Contact extends React.Component {
         super(props);
         this.state = {
             emailText: '',
-            messageText:'',
+            messageText: '',
         }
         this.handleEmailTextChange = this.handleEmailTextChange.bind(this);
         this.handleMessageTextChange = this.handleMessageTextChange.bind(this);
@@ -59,6 +59,8 @@ export default class Contact extends React.Component {
             .then(response => response.json())
             .then(response => {
                 console.log('Success:', response);
+                alert("Your message was successfully sent. The seller will contact you soon.");
+                this.setState({ emailText: '', messageText: '' });
             })
             .catch((error) => {
                 console.error('Error:', error);

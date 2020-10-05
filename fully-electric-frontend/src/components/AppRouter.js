@@ -15,6 +15,7 @@ function AppRouter() {
                 <Route path='/evs' exact component={EVs}></Route>
                 <Route path='/ev/:id' exact component={EV}></Route>
                 <Route path='/contact' exact component={Contact}></Route>
+                <Route path='/contact/seller/:id' exact component={Contact}></Route>
             </Switch>
         </Router>
     );

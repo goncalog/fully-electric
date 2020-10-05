@@ -8,7 +8,10 @@ export default function SellerContact(props) {
     let history = useHistory();
 
     function onContactSellerClick() {
-        history.push('/contact');
+        history.push({
+            pathname: `/contact/seller/${props.id}`,
+            state: { contact: props.contact }, 
+        });
     }
 
     return (

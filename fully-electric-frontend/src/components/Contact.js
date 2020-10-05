@@ -2,6 +2,7 @@ import React from 'react';
 import ContactForm from './support_components/ContactForm';
 import CallToActionButton from './support_components/CallToActionButton';
 import '../css/Contact.css';
+import validateEmail from '../utils/validateEmail';
 
 export default class Contact extends React.Component {
     constructor(props) {
@@ -24,6 +25,18 @@ export default class Contact extends React.Component {
     }
 
     handleSendMessageButtonClick() {
+        // Validate email provided
+        if (!validateEmail(this.state.emailText)) {
+            alert('Please provide a valid email.');
+            return;
+        }
+
+        // Validate message provided
+        if (this.state.messageText === '') {
+            alert('Please provide a message.');
+            return;
+        }
+
         // Send data to backend
         let url = (process.env.NODE_ENV === 'production') 
                 ? `/content/seller/${this.props.match.params.id}`

@@ -61,8 +61,21 @@ export default class EV extends React.Component {
         let ev = {
             title: '', 
             price: '',
-            seller: { name: '', rating: '', callToActionText: '', },
-            detail: { imagePath: '', evFeatures: [], sectionsVisibility: [], sections: [], onChangeImageButtonClick: this.handleChangeImageButtonClick, onChangeSectionsVisibility: this.handleChangeSectionsVisibility, },     
+            seller: { 
+                name: '', 
+                rating: '', 
+                callToActionText: '',
+                contact: '',
+                id: '', 
+            },
+            detail: { 
+                imagePath: '', 
+                evFeatures: [], 
+                sectionsVisibility: [], 
+                sections: [], 
+                onChangeImageButtonClick: this.handleChangeImageButtonClick, 
+                onChangeSectionsVisibility: this.handleChangeSectionsVisibility, 
+            },
         }
 
         if (Object.keys(this.state.ev).length > 0) {
@@ -77,6 +90,8 @@ export default class EV extends React.Component {
                     name: this.state.ev.seller.name,
                     rating: this.state.ev.seller.rating,
                     callToActionText: 'Contact Seller',
+                    contact: this.state.ev.seller.contact,
+                    id: this.state.ev.seller._id,
                 },
                 detail: {
                     imagePath: imagePath,

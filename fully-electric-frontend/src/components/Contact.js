@@ -24,8 +24,32 @@ export default class Contact extends React.Component {
     }
 
     handleSendMessageButtonClick() {
-        // Send message to backend
-        console.log(`From: ${this.state.emailText}, To: , Message: ${this.state.messageText}`);
+        // Send data to backend
+        let url = (process.env.NODE_ENV === 'production') 
+                ? `/content/seller/${this.props.match.params.id}`
+                : `${process.env.REACT_APP_SERVER_URL}/content/seller/${this.props.match.params.id}`;
+        
+        const data = { 
+            from: this.state.emailText,
+            to: this.props.location.state.contact,
+            subject: 'Contact',
+            text: this.state.messageText,
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(response => {
+                console.log('Success:', response);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });        
     }
 
     componentDidMount() {

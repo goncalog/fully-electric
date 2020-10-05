@@ -12,6 +12,7 @@ export default class Contact extends React.Component {
         }
         this.handleEmailTextChange = this.handleEmailTextChange.bind(this);
         this.handleMessageTextChange = this.handleMessageTextChange.bind(this);
+        this.handleSendMessageButtonClick = this.handleSendMessageButtonClick.bind(this);
     }
 
     handleEmailTextChange(emailText) {
@@ -20,6 +21,11 @@ export default class Contact extends React.Component {
 
     handleMessageTextChange(messageText) {
         this.setState({ messageText })
+    }
+
+    handleSendMessageButtonClick() {
+        // Send message to backend
+        console.log(`From: ${this.state.emailText}, To: , Message: ${this.state.messageText}`);
     }
 
     componentDidMount() {
@@ -36,7 +42,10 @@ export default class Contact extends React.Component {
                     onEmailTextChange={this.handleEmailTextChange} 
                     onMessageTextChange={this.handleMessageTextChange} 
                 />
-                <CallToActionButton callToActionText="Send Message"></CallToActionButton>
+                <CallToActionButton 
+                    callToActionText="Send Message"
+                    onButtonClick={this.handleSendMessageButtonClick}  
+                />
             </div>
         );
     }

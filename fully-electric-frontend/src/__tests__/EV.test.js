@@ -69,6 +69,8 @@ describe('EV', () => {
             expect(Object.keys(node.props())).toContain('name');
             expect(Object.keys(node.props())).toContain('rating');
             expect(Object.keys(node.props())).toContain('callToActionText');
+            expect(Object.keys(node.props())).toContain('contact');
+            expect(Object.keys(node.props())).toContain('id');
         });
     });
 

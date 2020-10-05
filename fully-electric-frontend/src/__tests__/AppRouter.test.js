@@ -32,7 +32,7 @@ test('renders the Switch component', () => {
 
 test('renders 4 Route components', () => {
     const wrapper = shallow(<AppRouter />);
-    expect(wrapper.find(Route).length).toBe(4);
+    expect(wrapper.find(Route).length).toBe(5);
 });
 
 test('renders all Route components with correct paths', () => {
@@ -46,5 +46,6 @@ test('renders all Route components with correct paths', () => {
     expect(pathMap['/evs']).toBe(EVs);
     expect(pathMap['/ev/:id']).toBe(EV);
     expect(pathMap['/contact']).toBe(Contact);
+    expect(pathMap['/contact/seller/:id']).toBe(Contact);
 });
   

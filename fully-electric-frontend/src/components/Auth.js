@@ -78,29 +78,33 @@ export default class Auth extends React.Component {
         return (
             <div className="auth">
                 <MainHeadline mainHeadline="Sign up" />
-                <Input 
+                <Input
                     className="first-name" 
+                    property="firstName"
                     placeholder="First name" 
                     text={this.state.firstName}
-                    onTextChange={this.state.handleTextChange}
+                    onTextChange={this.handleTextChange}
                 />
                 <Input 
-                    className="last-name" 
+                    className="last-name"
+                    property="lastName"
                     placeholder="Last name" 
                     text={this.state.lastName}
-                    onTextChange={this.state.handleTextChange}
+                    onTextChange={this.handleTextChange}
                 />
                 <Input 
-                    className="email" 
+                    className="email"
+                    property="email"
                     placeholder="Email address" 
                     text={this.state.email}
-                    onTextChange={this.state.handleTextChange}
+                    onTextChange={this.handleTextChange}
                 />
                 <Input 
-                    className="password" 
+                    className="password"
+                    property="password"
                     placeholder="Password" 
                     text={this.state.password}
-                    onTextChange={this.state.handleTextChange}
+                    onTextChange={this.handleTextChange}
                 />
                 <CallToActionButton callToActionText="Sign up" onButtonClick={this.handleButtonClick} />
             </div>

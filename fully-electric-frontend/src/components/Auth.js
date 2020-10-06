@@ -75,23 +75,27 @@ export default class Auth extends React.Component {
     }
 
     render() {
+        const action = this.props.match.url === '/seller/signup' ? 'Sign up' : 'Log in';
+
         return (
             <div className="auth">
-                <MainHeadline mainHeadline="Sign up" />
-                <Input
-                    className="first-name" 
-                    property="firstName"
-                    placeholder="First name" 
-                    text={this.state.firstName}
-                    onTextChange={this.handleTextChange}
-                />
-                <Input 
-                    className="last-name"
-                    property="lastName"
-                    placeholder="Last name" 
-                    text={this.state.lastName}
-                    onTextChange={this.handleTextChange}
-                />
+                <MainHeadline mainHeadline={action} />
+                <div className={this.props.match.url === '/seller/signup' ? '' : 'invisible'}>
+                    <Input
+                        className="first-name" 
+                        property="firstName"
+                        placeholder="First name" 
+                        text={this.state.firstName}
+                        onTextChange={this.handleTextChange}
+                    />
+                    <Input 
+                        className="last-name"
+                        property="lastName"
+                        placeholder="Last name" 
+                        text={this.state.lastName}
+                        onTextChange={this.handleTextChange}
+                    />
+                </div>
                 <Input 
                     className="email"
                     property="email"
@@ -106,7 +110,7 @@ export default class Auth extends React.Component {
                     text={this.state.password}
                     onTextChange={this.handleTextChange}
                 />
-                <CallToActionButton callToActionText="Sign up" onButtonClick={this.handleButtonClick} />
+                <CallToActionButton callToActionText={action} onButtonClick={this.handleButtonClick} />
             </div>
         );
     }

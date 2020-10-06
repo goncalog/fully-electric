@@ -35,6 +35,10 @@
     border-top-right-radius: 0;
 }
 
+.auth .invisible {
+    display: none;
+}
+
 .auth .callToActionButton {
     margin-bottom: 20px;
 }

@@ -9,9 +9,10 @@ configure({ adapter: new Adapter() });
 
 describe('Auth', () => {
     let shallowAuth;
+    let props;
     const auth = () => {
         if (!shallowAuth) {
-            shallowAuth = shallow(<Auth />);
+            shallowAuth = shallow(<Auth {...props} />);
         }
         return shallowAuth;
     }
@@ -21,6 +22,11 @@ describe('Auth', () => {
     // By setting shallowAuth to undefined here, when the next test runs, 
     // if it calls auth, a new Auth will be created.
     beforeEach(() => {
+        props = {
+            match: { 
+                url: '/test/url',
+            }
+        };
         shallowAuth = undefined;
     });
 
@@ -36,8 +42,8 @@ describe('Auth', () => {
         window.scrollTo = jsdomScrollTo; // restore the jsdom scrollTo
     });
 
-    test('has 6 children', () => {
-        expect(auth().children().length).toEqual(6);
+    test('has 5 children', () => {
+        expect(auth().children().length).toEqual(5);
     });
 
     test('has one MainHeadline rendered with passed properties', () => {

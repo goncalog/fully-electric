@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import EVs from './EVs';
 import Contact from './Contact';
+import Auth from './Auth';
 import Navigation from './Navigation';
 import EV from './EV';
 
@@ -14,8 +15,9 @@ function AppRouter() {
                 <Route path='/' exact component={Home}></Route>
                 <Route path='/evs' exact component={EVs}></Route>
                 <Route path='/ev/:id' exact component={EV}></Route>
-                <Route path='/contact' exact component={Contact}></Route>
                 <Route path='/contact/seller/:id' exact component={Contact}></Route>
+                <Route path='/seller/signup' exact component={Auth}></Route>
+                <Route path='/seller/login' exact component={Auth}></Route>
             </Switch>
         </Router>
     );

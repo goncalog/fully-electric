@@ -42,21 +42,35 @@ function Navigation(props) {
                                     to="/evs" 
                                     onClick={() => setExpanded(false)}
                                 >
-                                    All EVs
+                                    Buy
                                 </Link>
                             </Nav.Item>
 
                             <Nav.Item 
                                 className={`${
-                                    props.location.pathname === "/contact" ? "active" : "" 
+                                    props.location.pathname === "/seller/signup" ? "active" : "" 
                                 }`}
                             >
                                 <Link 
                                     className="nav-link" 
-                                    to="/contact" 
+                                    to="/seller/signup" 
                                     onClick={() => setExpanded(false)}
                                 >
-                                    Contact
+                                    Sell
+                                </Link>
+                            </Nav.Item>
+
+                            <Nav.Item 
+                                className={`${
+                                    props.location.pathname === "/seller/login" ? "active" : "" 
+                                }`}
+                            >
+                                <Link 
+                                    className="nav-link" 
+                                    to="/seller/login" 
+                                    onClick={() => setExpanded(false)}
+                                >
+                                    Log in
                                 </Link>
                             </Nav.Item>
                         </Nav>

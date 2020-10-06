@@ -50,6 +50,8 @@ describe('Auth', () => {
         const shallowWrapper = auth().find(Input);
         expect(shallowWrapper.length).toEqual(4);
         shallowWrapper.forEach((node) => {
+            expect(Object.keys(node.props())).toContain('className');
+            expect(Object.keys(node.props())).toContain('property');
             expect(Object.keys(node.props())).toContain('placeholder');
             expect(Object.keys(node.props())).toContain('text');
             expect(Object.keys(node.props())).toContain('onTextChange');

@@ -43,14 +43,24 @@ export default class Auth extends React.Component {
 
         // Send data to backend
         let url = (process.env.NODE_ENV === 'production') 
-                ? `/content/seller/signup`
-                : `${process.env.REACT_APP_SERVER_URL}/content/seller/signup`;
+            ? `/content${this.props.match.url}`
+            : `${process.env.REACT_APP_SERVER_URL}/content${this.props.match.url}`;
+        let data;
         
-        const data = { 
-            name: `${this.state.firstName} ${this.state.lastName}`,
-            contact: this.state.email,
-            password: this.state.password,
-        };
+        if (this.props.match.url === '/seller/signup') {
+            // Sign up
+            data = { 
+                name: `${this.state.firstName} ${this.state.lastName}`,
+                contact: this.state.email,
+                password: this.state.password,
+            };
+        } else {
+            // Log in
+            data = { 
+                username: this.state.email,
+                password: this.state.password,
+            };
+        }
 
         fetch(url, {
             method: 'POST',

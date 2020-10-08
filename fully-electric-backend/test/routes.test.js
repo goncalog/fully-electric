@@ -201,19 +201,13 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
-    it('route for sending message to seller works (1)', () => {
+    it('route for sending message to seller works', () => {
         return request(app)
             .post('/content/seller/12345')
+            .type('form')
+            .send({ to: 'tomasa.hintz99@ethereal.email', subject: '', from: '', text: '' })
             .expect('Content-type', /json/)
             .expect({ title: 'Contact seller with id 12345' })
-            .expect(200)
-    });
-
-    it('route for sending message to seller works (2)', () => {
-        return request(app)
-            .post('/content/seller/678910')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Contact seller with id 678910' })
             .expect(200)
     });
 

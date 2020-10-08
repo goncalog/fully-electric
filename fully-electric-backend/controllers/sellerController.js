@@ -50,11 +50,22 @@ exports.signUp = [
             }
         })
     }
-]
+];
 
 // POST request to log in seller
-exports.logIn = (req, res, next) => {
-    res.json({ title: `Seller logged in` });
+exports.logIn = (req, res, next) => { // Same name as logIn in line 61 - is this an issue?
+    passport.authenticate('local', function(err, user, info) {
+        console.log('TEST AUTHENTICATE');
+        if (err) { return next(err); }
+        if (!user) { return res.json({ title: `Seller not logged in`, user: user }); }
+        req.logIn(user, function(err) {
+          if (err) { return next(err); }
+          return res.json({ title: `Seller logged in`, user: user });
+        });
+    })(req, res, next);
+
+    // return res.json({ title: `Seller logged in` });
+
 }
 
 // POST request to log out seller

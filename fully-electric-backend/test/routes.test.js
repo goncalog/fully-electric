@@ -185,6 +185,30 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
+    it('route for seller sign up works', () => {
+        return request(app)
+            .post('/content/seller/signup')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Seller signed up' })
+            .expect(200)
+    });
+
+    it('route for seller log in works', () => {
+        return request(app)
+            .post('/content/seller/login')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Seller logged in' })
+            .expect(200)
+    });
+
+    it('route for seller log out works', () => {
+        return request(app)
+            .post('/content/seller/logout')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Seller logged out' })
+            .expect(200)
+    });
+
     it('route for getting seller contact form works (1)', () => {
         return request(app)
             .get('/content/seller/12345')

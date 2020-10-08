@@ -41,6 +41,7 @@ const missTesla = new Seller({
     name: 'Miss Tesla',
     contact: 'miss.tesla@gmail.com',
     rating: 4.2,
+    password: '12345678',
     test: 2,
 });
 
@@ -281,8 +282,8 @@ describe('Seller model', () => {
         assert.instanceOf(missTesla, Seller, 'missTesla is instance of Seller');
     });
 
-    it('Seller model has 6 properties', () => {
-        assert.strictEqual(Object.keys(missTesla.schema.tree).length, 6, 'missTesla has 6 properties');
+    it('Seller model has 7 properties', () => {
+        assert.strictEqual(Object.keys(missTesla.schema.tree).length, 7, 'missTesla has 7 properties');
     });
 
     it('Seller model has name', () => {
@@ -296,6 +297,10 @@ describe('Seller model', () => {
 
     it('Seller model has rating', () => {
         assert.strictEqual(missTesla.rating, 4.2, 'missTesla\'s rating is 4.2');
+    });
+
+    it('has password', () => {
+        assert.strictEqual(missTesla.password, '12345678', 'missTesla\'s password is 12345678');
     });
 
     it('Seller model doesn\'t have test property', () => {
@@ -348,6 +353,7 @@ const modelMaxValidation = new Model({
 
 const sellerMinValidation = new Seller({
     rating: -1,
+    password: '1234567',
 });
 
 const sellerMaxValidation = new Seller({
@@ -662,6 +668,18 @@ describe('Seller model require validators are set', () => {
     it('Seller model\'s rating is less or equal to 0', () => {
         sellerMaxValidation.validate((err) => {
             assert.exists(err.errors.rating, 'seller model\'s rating is less or equal to 0');
+        });
+    });
+
+    it('Seller model requires password', () => {
+        sellerEmpty.validate((err) => {
+            assert.exists(err.errors.password, 'seller model requires password');
+        });
+    });
+
+    it('Seller model\'s password has at least 8 characters', () => {
+        sellerMinValidation.validate((err) => {
+            assert.exists(err.errors.password, 'seller model\'s password has at least 8 characters');
         });
     });
 });

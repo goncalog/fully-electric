@@ -1,3 +1,5 @@
+const Seller = require('./models/seller');
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -19,6 +21,46 @@ const app = express();
 
 app.use(helmet()); // Protects against well known vulnerabilities (e.g. by adding appropriate HTTP headers)
 app.use(compression());
+
+// Passport for handling user sessions (e.g. log in)
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    console.log('TEST PASSPORT');
+    Seller.findOne({ contact: username }, (err, user) => {
+      if (err) { return done(err); }
+
+      if (!user) {
+        return done(null, false, { msg: 'Incorrect email' });
+      }
+
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) { return done(err); }
+
+        if (!result) {
+          console.log('INCORRECT PASSWORD');
+          console.log(`PASSWORD IS: ${user.password}`);
+          return done(null, false, { msg: 'Incorrect password' });
+        }
+      })
+
+      return done(null, user);
+    });
+  })
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  Seller.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(express.json());

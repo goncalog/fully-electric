@@ -214,8 +214,26 @@ describe('Routes testing', function () {
     it('route for seller log in works', () => {
         return request(app)
             .post('/content/seller/login')
+            .type('form')
+            .send({ username: 'zoe@gmail.com', password: '12345678' })
             .expect('Content-type', /json/)
-            .expect({ title: 'Seller logged in' })
+            .expect(function(res) {
+                res.body.user._id = 'test id';
+                res.body.user.__v = 'test version';
+                res.body.user.password = 'hashedPassword';
+                res.body.user.rating = 5;
+            })
+            .expect({ 
+                title: 'Seller logged in', 
+                user: {
+                    _id: 'test id',
+                    __v: 'test version',
+                    name: 'Miss Zoe', 
+                    contact: 'zoe@gmail.com',
+                    rating: 5, 
+                    password: 'hashedPassword' 
+                } 
+            })
             .expect(200)
     });
 

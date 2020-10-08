@@ -23,10 +23,12 @@ export default class Auth extends React.Component {
     }
 
     handleButtonClick() {
-        // Validate name provided
-        if (this.state.firstName === '' || this.state.lastName === '') {
-            alert('Please provide a valid name.');
-            return;
+        if (this.props.match.url === '/seller/signup') {
+            // Validate name provided
+            if (this.state.firstName === '' || this.state.lastName === '') {
+                alert('Please provide a valid name.');
+                return;
+            }
         }
 
         // Validate email provided

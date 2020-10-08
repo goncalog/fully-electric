@@ -35,6 +35,15 @@ router.get('/make/:id', makeController.getMake);
 // GET request for model
 router.get('/model/:id', modelController.getModel);
 
+// POST request to sign up seller
+router.post('/seller/signup', sellerController.signUp);
+
+// POST request to log in seller
+router.post('/seller/login', sellerController.logIn);
+
+// POST request to log out seller
+router.post('/seller/logout', sellerController.logOut);
+
 // GET request to contact seller
 router.get('/seller/:id', sellerController.getContactSeller);
 

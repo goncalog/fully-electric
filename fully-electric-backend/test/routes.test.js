@@ -188,8 +188,26 @@ describe('Routes testing', function () {
     it('route for seller sign up works', () => {
         return request(app)
             .post('/content/seller/signup')
+            .type('form')
+            .send({ name: 'Miss Zoe', contact: 'zoe@gmail.com', password: '12345678' })
             .expect('Content-type', /json/)
-            .expect({ title: 'Seller signed up' })
+            .expect(function(res) {
+                res.body.user._id = 'test id';
+                res.body.user.__v = 'test version';
+                res.body.user.password = 'hashedPassword';
+                res.body.user.rating = 5;
+            })
+            .expect({ 
+                title: 'Seller signed up', 
+                user: {
+                    _id: 'test id',
+                    __v: 'test version',
+                    name: 'Miss Zoe', 
+                    contact: 'zoe@gmail.com',
+                    rating: 5, 
+                    password: 'hashedPassword' 
+                }
+            })
             .expect(200)
     });
 

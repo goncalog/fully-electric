@@ -1,7 +1,56 @@
+const Seller = require('../models/seller');
+
+const async = require('async');
+const validator = require('express-validator');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+
 // POST request to sign up seller
-exports.signUp = (req, res, next) => {
-    res.json({ title: `Seller signed up` });
-}
+exports.signUp = [
+    // Validate fields.
+    validator.body('name', 'Name must not be empty.').trim().isLength({ min: 1 }),
+    validator.body('contact', 'Contact must not be empty.').trim().isLength({ min: 1 }),
+    validator.body('password', 'Password must have at least 8 characters.').trim().isLength({ min: 8 }),
+    
+    // Sanitize fields (using wildcard).
+    validator.sanitizeBody('*').escape(),
+
+    // Process request after validation and sanitization.
+   (req, res, next) => {
+        // Extract the validation errors from a request.
+        const errors = validator.validationResult(req);
+
+        // Encrypt password
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+            // if err, do something
+            if (err) { return next(err); }
+
+            // otherwise, store hashedPassword in DB
+            const user = new Seller({
+                name: req.body.name,
+                contact: req.body.contact,
+                rating: 5,
+                password: hashedPassword,
+            });
+            
+            if (!errors.isEmpty()) {
+                // There are errors. Send sanitized values/error messages.
+
+                res.json({ errors: errors.array() });
+                return;
+                
+            } else {
+                // Data is valid. Save item.
+                user.save(err => {
+                    if (err) { return next(err); }
+
+                    // Successful - render main page with messsages.
+                    res.json({ title: `Seller signed up`, user: user });
+                });
+            }
+        })
+    }
+]
 
 // POST request to log in seller
 exports.logIn = (req, res, next) => {

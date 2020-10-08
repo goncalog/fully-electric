@@ -1,3 +1,18 @@
+// POST request to sign up seller
+exports.signUp = (req, res, next) => {
+    res.json({ title: `Seller signed up` });
+}
+
+// POST request to log in seller
+exports.logIn = (req, res, next) => {
+    res.json({ title: `Seller logged in` });
+}
+
+// POST request to log out seller
+exports.logOut = (req, res, next) => {
+    res.json({ title: `Seller logged out` });
+}
+
 // GET request to contact seller
 exports.getContactSeller = (req, res, next) => {
     res.json({ title: `Contact form from seller with id ${req.params.id}` });

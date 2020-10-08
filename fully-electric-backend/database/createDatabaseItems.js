@@ -80,11 +80,12 @@ function createDatabaseItems(mongooseConnection) {
         });
     }
     
-    function sellerCreate(name, contact, rating, cb) {
+    function sellerCreate(name, contact, rating, password, cb) {
         sellerDetail = { 
             name: name, 
             contact: contact,
-            rating: rating, 
+            rating: rating,
+            password: password, 
         }
     
         const seller = new Seller(sellerDetail);
@@ -312,40 +313,40 @@ function createDatabaseItems(mongooseConnection) {
     function createSellers(cb) {
         async.series([
             function (callback) {
-                sellerCreate('Emily P.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Emily P.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('John A.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('John A.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Mike C.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Mike C.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Laura S.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Laura S.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Miles D.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Miles D.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Zoe Q.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Zoe Q.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Clara F.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Clara F.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Bella T.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Bella T.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Chris C.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Chris C.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Alex B.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Alex B.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Meredith H.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Meredith H.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
             function (callback) {
-                sellerCreate('Jules O.', process.env.CONTACT_EMAIL, 5, callback);
+                sellerCreate('Jules O.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
             },
         ],
         // Optional callback
@@ -625,7 +626,7 @@ function createDatabaseItems(mongooseConnection) {
     // Optional callback
     function (err, results) {
         if (err) {
-            console.log(`FINAL ERR: ${err}`);
+            console.log(`CREATE DATABASE FINAL ERR: ${err}`);
         } else {
             // console.log(`EVs: ${evs}`);
 

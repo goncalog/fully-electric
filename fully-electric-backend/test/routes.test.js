@@ -4,10 +4,17 @@ const mongooseConnection = require('../database/mongoConfigTesting');
 const createDatabaseItems = require('../database/createDatabaseItems');
 require('dotenv').config({ path: __dirname + '/../.env' });
 
+const session = require('express-session');
+const passport = require('../auth/passportConfig');
+
 const request = require('supertest');
 const express = require('express');
 
 const app = express();
+
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.urlencoded({ extended: false }));
 app.use('/content', contentRouter);

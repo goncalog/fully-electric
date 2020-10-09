@@ -7,6 +7,7 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 const session = require('express-session');
 const passport = require('../auth/passportConfig');
 
+const cookieParser = require('cookie-parser');
 const request = require('supertest');
 const express = require('express');
 
@@ -17,6 +18,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
 app.use('/content', contentRouter);
 
 before(function () {
@@ -218,6 +221,15 @@ describe('Routes testing', function () {
             .expect('Content-type', /json/)
             .expect({ title: 'Seller logged out' })
             .expect(200)
+    });
+
+    it('route for seller\'s evs works (1)', () => {
+        return request(app)
+            .get('/content/seller/evs')
+            .set('Cookie', '12345678')
+            .expect('Content-type', /json/)
+            .expect({ message: 'Unauthorized: No token provided' })
+            .expect(401)
     });
 
     it('route for getting seller contact form works (1)', () => {

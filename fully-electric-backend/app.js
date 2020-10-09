@@ -25,7 +25,6 @@ app.use(compression());
 // Passport for handling user sessions (e.g. log in)
 passport.use(
   new LocalStrategy((username, password, done) => {
-    console.log('TEST PASSPORT');
     Seller.findOne({ contact: username }, (err, user) => {
       if (err) { return done(err); }
 
@@ -37,8 +36,6 @@ passport.use(
         if (err) { return done(err); }
 
         if (!result) {
-          console.log('INCORRECT PASSWORD');
-          console.log(`PASSWORD IS: ${user.password}`);
           return done(null, false, { msg: 'Incorrect password' });
         }
       })
@@ -97,9 +94,9 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // respond with the error
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ err });
 });
 
 module.exports = app;

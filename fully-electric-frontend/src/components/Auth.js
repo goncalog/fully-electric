@@ -71,14 +71,21 @@ export default class Auth extends React.Component {
             },
             body: JSON.stringify(data),
         })
-            .then(response => response.json())
-            .then(response => {
-                console.log('Success:', response);
+            .then(async response => {
+                const data = await response.json();
+
+                if (!response.ok) {
+                    const error = (data && data.message) || response.statusText;
+                    return Promise.reject(error);
+                }
+
+                console.log('Success:', data);
                 // Go to Seller Page
 
-            })
+            })            
             .catch((error) => {
                 console.error('Error:', error);
+                alert(`Error: ${error}`);
             });        
     }
 

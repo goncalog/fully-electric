@@ -4,6 +4,7 @@ const evController = require('../controllers/evController');
 const makeController = require('../controllers/makeController');
 const modelController = require('../controllers/modelController');
 const sellerController = require('../controllers/sellerController');
+const withAuth = require('../auth/authMiddleware');
 
 // GET request for home page
 router.get('/', evController.index);
@@ -43,6 +44,9 @@ router.post('/seller/login', sellerController.logIn);
 
 // POST request to log out seller
 router.post('/seller/logout', sellerController.logOut);
+
+// GET request to list of the seller's evs
+router.get('/seller/evs', withAuth, sellerController.getEvs);
 
 // GET request to contact seller
 router.get('/seller/:id', sellerController.getContactSeller);

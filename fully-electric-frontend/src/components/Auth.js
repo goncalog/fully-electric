@@ -81,7 +81,7 @@ export default class Auth extends React.Component {
 
                 console.log('Success:', data);
                 // Go to Seller Page
-
+                this.props.history.push('/seller/evs');
             })            
             .catch((error) => {
                 console.error('Error:', error);

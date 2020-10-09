@@ -1,9 +1,9 @@
 const Seller = require('../models/seller');
 
-const async = require('async');
 const validator = require('express-validator');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 // POST request to sign up seller
 exports.signUp = [
@@ -53,7 +53,13 @@ exports.signUp = [
                     user.save(err => {
                         if (err) { return next(err); }
 
-                        // Successful - render main page with messsages.
+                        // Successful - issue token
+                        const payload = { contact: user.contact };
+                        const token = jwt.sign(payload, process.env.SECRET, {
+                            expiresIn: '1h',
+                        });
+                        
+                        res.cookie('token', token, { httpOnly: true });
                         res.json({ title: `${user.name} signed up` });
                     });
                 }
@@ -72,6 +78,14 @@ exports.logIn = (req, res, next) => {
         }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
+            
+            // Successful - issue token
+            const payload = { contact: user.contact };
+            const token = jwt.sign(payload, process.env.SECRET, {
+                expiresIn: '1h',
+            });
+            
+            res.cookie('token', token, { httpOnly: true });
             return res.json({ title: `${user.name} logged in` });
         });
     })(req, res, next);

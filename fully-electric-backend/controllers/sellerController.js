@@ -20,35 +20,45 @@ exports.signUp = [
         // Extract the validation errors from a request.
         const errors = validator.validationResult(req);
 
-        // Encrypt password
-        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-            // if err, do something
+        // Check if Seller already exists
+        // If not, hash password and save to db
+        Seller.findOne({ contact: req.body.contact }, (err, user) => {
             if (err) { return next(err); }
-
-            // otherwise, store hashedPassword in DB
-            const user = new Seller({
-                name: req.body.name,
-                contact: req.body.contact,
-                rating: 5,
-                password: hashedPassword,
-            });
-            
-            if (!errors.isEmpty()) {
-                // There are errors. Send sanitized values/error messages.
-
-                res.json({ errors: errors.array() });
-                return;
-                
-            } else {
-                // Data is valid. Save item.
-                user.save(err => {
-                    if (err) { return next(err); }
-
-                    // Successful - render main page with messsages.
-                    res.json({ title: `Seller signed up`, user: user });
-                });
+      
+            if (user) {
+                res.status(401);
+                return res.json({ message: 'A user with this email already exists.' })
             }
-        })
+
+            // Encrypt password
+            bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+                // if err, do something
+                if (err) { return next(err); }
+
+                // otherwise, store hashedPassword in db
+                const user = new Seller({
+                    name: req.body.name,
+                    contact: req.body.contact,
+                    rating: 5,
+                    password: hashedPassword,
+                });
+                
+                if (!errors.isEmpty()) {
+                    // There are errors. Send sanitized values/error messages.
+                    res.json({ errors: errors.array() });
+                    return;
+                    
+                } else {
+                    // Data is valid. Save item.
+                    user.save(err => {
+                        if (err) { return next(err); }
+
+                        // Successful - render main page with messsages.
+                        res.json({ title: `Seller signed up`, user: user });
+                    });
+                }
+});
+        });
     }
 ];
 

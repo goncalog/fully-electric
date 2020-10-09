@@ -54,7 +54,6 @@ exports.signUp = [
 
 // POST request to log in seller
 exports.logIn = (req, res, next) => {
-    console.log('LOGIN CONTROLLER');
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) {
@@ -63,7 +62,7 @@ exports.logIn = (req, res, next) => {
         }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
-            // return res.json({ title: `Seller logged in`, user: user });
+            return res.json({ title: `Seller logged in`, user: user });
         });
     })(req, res, next);
 }

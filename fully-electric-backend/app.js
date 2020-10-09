@@ -25,20 +25,21 @@ app.use(compression());
 // Passport for handling user sessions (e.g. log in)
 passport.use(
   new LocalStrategy((username, password, done) => {
-    Seller.findOne({ contact: username }, (err, user) => {
+    Seller.findOne({ contact: username }, async (err, user) => {
       if (err) { return done(err); }
 
       if (!user) {
         return done(null, false, { msg: 'Incorrect email' });
       }
 
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (err) { return done(err); }
-
+      try {
+        let result = await bcrypt.compare(password, user.password);
         if (!result) {
           return done(null, false, { msg: 'Incorrect password' });
         }
-      })
+      } catch(err) {
+        return done(err);
+      }
 
       return done(null, user);
     });

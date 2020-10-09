@@ -198,23 +198,7 @@ describe('Routes testing', function () {
             .type('form')
             .send({ name: 'Miss Zoe', contact: 'zoe@gmail.com', password: '12345678' })
             .expect('Content-type', /json/)
-            .expect(function(res) {
-                res.body.user._id = 'test id';
-                res.body.user.__v = 'test version';
-                res.body.user.password = 'hashedPassword';
-                res.body.user.rating = 5;
-            })
-            .expect({ 
-                title: 'Seller signed up', 
-                user: {
-                    _id: 'test id',
-                    __v: 'test version',
-                    name: 'Miss Zoe', 
-                    contact: 'zoe@gmail.com',
-                    rating: 5, 
-                    password: 'hashedPassword' 
-                }
-            })
+            .expect({ title: 'Miss Zoe signed up' })
             .expect(200)
     });
 
@@ -224,23 +208,7 @@ describe('Routes testing', function () {
             .type('form')
             .send({ username: 'zoe@gmail.com', password: '12345678' })
             .expect('Content-type', /json/)
-            .expect(function(res) {
-                res.body.user._id = 'test id';
-                res.body.user.__v = 'test version';
-                res.body.user.password = 'hashedPassword';
-                res.body.user.rating = 5;
-            })
-            .expect({ 
-                title: 'Seller logged in', 
-                user: {
-                    _id: 'test id',
-                    __v: 'test version',
-                    name: 'Miss Zoe', 
-                    contact: 'zoe@gmail.com',
-                    rating: 5, 
-                    password: 'hashedPassword' 
-                } 
-            })
+            .expect({ title: 'Miss Zoe logged in' })
             .expect(200)
     });
 

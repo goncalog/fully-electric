@@ -54,7 +54,7 @@ exports.signUp = [
                         if (err) { return next(err); }
 
                         // Successful - render main page with messsages.
-                        res.json({ title: `Seller signed up`, user: user });
+                        res.json({ title: `${user.name} signed up` });
                     });
                 }
 });
@@ -72,7 +72,7 @@ exports.logIn = (req, res, next) => {
         }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
-            return res.json({ title: `Seller logged in`, user: user });
+            return res.json({ title: `${user.name} logged in` });
         });
     })(req, res, next);
 }

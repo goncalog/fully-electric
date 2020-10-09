@@ -96,6 +96,11 @@ exports.logOut = (req, res, next) => {
     res.json({ title: `Seller logged out` });
 }
 
+// GET request for list of seller's evs
+exports.getEvs = (req, res, next) => {
+    res.json({ title: `List of ${req.name}'s EVs` });
+}
+
 // GET request to contact seller
 exports.getContactSeller = (req, res, next) => {
     res.json({ title: `Contact form from seller with id ${req.params.id}` });

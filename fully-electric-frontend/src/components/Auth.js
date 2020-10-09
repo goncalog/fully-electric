@@ -67,9 +67,10 @@ export default class Auth extends React.Component {
         fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+            credentials: 'include',
         })
             .then(async response => {
                 const data = await response.json();

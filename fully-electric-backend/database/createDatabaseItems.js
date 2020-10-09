@@ -10,11 +10,25 @@ function createDatabaseItems(mongooseConnection) {
     const Location = require('../models/location');
     const Seller = require('../models/seller');
     
+    let hashedPasswords = [];
     let makes = [];
     let models = [];
     let locations = [];
     let sellers = [];
     let evs = [];
+    
+    function hashedPasswordCreate(password, cb) {
+        const bcrypt = require('bcryptjs');
+        bcrypt.hash(password, 10, (err, hashedPassword) => {
+            if (err) {
+                cb(err, null);
+                return;
+            }
+            // console.log(`New HashedPassord: ${hashedPassword}`);
+            hashedPasswords.push(hashedPassword);
+            cb(null, hashedPassword);
+        });
+    }
     
     function makeCreate(name, cb) {
         makeDetail = { name: name };
@@ -135,7 +149,7 @@ function createDatabaseItems(mongooseConnection) {
             cb(null, ev);
         });
     }
-    
+
     function createMakes(cb) {
         async.series([
             function (callback) {
@@ -173,6 +187,17 @@ function createDatabaseItems(mongooseConnection) {
             },
             function (callback) {
                 makeCreate('Peugeot', callback);
+            },
+        ],
+        // Optional callback
+        cb
+        );
+    }
+    
+    function createHashedPasswords(cb) {
+        async.series([
+            function (callback) {
+                hashedPasswordCreate('12345678', callback);
             },
         ],
         // Optional callback
@@ -310,43 +335,10 @@ function createDatabaseItems(mongooseConnection) {
         );
     }
     
-    function createSellers(cb) {
+    function createSellers(cb) {    
         async.series([
             function (callback) {
-                sellerCreate('Emily P.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('John A.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Mike C.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Laura S.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Miles D.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Zoe Q.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Clara F.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Bella T.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Chris C.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Alex B.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Meredith H.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
-            },
-            function (callback) {
-                sellerCreate('Jules O.', process.env.CONTACT_EMAIL, 5, '12345678', callback);
+                sellerCreate('Emily P.', process.env.CONTACT_EMAIL, 5, hashedPasswords[0], callback);
             },
         ],
         // Optional callback
@@ -390,7 +382,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.hgmsites.net%2Fhug%2F2016-nissan-leaf_100527043_h.jpg&f=1&nofb=1', 
                             'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.evbud.com%2Fb4%2F4818.jpg&f=1&nofb=1', 
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fusedcars.nissan.co.uk%2Fpicserver1%2Fuserdata%2F46%2F501376%2FYhfTBoblFrovo%2Fxxl_kfz893185_dsc04178.jpg&f=1&nofb=1'],
-                    sellers[1],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Blue' },
@@ -411,7 +403,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.cdn.autocar.co.uk%2Fsites%2Fautocar.co.uk%2Ffiles%2Fstyles%2Fgallery_slide%2Fpublic%2Frenault-zoe.jpg%3Fitok%3DpnEKK1ba&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.wintonsworld.com%2Fwp-content%2Fuploads%2F2017%2F08%2FRenault-Zoe_01.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcar-images.bauersecure.com%2Fpagefiles%2F32662%2Fzrenaultzoe-100.jpg&f=1&nofb=1'],
-                    sellers[2],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Red' },
@@ -432,7 +424,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ff9%2F2018_Hyundai_Kona_SE_1.0.jpg%2F1200px-2018_Hyundai_Kona_SE_1.0.jpg&f=1&nofb=1', 
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcarwow-uk-wp-3.imgix.net%2F2018-hyundai-kona-review-4.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fst.automobilemag.com%2Fuploads%2Fsites%2F11%2F2017%2F06%2F2018-Hyundai-Kona-proving-grounds-15.jpg&f=1&nofb=1'],
-                    sellers[3],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Black' },
@@ -453,7 +445,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.drivingelectric.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Farticle_image_desktop%2Fpublic%2F2018-11%2F2kiae-niro.jpg%3Fh%3Dc3635fa2%26itok%3DhuFgMWcL&f=1&nofb=1', 
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblogmedia.dealerfire.com%2Fwp-content%2Fuploads%2Fsites%2F445%2F2018%2F10%2FRear-View-of-White-2019-Kia-Niro-EV_o.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.autocar.co.uk%2Fsites%2Fautocar.co.uk%2Ffiles%2Fstyles%2Fgallery_slide%2Fpublic%2Fimages%2Fcar-reviews%2Ffirst-drives%2Flegacy%2F2-kia-niro-ev-2019-fd-otr-left_0.jpg%3Fitok%3Dn0vgcLPF&f=1&nofb=1'],
-                    sellers[4],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'White' },
@@ -474,7 +466,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.telegraph.co.uk%2Fcars%2Fimages%2F2017%2F06%2F20%2FTELEMMGLPICT000130092501-xlarge_trans_NvBQzQNjv4BqJQuPXpcEMOatKkwW02PS65oSssFO5HHodOf-e6p-uYU.jpeg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.thetruthaboutcars.com%2Fwp-content%2Fuploads%2F2015%2F03%2F2015-Volkswagen-Golf-TDI-white.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.autocar.co.uk%2Fsites%2Fautocar.co.uk%2Ffiles%2Fstyles%2Fgallery_slide%2Fpublic%2Fvolkswagen-e-golf-dashboard.jpg%3Fitok%3Dt4Ez5nkV&f=1&nofb=1'],
-                    sellers[5],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'White' },
@@ -495,7 +487,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.cdn.autocar.co.uk%2Fsites%2Fautocar.co.uk%2Ffiles%2Fstyles%2Fgallery_slide%2Fpublic%2FBMWi3-Stan_30125.jpg%3Fitok%3DqRtk_UkH&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.thecarconnection.com%2Flrg%2F2014-bmw-i3-leaked_100434427_l.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcarwow-uk-wp-3.imgix.net%2Fbmw-i3-interior-dashboard-uk.jpg&f=1&nofb=1'],
-                    sellers[6],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Grey' },
@@ -516,7 +508,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fssl.caranddriving.com%2Ff2%2Fimages%2Fnew%2Fbig%2Faudietron0819(2).jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fweb21st.imgix.net%2Fassets%2Fimages%2Fnew-vehicles%2Faudi%2Faudi-e-tron-2019-launch-edition-brilliant-black.png&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fautocarmalaysia.com%2Fwp-content%2Fuploads%2F2019%2F04%2FAudi_e-tron_55quattro-3a.jpg&f=1&nofb=1'],
-                    sellers[7],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Black' },
@@ -537,7 +529,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.autoexpress.co.uk%2Fimage%2Fprivate%2Fs--Wzb4sPbF--%2Fv1565018660%2Fautoexpress%2F2019%2F08%2F01_2.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Rk5iGrnkyTN4m1SbGM7V4AHaEK%26pid%3DApi&f=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.carmagazine.co.uk%2FImages%2FPageFiles%2F87936%2FMercedes_EQC_005.jpg&f=1&nofb=1'],
-                    sellers[8],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'White' },
@@ -558,7 +550,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F3%2F37%2F2018_Jaguar_I-Pace_EV400_AWD_Front.jpg%2F1200px-2018_Jaguar_I-Pace_EV400_AWD_Front.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.7znu4mm63naud-U_r6DqkAHaEK%26pid%3DApi&f=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.arstechnica.net%2Fwp-content%2Fuploads%2F2018%2F06%2FJaguar-I-Pace-34-980x735.jpg&f=1&nofb=1'],
-                    sellers[9],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'White' },
@@ -579,7 +571,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F9to5google.com%2Fwp-content%2Fuploads%2Fsites%2F4%2F2019%2F02%2Fpolestar_2_1.jpg%3Fquality%3D82%26strip%3Dall&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.autocar.co.uk%2Fsites%2Fautocar.co.uk%2Ffiles%2Fimages%2Fcar-reviews%2Ffirst-drives%2Flegacy%2F99-polestar-2-prototype-feature-2020-hero-front.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.q0e5O723K8Wq12ored2uWgHaE5%26pid%3DApi&f=1'],
-                    sellers[10],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Dark Grey' },
@@ -600,7 +592,7 @@ function createDatabaseItems(mongooseConnection) {
                     ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.iJnLtTabyraAS5eG4XgT2AHaFj%26pid%3DApi&f=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fquickcarreview.com%2Fwp-content%2Fuploads%2F2019%2F10%2F2019_Peugeot_208_e-208_Test_IMG_0768.jpg&f=1&nofb=1',
                             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapi-cdn2.stoneacremotorgroup.co.uk%2F7350136%2Fpeugeot-e-208-gt-100kw-gt-50kwh-5dr-auto-yc69yud-24.jpg&f=1&nofb=1'],
-                    sellers[11],
+                    sellers[0],
                     currentDate,
                     ['Air conditioning', 'Brake assistance', 'Traction control', 'Speed control'],
                     { colour: 'Blue' },
@@ -617,6 +609,7 @@ function createDatabaseItems(mongooseConnection) {
     }
     
     async.series([
+        createHashedPasswords,
         createMakes,
         createModels,
         createLocations,

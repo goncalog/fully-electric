@@ -101,6 +101,11 @@ exports.getEvs = (req, res, next) => {
     res.json({ title: `List of ${req.name}'s EVs` });
 }
 
+// GET request to check log in token
+exports.checkToken = (req, res, next) => {
+    res.json({ title: `Checked token` });
+}
+
 // GET request to contact seller
 exports.getContactSeller = (req, res, next) => {
     res.json({ title: `Contact form from seller with id ${req.params.id}` });

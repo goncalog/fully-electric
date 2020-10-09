@@ -231,6 +231,14 @@ describe('Routes testing', function () {
             .expect(401)
     });
 
+    it('route to check the log in token works', () => {
+        return request(app)
+            .get('/content/seller/checkToken')
+            .expect('Content-type', /json/)
+            .expect({ message: 'Unauthorized: No token provided' })
+            .expect(401)
+    });
+
     it('route for getting seller contact form works (1)', () => {
         return request(app)
             .get('/content/seller/12345')

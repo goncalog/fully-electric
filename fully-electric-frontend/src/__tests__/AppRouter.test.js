@@ -6,6 +6,7 @@ import EVs from '../components/EVs';
 import EV from '../components/EV';
 import Contact from '../components/Contact';
 import Auth from '../components/Auth';
+import withAuth from '../components/support_components/withAuth';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -31,9 +32,9 @@ test('renders the Switch component', () => {
     expect(wrapper.find(Switch).length).toBe(1);
 });
 
-test('renders 6 Route components', () => {
+test('renders 7 Route components', () => {
     const wrapper = shallow(<AppRouter />);
-    expect(wrapper.find(Route).length).toBe(6);
+    expect(wrapper.find(Route).length).toBe(7);
 });
 
 test('renders all Route components with correct paths', () => {

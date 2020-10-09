@@ -223,10 +223,9 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
-    it('route for seller\'s evs works (1)', () => {
+    it('route for seller\'s evs works', () => {
         return request(app)
             .get('/content/seller/evs')
-            .set('Cookie', '12345678')
             .expect('Content-type', /json/)
             .expect({ message: 'Unauthorized: No token provided' })
             .expect(401)

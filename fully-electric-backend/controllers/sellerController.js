@@ -52,11 +52,18 @@ exports.signUp = [
                     user.save(err => {
                         if (err) { return next(err); }
 
-                        // Successful
-                        res.json({ title: `${req.user.name} signed up` });
+                        // Successful - log in user via Passport
+                        console.log(`AFTER SIGN UP BUT BEFORE LOG IN: ${req.user}`);
+                        req.logIn(user, function(err) {
+                            if (err) { return next(err); }
+                            
+                            // Successful
+                            console.log(`AFTER SIGN UP AND LOG IN: ${req.user}`);
+                            return res.json({ title: `${req.user.name} signed up` });
+                        });                        
                     });
                 }
-});
+            });
         });
     }
 ];

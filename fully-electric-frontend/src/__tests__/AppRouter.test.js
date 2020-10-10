@@ -42,15 +42,16 @@ test('renders all Route components with correct paths', () => {
     const wrapper = shallow(<AppRouter />);
     const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
         const routeProps = route.props();
-        pathMap[routeProps.path] = routeProps.component;
+        pathMap[routeProps.path] = (routeProps.component) ? routeProps.component : routeProps.render;
         return pathMap;
     }, {});
     expect(pathMap['/']).toBe(Home);
     expect(pathMap['/evs']).toBe(EVs);
     expect(pathMap['/ev/:id']).toBe(EV);
     expect(pathMap['/contact/seller/:id']).toBe(Contact);
-    expect(pathMap['/seller/signup']).toBe(Auth);
-    expect(pathMap['/seller/login']).toBe(Auth);
-    expect(pathMap['/seller/logout']).toBe(LogOut);
+    expect(Object.keys(pathMap)).toContain('/seller/signup');
+    expect(Object.keys(pathMap)).toContain('/seller/login');
+    expect(Object.keys(pathMap)).toContain('/seller/logout');
+    expect(Object.keys(pathMap)).toContain('/seller/evs');
 });
   

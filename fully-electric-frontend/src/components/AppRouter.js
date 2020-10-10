@@ -11,6 +11,9 @@ import withAuth from './support_components/withAuth';
 
 function AppRouter() {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [authState, setAuthState] = useState(false);
+
+    const handleAuthChange = () => {setAuthState(!authState)};
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
@@ -40,9 +43,24 @@ function AppRouter() {
                 <Route path='/evs' exact component={EVs}></Route>
                 <Route path='/ev/:id' exact component={EV}></Route>
                 <Route path='/contact/seller/:id' exact component={Contact}></Route>
-                <Route path='/seller/signup' exact component={Auth}></Route>
-                <Route path='/seller/login' exact component={Auth}></Route>
-                <Route path='/seller/logout' exact component={LogOut}></Route>
+                <Route 
+                    path='/seller/signup'
+                    exact
+                    render={(props) => (<Auth onAuth={handleAuthChange} {...props} />)}
+                >
+                </Route>
+                <Route 
+                    path='/seller/login'
+                    exact
+                    render={(props) => (<Auth onAuth={handleAuthChange} {...props} />)}
+                >
+                </Route>
+                <Route 
+                    path='/seller/logout'
+                    exact 
+                    render={(props) => (<LogOut onAuth={handleAuthChange} {...props} />)}
+                >
+                </Route>
                 <Route path='/seller/evs' component={withAuth(EVs)}></Route>
             </Switch>
         </Router>

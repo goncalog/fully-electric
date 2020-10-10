@@ -81,6 +81,8 @@ export default class Auth extends React.Component {
                 }
 
                 console.log('Success:', data);
+                // Inform AppRouter that login status changed
+                this.props.onAuth();
                 // Go to Seller Page
                 this.props.history.push('/seller/evs');
             })            

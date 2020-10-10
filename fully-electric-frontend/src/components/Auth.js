@@ -70,6 +70,7 @@ export default class Auth extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+            credentials: 'include',
         })
             .then(async response => {
                 const data = await response.json();

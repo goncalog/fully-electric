@@ -17,7 +17,7 @@ export default function withAuth(ComponentToProtect) {
                     ? '/content/seller/checkAuth' 
                     : `${process.env.REACT_APP_SERVER_URL}/content/seller/checkAuth`;
 
-            fetch(url)
+            fetch(url, { credentials: 'include' })
                 .then(res => {
                     if (res.status === 200) {
                         this.setState({ loading: false });

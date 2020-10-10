@@ -25,6 +25,7 @@ it('renders two children', () => {
 test('renders the Navigation component', () => {
     const wrapper = shallow(<AppRouter />);
     expect(wrapper.find(Navigation).length).toBe(1);
+    expect(Object.keys(wrapper.find(Navigation).props())).toContain('loggedIn');
 });
 
 test('renders the Switch component', () => {

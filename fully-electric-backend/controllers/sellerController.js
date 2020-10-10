@@ -3,7 +3,6 @@ const Seller = require('../models/seller');
 const validator = require('express-validator');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 
 // POST request to sign up seller
 exports.signUp = [
@@ -53,14 +52,8 @@ exports.signUp = [
                     user.save(err => {
                         if (err) { return next(err); }
 
-                        // Successful - issue token
-                        const payload = { contact: user.contact };
-                        const token = jwt.sign(payload, process.env.SECRET, {
-                            expiresIn: '1h',
-                        });
-                        
-                        res.cookie('token', token, { httpOnly: true });
-                        res.json({ title: `${user.name} signed up` });
+                        // Successful
+                        res.json({ title: `${req.user.name} signed up` });
                     });
                 }
 });
@@ -76,17 +69,13 @@ exports.logIn = (req, res, next) => {
             res.status(401);
             return res.json({ message: info.msg }); 
         }
+        console.log(`BEFORE PASSPORT LOGIN: ${req.user}`);
         req.logIn(user, function(err) {
             if (err) { return next(err); }
             
-            // Successful - issue token
-            const payload = { contact: user.contact };
-            const token = jwt.sign(payload, process.env.SECRET, {
-                expiresIn: '1h',
-            });
-            
-            res.cookie('token', token, { httpOnly: true });
-            return res.json({ title: `${user.name} logged in` });
+            // Successful
+            console.log(`AFTER PASSPORT LOGIN: ${req.user}`);
+            return res.json({ title: `${req.user.name} logged in` });
         });
     })(req, res, next);
 }

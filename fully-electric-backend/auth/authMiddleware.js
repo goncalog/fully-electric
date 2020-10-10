@@ -1,22 +1,10 @@
-const jwt = require('jsonwebtoken');
-
 function withAuth(req, res, next) {
-    const token = req.cookies.token;
-
-    if (!token) {
+    if (!req.user) {
         res.status(401);
-        return res.json({ message: 'Unauthorized: No token provided' });
+        return res.json({ message: 'Unauthorized: User not logged in' });
     }
 
-    jwt.verify(token, process.env.SECRET, function (err, decoded) {
-        if (err) {
-            res.status(401);
-            return res.json({ message: 'Unauthorized: Invalid token' });
-        }
-
-        req.name = decoded.name;
-        next();        
-    });
+    next();
 }
 
 module.exports = withAuth;

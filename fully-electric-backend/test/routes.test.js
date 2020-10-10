@@ -18,7 +18,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.use('/content', contentRouter);
 
@@ -227,7 +226,7 @@ describe('Routes testing', function () {
         return request(app)
             .get('/content/seller/evs')
             .expect('Content-type', /json/)
-            .expect({ message: 'Unauthorized: No token provided' })
+            .expect({ message: 'Unauthorized: User not logged in' })
             .expect(401)
     });
 
@@ -235,7 +234,7 @@ describe('Routes testing', function () {
         return request(app)
             .get('/content/seller/checkToken')
             .expect('Content-type', /json/)
-            .expect({ message: 'Unauthorized: No token provided' })
+            .expect({ message: 'Unauthorized: User not logged in' })
             .expect(401)
     });
 

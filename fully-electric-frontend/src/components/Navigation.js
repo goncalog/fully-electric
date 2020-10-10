@@ -42,23 +42,69 @@ function Navigation(props) {
                                     to="/evs" 
                                     onClick={() => setExpanded(false)}
                                 >
-                                    All EVs
+                                    Buy
                                 </Link>
                             </Nav.Item>
 
-                            <Nav.Item 
-                                className={`${
-                                    props.location.pathname === "/contact" ? "active" : "" 
-                                }`}
-                            >
-                                <Link 
-                                    className="nav-link" 
-                                    to="/contact" 
-                                    onClick={() => setExpanded(false)}
+                            {props.loggedIn ? (
+                                <Nav.Item 
+                                    className={`${
+                                        props.location.pathname === "/seller/evs" ? "active" : "" 
+                                    }`}
                                 >
-                                    Contact
-                                </Link>
-                            </Nav.Item>
+                                    <Link 
+                                        className="nav-link" 
+                                        to="/seller/evs" 
+                                        onClick={() => setExpanded(false)}
+                                    >
+                                        Sell
+                                    </Link>
+                                </Nav.Item>
+                            ) : (
+                                <Nav.Item 
+                                    className={`${
+                                        props.location.pathname === "/seller/signup" ? "active" : "" 
+                                    }`}
+                                >
+                                    <Link 
+                                        className="nav-link" 
+                                        to="/seller/signup" 
+                                        onClick={() => setExpanded(false)}
+                                    >
+                                        Sell
+                                    </Link>
+                                </Nav.Item>
+                            )}
+                            
+                            {props.loggedIn ? (
+                                <Nav.Item 
+                                    className={`${
+                                        props.location.pathname === "/seller/logout" ? "active" : "" 
+                                    }`}
+                                >
+                                    <Link 
+                                        className="nav-link" 
+                                        to="/seller/logout" 
+                                        onClick={() => setExpanded(false)}
+                                    >
+                                        Log out
+                                    </Link>
+                                </Nav.Item>
+                            ) : (
+                                <Nav.Item 
+                                    className={`${
+                                        props.location.pathname === "/seller/login" ? "active" : "" 
+                                    }`}
+                                >
+                                    <Link 
+                                        className="nav-link" 
+                                        to="/seller/login" 
+                                        onClick={() => setExpanded(false)}
+                                    >
+                                        Log in
+                                    </Link>
+                                </Nav.Item>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </div>

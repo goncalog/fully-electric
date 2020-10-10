@@ -4,12 +4,21 @@ const mongooseConnection = require('../database/mongoConfigTesting');
 const createDatabaseItems = require('../database/createDatabaseItems');
 require('dotenv').config({ path: __dirname + '/../.env' });
 
+const session = require('express-session');
+const passport = require('../auth/passportConfig');
+
+const cookieParser = require('cookie-parser');
 const request = require('supertest');
 const express = require('express');
 
 const app = express();
 
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.urlencoded({ extended: false }));
+
 app.use('/content', contentRouter);
 
 before(function () {
@@ -183,6 +192,50 @@ describe('Routes testing', function () {
             .expect('Content-type', /json/)
             .expect({ title: 'Model with id 678910' })
             .expect(200)
+    });
+
+    it('route for seller sign up works', () => {
+        return request(app)
+            .post('/content/seller/signup')
+            .type('form')
+            .send({ name: 'Miss Zoe', contact: 'zoe@gmail.com', password: '12345678' })
+            .expect('Content-type', /json/)
+            .expect({ title: 'Miss Zoe signed up' })
+            .expect(200)
+    });
+
+    it('route for seller log in works', () => {
+        return request(app)
+            .post('/content/seller/login')
+            .type('form')
+            .send({ username: 'zoe@gmail.com', password: '12345678' })
+            .expect('Content-type', /json/)
+            .expect({ title: 'Miss Zoe logged in' })
+            .expect(200)
+    });
+
+    it('route for seller log out works', () => {
+        return request(app)
+            .post('/content/seller/logout')
+            .expect('Content-type', /json/)
+            .expect({ title: 'Seller logged out' })
+            .expect(200)
+    });
+
+    it('route for seller\'s evs works', () => {
+        return request(app)
+            .get('/content/seller/evs')
+            .expect('Content-type', /json/)
+            .expect({ message: 'Unauthorized: User not logged in' })
+            .expect(401)
+    });
+
+    it('route to check the log in auth check works', () => {
+        return request(app)
+            .get('/content/seller/checkAuth')
+            .expect('Content-type', /json/)
+            .expect({ message: 'Unauthorized: User not logged in' })
+            .expect(401)
     });
 
     it('route for getting seller contact form works (1)', () => {

@@ -14,8 +14,8 @@ export default function Home() {
         history.push('/evs');
     }
 
-    function onContactSellerButtonClick() {
-        history.push('/contact');
+    function onSellButtonClick() {
+        history.push('/seller/signup');
     }
     
     const headlineProps = {
@@ -50,7 +50,7 @@ export default function Home() {
         mainHeadline: 'Sell your EV for more',
         secondaryHeadline: 'Get £1000 to £3000 more than if you sold to a car dealer',
         callToActionText: 'Let\'s SELL!',
-        onButtonClick: onContactSellerButtonClick,
+        onButtonClick: onSellButtonClick,
     }
 
     return (

@@ -27,16 +27,23 @@ it('renders Home link correctly', () => {
 
 it('renders EVs link correctly', () => {
     const { getByText } = render(<Router><Navigation /></Router>);
-    const evsLink = getByText(/EVs/);
+    const evsLink = getByText(/Buy/);
     expect(evsLink).toBeInTheDocument();
     expect(evsLink.getAttribute('href')).toBe('/evs');
 });
 
-it('renders Contact link correctly', () => {
+it('renders Sell link correctly', () => {
     const { getByText } = render(<Router><Navigation /></Router>);
-    const contactLink = getByText(/Contact/);
+    const contactLink = getByText(/Sell/);
     expect(contactLink).toBeInTheDocument();
-    expect(contactLink.getAttribute('href')).toBe('/contact');
+    expect(contactLink.getAttribute('href')).toBe('/seller/signup');
+});
+
+it('renders Log in link correctly', () => {
+    const { getByText } = render(<Router><Navigation /></Router>);
+    const contactLink = getByText(/Log/);
+    expect(contactLink).toBeInTheDocument();
+    expect(contactLink.getAttribute('href')).toBe('/seller/login');
 });
 
 it('renders the logo correctly', () => {

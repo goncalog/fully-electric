@@ -5,11 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
-const bcrypt = require('bcryptjs');
 
-const session = require("express-session");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const session = require('express-session');
+const passport = require('./auth/passportConfig');
 
 require('./database/mongoConfig');
 
@@ -19,6 +17,10 @@ const app = express();
 
 app.use(helmet()); // Protects against well known vulnerabilities (e.g. by adding appropriate HTTP headers)
 app.use(compression());
+
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,6 +34,7 @@ app.use(express.static(path.join(__dirname, '../fully-electric-frontend/build'))
 app.use(function (req, res, next) {
   // Website allowed to request content
   res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+  res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   next();
@@ -55,9 +58,9 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // respond with the error
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ err });
 });
 
 module.exports = app;

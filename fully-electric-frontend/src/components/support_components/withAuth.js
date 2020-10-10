@@ -14,10 +14,10 @@ export default function withAuth(ComponentToProtect) {
 
         componentDidMount() {
             let url = (process.env.NODE_ENV === 'production') 
-                    ? '/content/seller/checkToken' 
-                    : `${process.env.REACT_APP_SERVER_URL}/content/seller/checkToken`;
+                    ? '/content/seller/checkAuth' 
+                    : `${process.env.REACT_APP_SERVER_URL}/content/seller/checkAuth`;
 
-            fetch(url, { credentials: 'include' })
+            fetch(url)
                 .then(res => {
                     if (res.status === 200) {
                         this.setState({ loading: false });

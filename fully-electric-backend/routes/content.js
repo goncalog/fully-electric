@@ -48,8 +48,8 @@ router.post('/seller/logout', sellerController.logOut);
 // GET request to list of the seller's evs
 router.get('/seller/evs', withAuth, sellerController.getEvs);
 
-// GET request to check log in token
-router.get('/seller/checkToken', withAuth, sellerController.checkToken);
+// GET request to check log in status
+router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 
 // GET request to contact seller
 router.get('/seller/:id', sellerController.getContactSeller);

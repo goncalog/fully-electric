@@ -97,9 +97,9 @@ exports.getEvs = (req, res, next) => {
     res.json({ title: `List of ${req.name}'s EVs` });
 }
 
-// GET request to check log in token
-exports.checkToken = (req, res, next) => {
-    res.json({ title: `Checked token` });
+// GET request to check log in status
+exports.checkAuth = (req, res, next) => {
+    res.json({ title: `User is logged in` });
 }
 
 // GET request to contact seller

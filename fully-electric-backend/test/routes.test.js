@@ -230,9 +230,9 @@ describe('Routes testing', function () {
             .expect(401)
     });
 
-    it('route to check the log in token works', () => {
+    it('route to check the log in auth check works', () => {
         return request(app)
-            .get('/content/seller/checkToken')
+            .get('/content/seller/checkAuth')
             .expect('Content-type', /json/)
             .expect({ message: 'Unauthorized: User not logged in' })
             .expect(401)

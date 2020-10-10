@@ -6,6 +6,7 @@ import Contact from './Contact';
 import Auth from './Auth';
 import Navigation from './Navigation';
 import EV from './EV';
+import LogOut from './LogOut';
 import withAuth from './support_components/withAuth';
 
 function AppRouter() {
@@ -22,13 +23,12 @@ function AppRouter() {
                 if (res.status === 200) {
                     setLoggedIn(true);
                 } else {
-                    const error = new Error(res.error);
-                    throw error;
+                    console.log('User not logged in');
+                    setLoggedIn(false);
                 }
             })
             .catch(err => {
                 console.error(err);
-                setLoggedIn(false);
             });
       });
 
@@ -42,6 +42,7 @@ function AppRouter() {
                 <Route path='/contact/seller/:id' exact component={Contact}></Route>
                 <Route path='/seller/signup' exact component={Auth}></Route>
                 <Route path='/seller/login' exact component={Auth}></Route>
+                <Route path='/seller/logout' exact component={LogOut}></Route>
                 <Route path='/seller/evs' component={withAuth(EVs)}></Route>
             </Switch>
         </Router>

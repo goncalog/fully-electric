@@ -53,12 +53,10 @@ exports.signUp = [
                         if (err) { return next(err); }
 
                         // Successful - log in user via Passport
-                        console.log(`AFTER SIGN UP BUT BEFORE LOG IN: ${req.user}`);
                         req.logIn(user, function(err) {
                             if (err) { return next(err); }
                             
                             // Successful
-                            console.log(`AFTER SIGN UP AND LOG IN: ${req.user}`);
                             return res.json({ title: `${req.user.name} signed up` });
                         });                        
                     });
@@ -76,12 +74,10 @@ exports.logIn = (req, res, next) => {
             res.status(401);
             return res.json({ message: info.msg }); 
         }
-        console.log(`BEFORE PASSPORT LOGIN: ${req.user}`);
         req.logIn(user, function(err) {
             if (err) { return next(err); }
             
             // Successful
-            console.log(`AFTER PASSPORT LOGIN: ${req.user}`);
             return res.json({ title: `${req.user.name} logged in` });
         });
     })(req, res, next);
@@ -89,6 +85,7 @@ exports.logIn = (req, res, next) => {
 
 // POST request to log out seller
 exports.logOut = (req, res, next) => {
+    req.logOut();
     res.json({ title: `Seller logged out` });
 }
 

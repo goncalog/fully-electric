@@ -3,8 +3,8 @@
 Fully Electric is a marketplace for electric vehicles where sellers can list their cars and be contacted by interested buyers - find more at [fully-electric.herokuapp.com/](https://fully-electric.herokuapp.com/)
 
 ## Screenshots
-<img src=![image](https://user-images.githubusercontent.com/5341829/95762012-0a7c7d80-0ca5-11eb-9254-61b40fdbf925.png) alt='screens' width="1400" height="600">
-<img src=![image](https://user-images.githubusercontent.com/5341829/95762223-516a7300-0ca5-11eb-97dd-757e24391cda.png) alt='screens' width="1400" height="600">
+<img src='https://user-images.githubusercontent.com/5341829/95762012-0a7c7d80-0ca5-11eb-9254-61b40fdbf925.png' alt='screens' width="1400" height="600">
+<img src='https://user-images.githubusercontent.com/5341829/95762223-516a7300-0ca5-11eb-97dd-757e24391cda.png' alt='screens' width="700" height="300">
 
 ## Installation and getting it started
 To run the app please follow these instructions:

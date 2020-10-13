@@ -6,7 +6,7 @@ import EVs from './EVs';
 
 export default function SellerEVs(props) {
     function handleButtonClick() {
-        props.history.push(`${props.match.url}/ev/create`);
+        props.history.push(`/seller/${props.match.params.id}/ev/create`);
     }
 
     let url = (process.env.NODE_ENV === 'production') 

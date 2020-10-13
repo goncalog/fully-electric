@@ -39,8 +39,8 @@ export default class Contact extends React.Component {
 
         // Send data to backend
         let url = (process.env.NODE_ENV === 'production') 
-                ? `/content/seller/${this.props.match.params.id}`
-                : `${process.env.REACT_APP_SERVER_URL}/content/seller/${this.props.match.params.id}`;
+                ? `/content/seller/${this.props.match.params.id}/contact`
+                : `${process.env.REACT_APP_SERVER_URL}/content/seller/${this.props.match.params.id}/contact`;
         
         const data = { 
             from: this.state.emailText,

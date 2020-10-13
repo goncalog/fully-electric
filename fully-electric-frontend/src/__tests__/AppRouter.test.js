@@ -45,7 +45,7 @@ test('renders all Route components with correct paths', () => {
     expect(pathMap['/']).toBe(Home);
     expect(Object.keys(pathMap)).toContain('/evs');
     expect(pathMap['/ev/:id']).toBe(EV);
-    expect(pathMap['/contact/seller/:id']).toBe(Contact);
+    expect(pathMap['/seller/:id/contact']).toBe(Contact);
     expect(Object.keys(pathMap)).toContain('/seller/signup');
     expect(Object.keys(pathMap)).toContain('/seller/login');
     expect(Object.keys(pathMap)).toContain('/seller/logout');

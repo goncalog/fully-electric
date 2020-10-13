@@ -9,7 +9,7 @@ export default function SellerContact(props) {
 
     function onContactSellerClick() {
         history.push({
-            pathname: `/contact/seller/${props.id}`,
+            pathname: `/seller/${props.id}/contact`,
             state: { contact: props.contact }, 
         });
     }

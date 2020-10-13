@@ -52,7 +52,7 @@ function AppRouter() {
                 >
                 </Route>
                 <Route path='/ev/:id' exact component={EV}></Route>
-                <Route path='/contact/seller/:id' exact component={Contact}></Route>
+                <Route path='/seller/:id/contact' exact component={Contact}></Route>
                 <Route 
                     path='/seller/signup'
                     exact

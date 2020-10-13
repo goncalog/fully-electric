@@ -35,12 +35,21 @@ function AppRouter() {
             });
       });
 
+      let evsUrl = (process.env.NODE_ENV === 'production')
+                ? '/content/evs'
+                : `${process.env.REACT_APP_SERVER_URL}/content/evs`;
+
     return (
         <Router>
             <Navigation loggedIn={loggedIn}/>
             <Switch>
                 <Route path='/' exact component={Home}></Route>
-                <Route path='/evs' exact component={EVs}></Route>
+                <Route 
+                    path='/evs' 
+                    exact 
+                    render={(props) => (<EVs fetchUrl={evsUrl} {...props} />)}
+                >
+                </Route>
                 <Route path='/ev/:id' exact component={EV}></Route>
                 <Route path='/contact/seller/:id' exact component={Contact}></Route>
                 <Route 

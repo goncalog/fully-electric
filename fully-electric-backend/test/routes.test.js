@@ -199,8 +199,11 @@ describe('Routes testing', function () {
             .post('/content/seller/signup')
             .type('form')
             .send({ name: 'Miss Zoe', contact: 'zoe@gmail.com', password: '12345678' })
+            .expect(function(res) {
+                res.body.userId = '555666777';
+              })
             .expect('Content-type', /json/)
-            .expect({ title: 'Miss Zoe signed up' })
+            .expect({ title: 'Miss Zoe signed up', userId: '555666777' })
             .expect(200)
     });
 
@@ -209,8 +212,11 @@ describe('Routes testing', function () {
             .post('/content/seller/login')
             .type('form')
             .send({ username: 'zoe@gmail.com', password: '12345678' })
+            .expect(function(res) {
+                res.body.userId = '555666777';
+              })
             .expect('Content-type', /json/)
-            .expect({ title: 'Miss Zoe logged in' })
+            .expect({ title: 'Miss Zoe logged in', userId: '555666777' })
             .expect(200)
     });
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import MainHeadline from './support_components/MainHeadline';
 import CallToActionButton from './support_components/CallToActionButton';
 import EVs from './EVs';
-// import '../css/SellerEVs.css';
+import '../css/SellerEVs.css';
 
 export default function SellerEVs(props) {
     function handleButtonClick() {

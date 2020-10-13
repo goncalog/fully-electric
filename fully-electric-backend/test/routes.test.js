@@ -246,9 +246,14 @@ describe('Routes testing', function () {
 
     it('route for getting a seller\'s list of evs for sale works', () => {
         return request(app)
-            .get('/content/seller/12345/evs')
+            .get('/content/seller/5f80744b1a698848220d9e1e/evs')
             .expect('Content-type', /json/)
-            .expect({ title: 'List of EVs for sale from seller with id 12345' })
+            // The ids from sellers created at test time isn't accessible, so it returns
+            // an empty evs array
+            .expect({ 
+                title: 'List of EVs for sale from seller with id 5f80744b1a698848220d9e1e', 
+                evs: [],
+            })
             .expect(200)
     });
 

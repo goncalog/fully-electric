@@ -51,8 +51,8 @@ router.get('/seller/evs', withAuth, sellerController.getEvs);
 // GET request to check log in status
 router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 
-// GET request to get seller's list of evs for sale
-router.get('/seller/:id', sellerController.getContactSeller);
+// GET request to get a seller's list of evs for sale
+router.get('/seller/:id/evs', sellerController.getSellerEvs);
 
 // POST request to contact seller
 router.post('/seller/:id/contact', sellerController.postContactSeller);

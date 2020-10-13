@@ -16,15 +16,7 @@ export default class EVs extends React.Component {
         window.scrollTo(0, 0);
 
         // Upload database data
-        let evsUrl;
-        
-        if (process.env.NODE_ENV === 'production') {
-            evsUrl = '/content/evs';
-        } else {
-            evsUrl = `${process.env.REACT_APP_SERVER_URL}/content/evs`;
-        }
-
-        fetch(evsUrl)
+        fetch(this.props.fetchUrl)
             .then(res => res.json())
             .then((res) => { this.setState({ evs: res.evs }) })
     }

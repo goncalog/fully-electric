@@ -244,19 +244,11 @@ describe('Routes testing', function () {
             .expect(401)
     });
 
-    it('route for getting seller contact form works (1)', () => {
+    it('route for getting a seller\'s list of evs for sale works', () => {
         return request(app)
-            .get('/content/seller/12345')
+            .get('/content/seller/12345/evs')
             .expect('Content-type', /json/)
-            .expect({ title: 'Contact form from seller with id 12345' })
-            .expect(200)
-    });
-
-    it('route for getting seller contact form works (2)', () => {
-        return request(app)
-            .get('/content/seller/678910')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Contact form from seller with id 678910' })
+            .expect({ title: 'List of EVs for sale from seller with id 12345' })
             .expect(200)
     });
 

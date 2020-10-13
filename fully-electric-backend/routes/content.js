@@ -51,11 +51,11 @@ router.get('/seller/evs', withAuth, sellerController.getEvs);
 // GET request to check log in status
 router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 
-// GET request to contact seller
+// GET request to get seller's list of evs for sale
 router.get('/seller/:id', sellerController.getContactSeller);
 
 // POST request to contact seller
-router.post('/seller/:id', sellerController.postContactSeller);
+router.post('/seller/:id/contact', sellerController.postContactSeller);
 
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);

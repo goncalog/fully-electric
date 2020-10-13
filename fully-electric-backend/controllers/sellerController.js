@@ -1,4 +1,5 @@
 const Seller = require('../models/seller');
+const EV = require('../models/ev');
 
 const validator = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -99,9 +100,19 @@ exports.checkAuth = (req, res, next) => {
     res.json({ title: `User is logged in` });
 }
 
-// GET request to contact seller
-exports.getContactSeller = (req, res, next) => {
-    res.json({ title: `Contact form from seller with id ${req.params.id}` });
+// GET request to get a seller's list of evs for sale
+exports.getSellerEvs = (req, res, next) => {
+    EV.find({ seller: { _id: req.params.id }  })
+        .populate('location')
+        .populate('make')
+        .populate('model')
+        .populate('seller')
+        .exec(function (err, evs) {
+            if (err) { return next(err); }
+
+            // Successful, so send data
+            res.json({ title: `List of EVs for sale from seller with id ${req.params.id}`, evs: evs });
+        });
 }
 
 // POST request to contact seller

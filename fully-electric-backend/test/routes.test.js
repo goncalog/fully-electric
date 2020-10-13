@@ -262,7 +262,7 @@ describe('Routes testing', function () {
 
     it('route for sending message to seller works', () => {
         return request(app)
-            .post('/content/seller/12345')
+            .post('/content/seller/12345/contact')
             .type('form')
             .send({ to: 'tomasa.hintz99@ethereal.email', subject: '', from: '', text: '' })
             .expect('Content-type', /json/)

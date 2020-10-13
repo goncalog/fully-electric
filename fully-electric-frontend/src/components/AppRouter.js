@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import EV from './EV';
 import LogOut from './LogOut';
 import withAuth from './support_components/withAuth';
+import SellerEVs from './SellerEVs';
 
 function AppRouter() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -70,7 +71,7 @@ function AppRouter() {
                     render={(props) => (<LogOut onAuth={handleAuthChange} {...props} />)}
                 >
                 </Route>
-                <Route path='/seller/evs' component={withAuth(EVs)}></Route>
+                <Route path='/seller/:id/evs' component={withAuth(SellerEVs)}></Route>
             </Switch>
         </Router>
     );

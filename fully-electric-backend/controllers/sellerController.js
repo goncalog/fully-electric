@@ -78,7 +78,7 @@ exports.logIn = (req, res, next) => {
             if (err) { return next(err); }
             
             // Successful
-            return res.json({ title: `${req.user.name} logged in` });
+            return res.json({ title: `${req.user.name} logged in`, userId: req.user.id });
         });
     })(req, res, next);
 }

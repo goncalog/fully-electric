@@ -7,22 +7,26 @@ configure({ adapter: new Adapter() });
 
 describe('EVs', () => {
     let shallowEVs;
+    let props;
     const evs = () => {
         if (!shallowEVs) {
-            shallowEVs = shallow(<EVs />);
+            shallowEVs = shallow(<EVs {...props}/>);
         }
         return shallowEVs;
     }
 
-    // This reset the shallowEVs variable before every test. 
+    // This reset the props and the shallowEVs variable before every test. 
     // Otherwise, state from one test would leak into another. 
     // By setting shallowEVs to undefined here, when the next test runs, 
     // if it calls evs, a new EVs will be created
     beforeEach(() => {
+        props = {
+            fetchUrl: 'Text to test the fetchUrl property',
+        }
         shallowEVs = undefined;
     });
 
-        // The default test environment for Jest is a browser-like environment provided by jsdom,
+    // The default test environment for Jest is a browser-like environment provided by jsdom,
     // which implements most of what an actual browser would provide, but it doesn't implement everything.
     // Specifically, jsdom doesn't implement window.scrollTo, and instead throws an Error.
     const jsdomScrollTo = window.scrollTo;  // remember the jsdom scrollTo

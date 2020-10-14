@@ -27,9 +27,17 @@ function AppRouter() {
             .then(res => {
                 if (res.status === 200) {
                     setLoggedIn(true);
+                    return res.json();
                 } else {
                     console.log('User not logged in');
                     setLoggedIn(false);
+                    setUserId(undefined);
+                    return;
+                }
+            })
+            .then(res => {
+                if (res) {
+                    setUserId(res.userId);
                 }
             })
             .catch(err => {

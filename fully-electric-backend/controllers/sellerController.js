@@ -97,7 +97,7 @@ exports.getEvs = (req, res, next) => {
 
 // GET request to check log in status
 exports.checkAuth = (req, res, next) => {
-    res.json({ title: `User is logged in` });
+    res.json({ title: `User is logged in`, userId: req.user._id });
 }
 
 // GET request to get a seller's list of evs for sale

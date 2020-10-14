@@ -104,6 +104,11 @@ describe('EVsContainer', () => {
                     id: '78',    
                 },
             ],
+            match: {
+                params: {
+                    id: '',
+                }
+            }
         }
         shallowEVsContainer = undefined;
     });

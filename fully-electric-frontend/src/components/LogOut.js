@@ -19,7 +19,7 @@ export default function LogOut(props) {
 
             console.log('Success:', data);
             // Inform AppRouter that login status changed
-            props.onAuth();
+            props.onAuth(undefined);
             // Go to Home Page
             props.history.push('/');
         })            

@@ -12,9 +12,9 @@ import SellerEVs from './SellerEVs';
 
 function AppRouter() {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [authState, setAuthState] = useState(false);
+    const [userId, setUserId] = useState(undefined);
 
-    const handleAuthChange = () => {setAuthState(!authState)};
+    const handleAuthChange = (userId) => {setUserId(userId)};
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
@@ -42,7 +42,7 @@ function AppRouter() {
 
     return (
         <Router>
-            <Navigation loggedIn={loggedIn}/>
+            <Navigation loggedIn={loggedIn} userId={userId}/>
             <Switch>
                 <Route path='/' exact component={Home}></Route>
                 <Route 

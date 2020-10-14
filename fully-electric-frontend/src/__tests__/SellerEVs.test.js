@@ -20,7 +20,7 @@ describe('SellerEVs', () => {
     // This resets the props and the shallowSellerEVs variable before every test. 
     // Otherwise, state from one test would leak into another. 
     // By setting shallowSellerEVs to undefined here, when the next test runs, 
-    // if it calls sellerEVs, a new Auth will be created.
+    // if it calls sellerEVs, a new SellerEV will be created.
     beforeEach(() => {
         props = {
             match: {

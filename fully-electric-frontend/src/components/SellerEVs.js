@@ -21,7 +21,7 @@ export default function SellerEVs(props) {
         <div className="seller-evs">
             <MainHeadline mainHeadline="Your EVs for sale" />
             <CallToActionButton callToActionText="Add EV" onButtonClick={handleButtonClick} />
-            <EVs fetchUrl={url} />         
+            <EVs fetchUrl={url} {...props} />         
         </div>
     );
 }

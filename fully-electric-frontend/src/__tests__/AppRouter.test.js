@@ -23,6 +23,7 @@ test('renders the Navigation component', () => {
     const wrapper = shallow(<AppRouter />);
     expect(wrapper.find(Navigation).length).toBe(1);
     expect(Object.keys(wrapper.find(Navigation).props())).toContain('loggedIn');
+    expect(Object.keys(wrapper.find(Navigation).props())).toContain('userId');
 });
 
 test('renders the Switch component', () => {

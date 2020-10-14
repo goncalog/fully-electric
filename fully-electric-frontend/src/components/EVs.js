@@ -48,7 +48,7 @@ export default class EVs extends React.Component {
 
         return (
             <div className="evs">
-                <EVsContainer evs={evs} />
+                <EVsContainer evs={evs} {...this.props} />
             </div>
         );
     }

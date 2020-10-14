@@ -9,6 +9,7 @@ import EV from './EV';
 import LogOut from './LogOut';
 import withAuth from './support_components/withAuth';
 import SellerEVs from './SellerEVs';
+import SellerEV from './SellerEV';
 
 function AppRouter() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -72,6 +73,7 @@ function AppRouter() {
                 >
                 </Route>
                 <Route path='/seller/:id/evs' component={withAuth(SellerEVs)}></Route>
+                <Route path='/seller/:id/ev/:id' component={withAuth(SellerEV)}></Route>
             </Switch>
         </Router>
     );

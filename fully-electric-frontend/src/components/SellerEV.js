@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import CallToActionButton from './support_components/CallToActionButton';
 import EV from './EV';
-// import '../css/SellerEV.css';
+import '../css/SellerEV.css';
 
 export default function SellerEV(props) {
     const handleUpdateButtonClick = () => props.history.push(`${props.match.url}/update`);
@@ -15,11 +15,11 @@ export default function SellerEV(props) {
         <div className="seller-ev">
             <div className="callToActionButton-container">
                 <CallToActionButton 
-                    callToActionText="Update EV" 
+                    callToActionText="Update" 
                     onButtonClick={handleUpdateButtonClick} 
                 />
                 <CallToActionButton
-                    callToActionText="Delete EV" 
+                    callToActionText="Delete" 
                     onButtonClick={handleDeleteButtonClick} 
                 />
             </div>

@@ -26,12 +26,13 @@ describe('Input', () => {
             placeholder: "Text to test placeholder property",
             text: "Text to test text property",
             onTextChange: mockFunction,
+            datalist: ['Text 1 to test datalist property', 'Text 2 to test datalist property'],
         }
         shallowInput = undefined;
     });
 
-    test('has one child with passed properties', () => {
-        expect(input().children().length).toEqual(1);
+    test('has 2 children with passed properties', () => {
+        expect(input().children().length).toEqual(2);
         expect(input().hasClass(props.className)).toBe(true);
     });
 
@@ -41,6 +42,22 @@ describe('Input', () => {
         expect(shallowWrapper.prop('placeholder')).toBe(props.placeholder);
         expect(shallowWrapper.prop('value')).toBe(props.text);
         expect(Object.keys(shallowWrapper.props())).toContain('type');
+        expect(shallowWrapper.prop('list')).toBe(props.className);
+    });
+
+    test('has one HTML datalist element', () => {
+        const shallowWrapper = input().find('datalist');
+        expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('id')).toBe(props.className);
+    });
+
+    test('has 2 HTML option elements', () => {
+        const shallowWrapper = input().find('option');
+        expect(shallowWrapper.length).toEqual(2);
+        shallowWrapper.forEach((node, index) => {
+            expect(node.key()).toBe(index.toString());
+            expect(node.prop('value')).toBe(props.datalist[index]);
+        });
     });
 
     test('should call mockFunction onTextChange', () => {

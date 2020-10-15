@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MainHeadline from './support_components/MainHeadline';
 import Input from './support_components/Input';
 import CallToActionButton from './support_components/CallToActionButton';
-// import '../css/EVForm.css';
+import '../css/EVForm.css';
 
 export default class EVForm extends React.Component {
     constructor(props) {

@@ -21,6 +21,10 @@
     margin: 20px 0;
 }
 
+.ev-form .invisible {
+    display: none;
+}
+
 .ev-form .callToActionButton {
     margin-bottom: 20px;
 }

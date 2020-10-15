@@ -71,6 +71,9 @@ describe('EVForm', () => {
             expect(Object.keys(node.props())).toContain('placeholder');
             expect(Object.keys(node.props())).toContain('text');
             expect(Object.keys(node.props())).toContain('onTextChange');
+            if (['make', 'model', 'location'].includes(node.prop('className'))) {
+                expect(Object.keys(node.props())).toContain('datalist');
+            }
         })
     });
 });

@@ -42,13 +42,13 @@ describe('Input', () => {
         expect(shallowWrapper.prop('placeholder')).toBe(props.placeholder);
         expect(shallowWrapper.prop('value')).toBe(props.text);
         expect(Object.keys(shallowWrapper.props())).toContain('type');
-        expect(shallowWrapper.prop('list')).toBe(props.className);
+        expect(shallowWrapper.prop('list')).toBe(props.property);
     });
 
     test('has one HTML datalist element', () => {
         const shallowWrapper = input().find('datalist');
         expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.prop('id')).toBe(props.className);
+        expect(shallowWrapper.prop('id')).toBe(props.property);
     });
 
     test('has 2 HTML option elements', () => {

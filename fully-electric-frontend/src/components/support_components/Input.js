@@ -19,13 +19,13 @@ export default class Input extends React.Component {
                     onChange={this.handleTextChange} 
                     type={this.props.className === 'password' ? this.props.className : '' }
                     required
-                    list={this.props.datalist ? this.props.className : ''}
+                    list={this.props.datalist ? this.props.property : ''}
                 >
                 </input>
                 
                 {/* If statement to check if there's a datalist property */}
                 {this.props.datalist &&
-                    <datalist id={this.props.className}>
+                    <datalist id={this.props.property}>
                         {this.props.datalist.map((item, key) =>
                             <option key={key} value={item} />
                         )}

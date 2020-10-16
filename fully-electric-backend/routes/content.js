@@ -33,6 +33,9 @@ router.delete('/ev/:id/delete', evController.deleteEv);
 // GET request for make
 router.get('/make/:id', makeController.getMake);
 
+// GET request for list of all makes
+router.get('/makes', makeController.getMakes);
+
 // GET request for model
 router.get('/model/:id', modelController.getModel);
 

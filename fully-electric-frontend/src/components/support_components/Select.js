@@ -19,7 +19,7 @@ export default class Select extends React.Component {
                 >
                     <option value="" disabled selected hidden>{this.props.placeholder}</option>;
                     {this.props.options.map((item, key) => {
-                        return <option key={key} value={item}>{item}</option>;
+                        return <option key={key} value={item}>{`${item.name ? item.name : item.city}`}</option>;
                     })}
                 </select>
             </div>

@@ -3,6 +3,7 @@ import EVForm from '../components/EVForm';
 import MainHeadline from '../components/support_components/MainHeadline';
 import CallToActionButton from '../components/support_components/CallToActionButton';
 import Input from '../components/support_components/Input';
+import Select from '../components/support_components/Select';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -62,18 +63,27 @@ describe('EVForm', () => {
         
     });
 
-    test('has 16 Input components rendered with passed properties', () => {
+    test('has 13 Input components rendered with passed properties', () => {
         const shallowWrapper = evForm().find(Input);
-        expect(shallowWrapper.length).toEqual(16);
+        expect(shallowWrapper.length).toEqual(13);
         shallowWrapper.forEach((node) => {
             expect(Object.keys(node.props())).toContain('className');
             expect(Object.keys(node.props())).toContain('property');
             expect(Object.keys(node.props())).toContain('placeholder');
             expect(Object.keys(node.props())).toContain('text');
             expect(Object.keys(node.props())).toContain('onTextChange');
-            if (['make', 'model', 'location'].includes(node.prop('className'))) {
-                expect(Object.keys(node.props())).toContain('datalist');
-            }
         })
+    });
+
+    test('has 3 Select components rendered with passed properties', () => {
+        const shallowWrapper = evForm().find(Select);
+        expect(shallowWrapper.length).toEqual(3);
+        shallowWrapper.forEach((node) => {
+            expect(Object.keys(node.props())).toContain('className');
+            expect(Object.keys(node.props())).toContain('property');
+            expect(Object.keys(node.props())).toContain('placeholder');
+            expect(Object.keys(node.props())).toContain('onTextChange');
+            expect(Object.keys(node.props())).toContain('options');
+        });
     });
 });

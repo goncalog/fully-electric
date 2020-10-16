@@ -3,6 +3,7 @@ import MainHeadline from './support_components/MainHeadline';
 import Input from './support_components/Input';
 import Select from './support_components/Select';
 import CallToActionButton from './support_components/CallToActionButton';
+import EVAdditionalFeatures from './support_components/EVAdditionalFeatures';
 import '../css/EVForm.css';
 
 export default class EVForm extends React.Component {
@@ -62,7 +63,7 @@ export default class EVForm extends React.Component {
 
         this.setState((state) => {
             let array = state.equipmentAndOptions.slice(); // Creating a new copy
-            array.push(state.equipmentAndOption);
+            array.push({ name: state.equipmentAndOption });
             return { equipmentAndOptions: array, equipmentAndOption: '' };
         });
     }
@@ -264,13 +265,10 @@ export default class EVForm extends React.Component {
                         callToActionText="Add" 
                         onButtonClick={this.handleAddImageUrlButtonClick}
                     />
-                    <Input 
-                        className="image-urls added"
-                        property="imageUrls"
-                        placeholder="Image URLs" 
-                        text={this.state.imageUrls}
-                        onTextChange={this.handleTextChange}
-                    />
+                   <p className="image-urls">
+                        {`${this.state.imageUrls.length} ${this.state.imageUrls.length === 1 
+                                ? 'image' : 'images'} added`}
+                    </p>
                 </div>
 
                 <div className="equipment-and-options-container add">
@@ -285,12 +283,9 @@ export default class EVForm extends React.Component {
                         callToActionText="Add" 
                         onButtonClick={this.handleAddEquimentAndOptionsButtonClick}
                     />
-                    <Input 
-                        className="equipment-and-options added"
-                        property="equipmentAndOptions"
-                        placeholder="Equipment and options" 
-                        text={this.state.equipmentAndOptions}
-                        onTextChange={this.handleTextChange}
+                    <EVAdditionalFeatures 
+                        evFeatures={this.state.equipmentAndOptions}
+                        sectionVisibility={true}
                     />
                 </div>
                 

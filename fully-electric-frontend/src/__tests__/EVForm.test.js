@@ -4,6 +4,7 @@ import MainHeadline from '../components/support_components/MainHeadline';
 import CallToActionButton from '../components/support_components/CallToActionButton';
 import Input from '../components/support_components/Input';
 import Select from '../components/support_components/Select';
+import EVAdditionalFeatures from '../components/support_components/EVAdditionalFeatures';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -63,9 +64,9 @@ describe('EVForm', () => {
         
     });
 
-    test('has 13 Input components rendered with passed properties', () => {
+    test('has 11 Input components rendered with passed properties', () => {
         const shallowWrapper = evForm().find(Input);
-        expect(shallowWrapper.length).toEqual(13);
+        expect(shallowWrapper.length).toEqual(11);
         shallowWrapper.forEach((node) => {
             expect(Object.keys(node.props())).toContain('className');
             expect(Object.keys(node.props())).toContain('property');
@@ -85,5 +86,17 @@ describe('EVForm', () => {
             expect(Object.keys(node.props())).toContain('onTextChange');
             expect(Object.keys(node.props())).toContain('options');
         });
+    });
+
+    test('has one HTML p element', () => {
+        const shallowWrapper = evForm().find('p');
+        expect(shallowWrapper.length).toEqual(1);
+    });
+
+    test('has one EVAdditionalFeatures rendered with passed properties', () => {
+        const shallowWrapper = evForm().find(EVAdditionalFeatures);
+        expect(shallowWrapper.length).toEqual(1);
+        expect(Object.keys(shallowWrapper.props())).toContain('evFeatures');
+        expect(Object.keys(shallowWrapper.props())).toContain('sectionVisibility');
     });
 });

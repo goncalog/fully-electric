@@ -49,7 +49,8 @@ export default class EVForm extends React.Component {
 
         this.setState((state) => {
             let array = state.imageUrls.slice(); // Creating a new copy
-            return { imageUrls: array.push(state.imageUrl) };
+            array.push(state.imageUrl);
+            return { imageUrls: array, imageUrl: '' };
         });
     }
 
@@ -61,7 +62,8 @@ export default class EVForm extends React.Component {
 
         this.setState((state) => {
             let array = state.equipmentAndOptions.slice(); // Creating a new copy
-            return { equipmentAndOptions: array.push(state.equipmentAndOption) };
+            array.push(state.equipmentAndOption);
+            return { equipmentAndOptions: array, equipmentAndOption: '' };
         });
     }
 

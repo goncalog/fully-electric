@@ -183,9 +183,15 @@ export default class EVForm extends React.Component {
 
     handleMakeSelection(property, value) {
         // Fetch models of selected make
+        if (value !== "") {
+            let url = (process.env.NODE_ENV === 'production') 
+                    ? `/content/make/${value}/models`
+                    : `${process.env.REACT_APP_SERVER_URL}/content/make/${value}/models`;
 
-
-        this.setState({ models: ['T', 'X', 'S'] });
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => { this.setState({ models: res.models }) })
+        }
 
         (value === "")
                 ? this.setState({ [property]: value,  makeSelected: false})

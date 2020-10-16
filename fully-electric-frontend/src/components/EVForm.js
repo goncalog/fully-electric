@@ -197,16 +197,24 @@ export default class EVForm extends React.Component {
 
         // Fetch makes and locations
         if (this.state.makes.length === 0) {
-            let makesUrl = (process.env.NODE_ENV === 'production') 
+            let url = (process.env.NODE_ENV === 'production') 
                     ? `/content/makes` 
                     : `${process.env.REACT_APP_SERVER_URL}/content/makes`;
 
-            fetch(makesUrl)
+            fetch(url)
                 .then((res) => res.json())
                 .then((res) => { this.setState({ makes: res.makes }) })
         }
 
-        this.setState({ locations: [{city: 'London'}, {city: 'Manchester'}, {city: 'Liverpool'}] });
+        if (this.state.locations.length === 0) {
+            let url = (process.env.NODE_ENV === 'production') 
+                    ? `/content/locations` 
+                    : `${process.env.REACT_APP_SERVER_URL}/content/locations`;
+
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => { this.setState({ locations: res.locations }) })
+        }
     }
 
     render() {

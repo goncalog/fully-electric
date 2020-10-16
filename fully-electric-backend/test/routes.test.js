@@ -178,6 +178,36 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
+    it('all makes route works', () => {
+        return request(app)
+            .get('/content/makes')
+            .expect('Content-type', /json/)
+            .expect(hasTitle)
+            .expect(hasMakes)
+            .expect(isMake)
+            .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all makes')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasMakes(res) {
+            if (!(Object.keys(res.body.makes).length === 12)) {
+                throw new Error("Doesn\'t have all the db makes");
+            }
+        }
+
+        function isMake(res) {
+            for (let key in res.body.makes) {
+                if (!(Object.keys(res.body.makes[key]).length === 3)) {
+                    throw new Error("Not an instance of Make");
+                }
+            }
+        }
+    });
+
     it('model route works (1)', () => {
         return request(app)
             .get('/content/model/12345')

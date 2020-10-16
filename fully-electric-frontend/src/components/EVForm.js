@@ -324,12 +324,12 @@ export default class EVForm extends React.Component {
                     text={this.state.vehicleIdentificationNumber}
                     onTextChange={this.handleTextChange}
                 />
-                <Input 
+                <Select 
                     className="full-vehicle-inspection"
                     property="fullVehicleInspection"
                     placeholder="Full Vehicle Inspection" 
-                    text={this.state.fullVehicleInspection}
                     onTextChange={this.handleTextChange}
+                    options={['Yes', 'No']}
                 />
 
                 <CallToActionButton 

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MainHeadline from './support_components/MainHeadline';
 import Input from './support_components/Input';
+import Select from './support_components/Select';
 import CallToActionButton from './support_components/CallToActionButton';
 import '../css/EVForm.css';
 
@@ -24,15 +25,20 @@ export default class EVForm extends React.Component {
             seating: '',
             vehicleIdentificationNumber: '',
             fullVehicleInspection: '',
+            makes: [],
+            models: [],
+            locations: [],
+            makeSelected: false,
         }
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleAddImageUrlButtonClick = this.handleAddImageUrlButtonClick.bind(this);
         this.handleAddEquimentAndOptionsButtonClick = this.handleAddEquimentAndOptionsButtonClick.bind(this);
         this.handleSaveButtonClick = this.handleSaveButtonClick.bind(this);
+        this.handleMakeSelection = this.handleMakeSelection.bind(this);
     }
     
     handleTextChange(property, value) {
-        this.setState({ [property]: value })
+        this.setState({ [property]: value });
     }
 
     handleAddImageUrlButtonClick() {
@@ -172,8 +178,24 @@ export default class EVForm extends React.Component {
             });        
     }
 
+    handleMakeSelection(property, value) {
+        // Fetch models of selected make
+
+
+        (value === "")
+                ? this.setState({ [property]: value,  makeSelected: false})
+                : this.setState({ [property]: value,  makeSelected: true})
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
+
+        // Fetch models, makes and locations
+
+
+        this.setState({ makes: ['Tesla', 'Renault', 'Nissan'] });
+        this.setState({ models: ['T', 'X', 'S'] });
+        this.setState({ locations: ['London', 'Manchester', 'Liverpool'] });
     }
 
     render() {
@@ -185,19 +207,19 @@ export default class EVForm extends React.Component {
                     onButtonClick={this.handleSaveButtonClick}
                 />
 
-                <Input 
+                <Select 
                     className="make"
                     property="make"
                     placeholder="Make" 
-                    text={this.state.make}
-                    onTextChange={this.handleTextChange}
+                    onTextChange={this.handleMakeSelection}
+                    options={this.state.makes}
                 />
-                <Input 
-                    className="model"
+                <Select 
+                    className={this.state.makeSelected ? "model" : "model invisible"}
                     property="model"
                     placeholder="Model" 
-                    text={this.state.model}
                     onTextChange={this.handleTextChange}
+                    options={this.state.models}
                 />
                 <Input 
                     className="price"
@@ -220,12 +242,12 @@ export default class EVForm extends React.Component {
                     text={this.state.mileage}
                     onTextChange={this.handleTextChange}
                 />
-                <Input 
+                <Select
                     className="location"
                     property="location"
                     placeholder="Location" 
-                    text={this.state.location}
                     onTextChange={this.handleTextChange}
+                    options={this.state.locations}
                 />
                 
                 <div className="image-urls-container">

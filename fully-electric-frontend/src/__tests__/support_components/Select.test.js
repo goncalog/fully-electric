@@ -24,7 +24,7 @@ describe('Select', () => {
             className: "Text to test className property",
             property: "Text to test property property",
             placeholder: "Text to test placeholder property",
-            options: [{ name: "Test 1" }, { name: "Test 2" }],
+            options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
             onTextChange: mockFunction,
         }
         shallowSelect = undefined;
@@ -48,7 +48,7 @@ describe('Select', () => {
                 expect(node.text()).toBe(props.placeholder);
             } else {
                 expect(node.key()).toBe((index-1).toString());
-                expect(node.prop('value')).toBe(props.options[index-1]);
+                expect(node.prop('value')).toBe(props.options[index-1]._id);
                 expect(node.text()).toBe(props.options[index-1].name);
             }
         });

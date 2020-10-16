@@ -80,17 +80,17 @@ export default class EVForm extends React.Component {
             return;
         }
 
-        if (this.state.price < 0) {
+        if (this.state.price < 0 || this.state.price === '' || isNaN(Number(this.state.price))) {
             alert('Please provide a valid price.');
             return;
         }
 
-        if (this.state.year < 1900) {
+        if (this.state.year < 1900 || this.state.year === '' || isNaN(Number(this.state.year))) {
             alert('Please provide a valid year.');
             return;
         }
 
-        if (this.state.mileage < 0) {
+        if (this.state.mileage < 0 || this.state.mileage === '' || isNaN(Number(this.state.mileage))) {
             alert('Please provide a valid mileage.');
             return;
         }
@@ -115,7 +115,7 @@ export default class EVForm extends React.Component {
             return;
         }
 
-        if (this.state.seating <= 0) {
+        if (this.state.seating <= 0 || isNaN(Number(this.state.seating))) {
             alert('Please provide a valid seating.');
             return;
         }

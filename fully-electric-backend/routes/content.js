@@ -37,6 +37,9 @@ router.get('/make/:id', makeController.getMake);
 // GET request for list of all makes
 router.get('/makes', makeController.getMakes);
 
+// GET request for make's models
+router.get('/make/:id/models', makeController.getModels);
+
 // GET request for model
 router.get('/model/:id', modelController.getModel);
 

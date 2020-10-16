@@ -250,7 +250,7 @@ export default class EVForm extends React.Component {
                     options={this.state.locations}
                 />
                 
-                <div className="image-urls-container">
+                <div className="image-urls-container add">
                     <Input 
                         className="image-url"
                         property="imageUrl"
@@ -263,7 +263,7 @@ export default class EVForm extends React.Component {
                         onButtonClick={this.handleAddImageUrlButtonClick}
                     />
                     <Input 
-                        className="image-urls"
+                        className="image-urls added"
                         property="imageUrls"
                         placeholder="Image URLs" 
                         text={this.state.imageUrls}
@@ -271,7 +271,7 @@ export default class EVForm extends React.Component {
                     />
                 </div>
 
-                <div className="equipment-and-options-container">
+                <div className="equipment-and-options-container add">
                     <Input 
                         className="equipment-and-option"
                         property="equipmentAndOption"
@@ -284,7 +284,7 @@ export default class EVForm extends React.Component {
                         onButtonClick={this.handleAddEquimentAndOptionsButtonClick}
                     />
                     <Input 
-                        className="equipment-and-options"
+                        className="equipment-and-options added"
                         property="equipmentAndOptions"
                         placeholder="Equipment and options" 
                         text={this.state.equipmentAndOptions}

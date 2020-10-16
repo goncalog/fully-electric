@@ -45,6 +45,27 @@
     margin-bottom: 20px;
 }
 
+.ev-form .add {
+    display: grid;
+    margin: 0 5%;
+    grid-template-columns: 9fr 1fr;
+    column-gap: 20px;
+}
+
+.ev-form .add input {
+    width: 100%;
+}
+
+.ev-form .add .callToActionButton {
+    height: 55px;
+    width: 50px;
+    margin: 20px 0;
+}
+
+.ev-form .added {
+    grid-column: 1 / 3;
+}
+
 /* Responsive layout - when the screen is less than 800px wide (tablet portrait) */
 @media screen and (max-width: 800px) {
     .ev-form {

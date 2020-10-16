@@ -100,7 +100,7 @@ export default class EVForm extends React.Component {
         }
 
         if (this.state.imageUrls === []) {
-            alert('Please provide some images.');
+            alert('Please add some images.');
             return;
         }
 

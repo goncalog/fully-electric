@@ -64,9 +64,9 @@ describe('EVForm', () => {
         
     });
 
-    test('has 11 Input components rendered with passed properties', () => {
+    test('has 10 Input components rendered with passed properties', () => {
         const shallowWrapper = evForm().find(Input);
-        expect(shallowWrapper.length).toEqual(11);
+        expect(shallowWrapper.length).toEqual(10);
         shallowWrapper.forEach((node) => {
             expect(Object.keys(node.props())).toContain('className');
             expect(Object.keys(node.props())).toContain('property');
@@ -76,9 +76,9 @@ describe('EVForm', () => {
         })
     });
 
-    test('has 3 Select components rendered with passed properties', () => {
+    test('has 4 Select components rendered with passed properties', () => {
         const shallowWrapper = evForm().find(Select);
-        expect(shallowWrapper.length).toEqual(3);
+        expect(shallowWrapper.length).toEqual(4);
         shallowWrapper.forEach((node) => {
             expect(Object.keys(node.props())).toContain('className');
             expect(Object.keys(node.props())).toContain('property');

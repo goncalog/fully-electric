@@ -3,6 +3,7 @@ const router = express.Router();
 const evController = require('../controllers/evController');
 const makeController = require('../controllers/makeController');
 const modelController = require('../controllers/modelController');
+const locationController = require('../controllers/locationController');
 const sellerController = require('../controllers/sellerController');
 const withAuth = require('../auth/authMiddleware');
 
@@ -38,6 +39,9 @@ router.get('/makes', makeController.getMakes);
 
 // GET request for model
 router.get('/model/:id', modelController.getModel);
+
+// GET request for list of all locations
+router.get('/locations', locationController.getLocations);
 
 // POST request to sign up seller
 router.post('/seller/signup', sellerController.signUp);

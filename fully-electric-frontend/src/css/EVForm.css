@@ -21,6 +21,22 @@
     margin: 20px 0;
 }
 
+.ev-form select {
+    width: 90%;
+    height: 55px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 20px 0;
+    cursor: text;
+    appearance: none;
+}
+
+.ev-form select:invalid {
+    color: gray;
+}
+
 .ev-form .invisible {
     display: none;
 }

@@ -185,6 +185,8 @@ export default class EVForm extends React.Component {
         // Fetch models of selected make
 
 
+        this.setState({ models: ['T', 'X', 'S'] });
+
         (value === "")
                 ? this.setState({ [property]: value,  makeSelected: false})
                 : this.setState({ [property]: value,  makeSelected: true})
@@ -193,12 +195,18 @@ export default class EVForm extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
-        // Fetch models, makes and locations
+        // Fetch makes and locations
+        if (this.state.makes.length === 0) {
+            let makesUrl = (process.env.NODE_ENV === 'production') 
+                    ? `/content/makes` 
+                    : `${process.env.REACT_APP_SERVER_URL}/content/makes`;
 
+            fetch(makesUrl)
+                .then((res) => res.json())
+                .then((res) => { this.setState({ makes: res.makes }) })
+        }
 
-        this.setState({ makes: ['Tesla', 'Renault', 'Nissan'] });
-        this.setState({ models: ['T', 'X', 'S'] });
-        this.setState({ locations: ['London', 'Manchester', 'Liverpool'] });
+        this.setState({ locations: [{city: 'London'}, {city: 'Manchester'}, {city: 'Liverpool'}] });
     }
 
     render() {

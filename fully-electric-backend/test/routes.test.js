@@ -224,6 +224,36 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
+    it('all locations route works', () => {
+        return request(app)
+            .get('/content/locations')
+            .expect('Content-type', /json/)
+            .expect(hasTitle)
+            .expect(hasLocations)
+            .expect(isLocation)
+            .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all locations')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasLocations(res) {
+            if (!(Object.keys(res.body.locations).length === 12)) {
+                throw new Error("Doesn\'t have all the db locations");
+            }
+        }
+
+        function isLocation(res) {
+            for (let key in res.body.locations) {
+                if (!(Object.keys(res.body.locations[key]).length === 4)) {
+                    throw new Error("Not an instance of Location");
+                }
+            }
+        }
+    });
+
     it('route for seller sign up works', () => {
         return request(app)
             .post('/content/seller/signup')

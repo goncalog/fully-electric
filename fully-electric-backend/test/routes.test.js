@@ -208,6 +208,19 @@ describe('Routes testing', function () {
         }
     });
 
+    it('route for getting a makes\'s list of models works', () => {
+        return request(app)
+            .get('/content/make/5f80744b1a698848220d9e1e/models')
+            .expect('Content-type', /json/)
+            // The ids from makes created at test time isn't accessible, so it returns
+            // an empty models array
+            .expect({ 
+                title: 'List of models from make with id 5f80744b1a698848220d9e1e', 
+                models: [],
+            })
+            .expect(200)
+    });
+
     it('model route works (1)', () => {
         return request(app)
             .get('/content/model/12345')

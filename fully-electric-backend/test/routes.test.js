@@ -106,14 +106,6 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
-    it('route to create new ev works', () => {
-        return request(app)
-            .post('/content/ev/create')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Create new EV' })
-            .expect(200)
-    });
-
     it('route to get data to update ev works (1)', () => {
         return request(app)
             .get('/content/ev/12345/update')

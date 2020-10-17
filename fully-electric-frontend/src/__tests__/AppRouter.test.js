@@ -2,11 +2,8 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import AppRouter from '../components/AppRouter';
 import Home from '../components/Home';
-import EVs from '../components/EVs';
 import EV from '../components/EV';
 import Contact from '../components/Contact';
-import Auth from '../components/Auth';
-import LogOut from '../components/LogOut';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -26,6 +23,7 @@ test('renders the Navigation component', () => {
     const wrapper = shallow(<AppRouter />);
     expect(wrapper.find(Navigation).length).toBe(1);
     expect(Object.keys(wrapper.find(Navigation).props())).toContain('loggedIn');
+    expect(Object.keys(wrapper.find(Navigation).props())).toContain('userId');
 });
 
 test('renders the Switch component', () => {
@@ -33,9 +31,9 @@ test('renders the Switch component', () => {
     expect(wrapper.find(Switch).length).toBe(1);
 });
 
-test('renders 8 Route components', () => {
+test('renders 11 Route components', () => {
     const wrapper = shallow(<AppRouter />);
-    expect(wrapper.find(Route).length).toBe(8);
+    expect(wrapper.find(Route).length).toBe(11);
 });
 
 test('renders all Route components with correct paths', () => {
@@ -46,12 +44,15 @@ test('renders all Route components with correct paths', () => {
         return pathMap;
     }, {});
     expect(pathMap['/']).toBe(Home);
-    expect(pathMap['/evs']).toBe(EVs);
+    expect(Object.keys(pathMap)).toContain('/evs');
     expect(pathMap['/ev/:id']).toBe(EV);
-    expect(pathMap['/contact/seller/:id']).toBe(Contact);
+    expect(pathMap['/seller/:id/contact']).toBe(Contact);
     expect(Object.keys(pathMap)).toContain('/seller/signup');
     expect(Object.keys(pathMap)).toContain('/seller/login');
     expect(Object.keys(pathMap)).toContain('/seller/logout');
-    expect(Object.keys(pathMap)).toContain('/seller/evs');
+    expect(Object.keys(pathMap)).toContain('/seller/:id/evs');
+    expect(Object.keys(pathMap)).toContain('/seller/:id/ev/create');
+    expect(Object.keys(pathMap)).toContain('/seller/:id/ev/:id');
+    expect(Object.keys(pathMap)).toContain('/seller/:id/ev/:id/update');
 });
   

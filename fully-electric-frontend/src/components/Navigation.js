@@ -49,12 +49,13 @@ function Navigation(props) {
                             {props.loggedIn ? (
                                 <Nav.Item 
                                     className={`${
-                                        props.location.pathname === "/seller/evs" ? "active" : "" 
+                                        props.location.pathname === `/seller/${props.userId}/evs` 
+                                            ? "active" : "" 
                                     }`}
                                 >
                                     <Link 
                                         className="nav-link" 
-                                        to="/seller/evs" 
+                                        to={`/seller/${props.userId}/evs`}
                                         onClick={() => setExpanded(false)}
                                     >
                                         Sell

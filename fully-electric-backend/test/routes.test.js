@@ -106,14 +106,6 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
-    it('route to create new ev works', () => {
-        return request(app)
-            .post('/content/ev/create')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Create new EV' })
-            .expect(200)
-    });
-
     it('route to get data to update ev works (1)', () => {
         return request(app)
             .get('/content/ev/12345/update')
@@ -178,6 +170,49 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
+    it('all makes route works', () => {
+        return request(app)
+            .get('/content/makes')
+            .expect('Content-type', /json/)
+            .expect(hasTitle)
+            .expect(hasMakes)
+            .expect(isMake)
+            .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all makes')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasMakes(res) {
+            if (!(Object.keys(res.body.makes).length === 12)) {
+                throw new Error("Doesn\'t have all the db makes");
+            }
+        }
+
+        function isMake(res) {
+            for (let key in res.body.makes) {
+                if (!(Object.keys(res.body.makes[key]).length === 3)) {
+                    throw new Error("Not an instance of Make");
+                }
+            }
+        }
+    });
+
+    it('route for getting a makes\'s list of models works', () => {
+        return request(app)
+            .get('/content/make/5f80744b1a698848220d9e1e/models')
+            .expect('Content-type', /json/)
+            // The ids from makes created at test time isn't accessible, so it returns
+            // an empty models array
+            .expect({ 
+                title: 'List of models from make with id 5f80744b1a698848220d9e1e', 
+                models: [],
+            })
+            .expect(200)
+    });
+
     it('model route works (1)', () => {
         return request(app)
             .get('/content/model/12345')
@@ -194,13 +229,46 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
+    it('all locations route works', () => {
+        return request(app)
+            .get('/content/locations')
+            .expect('Content-type', /json/)
+            .expect(hasTitle)
+            .expect(hasLocations)
+            .expect(isLocation)
+            .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all locations')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasLocations(res) {
+            if (!(Object.keys(res.body.locations).length === 12)) {
+                throw new Error("Doesn\'t have all the db locations");
+            }
+        }
+
+        function isLocation(res) {
+            for (let key in res.body.locations) {
+                if (!(Object.keys(res.body.locations[key]).length === 4)) {
+                    throw new Error("Not an instance of Location");
+                }
+            }
+        }
+    });
+
     it('route for seller sign up works', () => {
         return request(app)
             .post('/content/seller/signup')
             .type('form')
             .send({ name: 'Miss Zoe', contact: 'zoe@gmail.com', password: '12345678' })
+            .expect(function(res) {
+                res.body.userId = '555666777';
+              })
             .expect('Content-type', /json/)
-            .expect({ title: 'Miss Zoe signed up' })
+            .expect({ title: 'Miss Zoe signed up', userId: '555666777' })
             .expect(200)
     });
 
@@ -209,8 +277,11 @@ describe('Routes testing', function () {
             .post('/content/seller/login')
             .type('form')
             .send({ username: 'zoe@gmail.com', password: '12345678' })
+            .expect(function(res) {
+                res.body.userId = '555666777';
+              })
             .expect('Content-type', /json/)
-            .expect({ title: 'Miss Zoe logged in' })
+            .expect({ title: 'Miss Zoe logged in', userId: '555666777' })
             .expect(200)
     });
 
@@ -238,25 +309,22 @@ describe('Routes testing', function () {
             .expect(401)
     });
 
-    it('route for getting seller contact form works (1)', () => {
+    it('route for getting a seller\'s list of evs for sale works', () => {
         return request(app)
-            .get('/content/seller/12345')
+            .get('/content/seller/5f80744b1a698848220d9e1e/evs')
             .expect('Content-type', /json/)
-            .expect({ title: 'Contact form from seller with id 12345' })
-            .expect(200)
-    });
-
-    it('route for getting seller contact form works (2)', () => {
-        return request(app)
-            .get('/content/seller/678910')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Contact form from seller with id 678910' })
+            // The ids from sellers created at test time isn't accessible, so it returns
+            // an empty evs array
+            .expect({ 
+                title: 'List of EVs for sale from seller with id 5f80744b1a698848220d9e1e', 
+                evs: [],
+            })
             .expect(200)
     });
 
     it('route for sending message to seller works', () => {
         return request(app)
-            .post('/content/seller/12345')
+            .post('/content/seller/12345/contact')
             .type('form')
             .send({ to: 'tomasa.hintz99@ethereal.email', subject: '', from: '', text: '' })
             .expect('Content-type', /json/)

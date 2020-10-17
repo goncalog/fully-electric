@@ -30,7 +30,7 @@ describe('Input', () => {
         shallowInput = undefined;
     });
 
-    test('has one child with passed properties', () => {
+    test('has one child with passed property', () => {
         expect(input().children().length).toEqual(1);
         expect(input().hasClass(props.className)).toBe(true);
     });

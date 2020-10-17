@@ -8,12 +8,15 @@ import Navigation from './Navigation';
 import EV from './EV';
 import LogOut from './LogOut';
 import withAuth from './support_components/withAuth';
+import SellerEVs from './SellerEVs';
+import SellerEV from './SellerEV';
+import EVForm from './EVForm';
 
 function AppRouter() {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [authState, setAuthState] = useState(false);
+    const [userId, setUserId] = useState(undefined);
 
-    const handleAuthChange = () => {setAuthState(!authState)};
+    const handleAuthChange = (userId) => {setUserId(userId)};
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
@@ -25,9 +28,17 @@ function AppRouter() {
             .then(res => {
                 if (res.status === 200) {
                     setLoggedIn(true);
+                    return res.json();
                 } else {
                     console.log('User not logged in');
                     setLoggedIn(false);
+                    setUserId(undefined);
+                    return;
+                }
+            })
+            .then(res => {
+                if (res) {
+                    setUserId(res.userId);
                 }
             })
             .catch(err => {
@@ -35,14 +46,23 @@ function AppRouter() {
             });
       });
 
+      let evsUrl = (process.env.NODE_ENV === 'production')
+                ? '/content/evs'
+                : `${process.env.REACT_APP_SERVER_URL}/content/evs`;
+
     return (
         <Router>
-            <Navigation loggedIn={loggedIn}/>
+            <Navigation loggedIn={loggedIn} userId={userId}/>
             <Switch>
                 <Route path='/' exact component={Home}></Route>
-                <Route path='/evs' exact component={EVs}></Route>
+                <Route 
+                    path='/evs' 
+                    exact 
+                    render={(props) => (<EVs fetchUrl={evsUrl} {...props} />)}
+                >
+                </Route>
                 <Route path='/ev/:id' exact component={EV}></Route>
-                <Route path='/contact/seller/:id' exact component={Contact}></Route>
+                <Route path='/seller/:id/contact' exact component={Contact}></Route>
                 <Route 
                     path='/seller/signup'
                     exact
@@ -61,7 +81,10 @@ function AppRouter() {
                     render={(props) => (<LogOut onAuth={handleAuthChange} {...props} />)}
                 >
                 </Route>
-                <Route path='/seller/evs' component={withAuth(EVs)}></Route>
+                <Route path='/seller/:id/evs' component={withAuth(SellerEVs)}></Route>
+                <Route path='/seller/:id/ev/create' component={withAuth(EVForm)}></Route>
+                <Route path='/seller/:id/ev/:id' component={withAuth(SellerEV)}></Route>
+                <Route path='/seller/:id/ev/:id/update' component={withAuth(EVForm)}></Route>
             </Switch>
         </Router>
     );

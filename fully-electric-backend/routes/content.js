@@ -3,6 +3,7 @@ const router = express.Router();
 const evController = require('../controllers/evController');
 const makeController = require('../controllers/makeController');
 const modelController = require('../controllers/modelController');
+const locationController = require('../controllers/locationController');
 const sellerController = require('../controllers/sellerController');
 const withAuth = require('../auth/authMiddleware');
 
@@ -14,9 +15,6 @@ router.get('/evs', evController.getEvs);
 
 // GET request for data to create new ev
 router.get('/ev/create', evController.getCreateEv);
-
-// POST request to create new ev
-router.post('/ev/create', evController.postCreateEv);
 
 // GET request for unique ev
 router.get('/ev/:id', evController.getUniqueEv);
@@ -33,8 +31,17 @@ router.delete('/ev/:id/delete', evController.deleteEv);
 // GET request for make
 router.get('/make/:id', makeController.getMake);
 
+// GET request for list of all makes
+router.get('/makes', makeController.getMakes);
+
+// GET request for make's models
+router.get('/make/:id/models', makeController.getModels);
+
 // GET request for model
 router.get('/model/:id', modelController.getModel);
+
+// GET request for list of all locations
+router.get('/locations', locationController.getLocations);
 
 // POST request to sign up seller
 router.post('/seller/signup', sellerController.signUp);
@@ -51,11 +58,14 @@ router.get('/seller/evs', withAuth, sellerController.getEvs);
 // GET request to check log in status
 router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 
-// GET request to contact seller
-router.get('/seller/:id', sellerController.getContactSeller);
+// GET request to get a seller's list of evs for sale
+router.get('/seller/:id/evs', sellerController.getSellerEvs);
+
+// POST request to create new ev
+router.post('/seller/:id/ev/create', sellerController.postCreateEv);
 
 // POST request to contact seller
-router.post('/seller/:id', sellerController.postContactSeller);
+router.post('/seller/:id/contact', sellerController.postContactSeller);
 
 // Placeholder code for testing POST routes
 router.get('/test', evController.getTest);

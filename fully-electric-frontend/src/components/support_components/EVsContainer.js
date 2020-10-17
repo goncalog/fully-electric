@@ -12,7 +12,13 @@ export default function EVsContainer(props) {
                 });
                 
                 return (
-                    <Link className="ev-link" to={`/ev/${ev.id}`} key={index}>
+                    <Link 
+                        className="ev-link" 
+                        to={(props.match.params.id)
+                                ? `/seller/${props.match.params.id}/ev/${ev.id}` 
+                                : `/ev/${ev.id}`} 
+                        key={index}
+                    >
                         <EVIntroCard 
                             imagePath={ev.imageUrls[0]} 
                             title={ev.title} 

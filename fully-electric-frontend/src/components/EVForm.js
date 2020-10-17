@@ -351,7 +351,7 @@ export default class EVForm extends React.Component {
                     property="fullVehicleInspection"
                     placeholder="Full Vehicle Inspection" 
                     onTextChange={this.handleTextChange}
-                    options={['Yes', 'No']}
+                    options={[{ name: 'Yes', _id: true }, { name: 'No', _id: false }]}
                 />
 
                 <CallToActionButton 

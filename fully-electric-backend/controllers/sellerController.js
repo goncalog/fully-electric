@@ -115,6 +115,47 @@ exports.getSellerEvs = (req, res, next) => {
         });
 }
 
+// POST request to create new ev
+exports.postCreateEv = [
+    // Mongoose and the backend already validates the data, so validation isn't repeat it here 
+    // (although triple redundancy could make sense)
+    // Sanitize fields (using wildcard).
+    validator.sanitizeBody('*').escape(),
+
+    // Process request after sanitization.
+    (req, res, next) => {
+        console.log(req.body.imageUrls);
+        evDetail = { 
+            make: req.body.make, 
+            model: req.body.model,
+            year: req.body.year,
+            price: req.body.price,
+            mileage: req.body.mileage,
+            location: req.body.location,
+            image_urls: typeof req.body.imageUrls === 'string'
+                    ? decodeURI(req.body.imageUrls)
+                    : req.body.imageUrls.map((url) => decodeURI(url)),
+            seller: req.user, // The seller is the logged in user via Passport
+            list_date: req.body.listDate,
+            equipment_and_options: req.body.equipmentAndOptions,
+            exterior: req.body.bodyStyle 
+                    ? { body_style: req.body.bodyStyle, colour: req.body.exteriorColour }
+                    : { colour: req.body.exteriorColour },
+            interior: { seating: req.body.seating, colour: req.body.interiorColour },
+            vehicle_identification_number: req.body.vehicleIdentificationNumber,
+            full_vehicle_inspection: req.body.fullVehicleInspection, 
+        }
+
+        const ev = new EV(evDetail);
+        ev.save(err => {
+            if (err) { return next(err); }
+
+            // Successful
+            return res.json({ title: `Created new EV ${ev._id}`, userId: req.user._id });                        
+        });
+    }
+];
+
 // POST request to contact seller
 exports.postContactSeller = (req, res, next) => {
     const nodemailer = require('nodemailer');

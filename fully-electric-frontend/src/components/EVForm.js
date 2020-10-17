@@ -146,7 +146,7 @@ export default class EVForm extends React.Component {
             imageUrls: this.state.imageUrls,
             // Not sending the seller because the backend (Passport) already has this info
             listDate: currentDate,
-            equipmentAndOptions: this.state.equipmentAndOptions,
+            equipmentAndOptions: this.state.equipmentAndOptions.map((item) => item.name),
             bodyStyle: this.state.bodyStyle,
             exteriorColour: this.state.exteriorColour,
             interiorColour: this.state.interiorColour,

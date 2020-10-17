@@ -16,9 +16,6 @@ router.get('/evs', evController.getEvs);
 // GET request for data to create new ev
 router.get('/ev/create', evController.getCreateEv);
 
-// POST request to create new ev
-router.post('/ev/create', evController.postCreateEv);
-
 // GET request for unique ev
 router.get('/ev/:id', evController.getUniqueEv);
 
@@ -63,6 +60,9 @@ router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 
 // GET request to get a seller's list of evs for sale
 router.get('/seller/:id/evs', sellerController.getSellerEvs);
+
+// POST request to create new ev
+router.post('/seller/:id/ev/create', sellerController.postCreateEv);
 
 // POST request to contact seller
 router.post('/seller/:id/contact', sellerController.postContactSeller);

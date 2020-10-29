@@ -25,9 +25,6 @@ router.get('/ev/:id/update', evController.getUpdateEv);
 // PUT request to update ev
 router.put('/ev/:id/update', evController.putUpdateEv);
 
-// DELETE request to delete ev
-router.delete('/ev/:id/delete', evController.deleteEv);
-
 // GET request for make
 router.get('/make/:id', makeController.getMake);
 
@@ -63,6 +60,9 @@ router.get('/seller/:id/evs', sellerController.getSellerEvs);
 
 // POST request to create new ev
 router.post('/seller/:id/ev/create', sellerController.postCreateEv);
+
+// DELETE request to delete ev
+router.delete('/seller/:id/ev/:id/delete', withAuth, sellerController.deleteEv);
 
 // POST request to contact seller
 router.post('/seller/:id/contact', sellerController.postContactSeller);

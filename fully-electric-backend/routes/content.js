@@ -59,7 +59,7 @@ router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 router.get('/seller/:id/evs', sellerController.getSellerEvs);
 
 // POST request to create new ev
-router.post('/seller/:id/ev/create', sellerController.postCreateEv);
+router.post('/seller/:id/ev/create', withAuth, sellerController.postCreateEv);
 
 // DELETE request to delete ev
 router.delete('/seller/:id/ev/:id/delete', withAuth, sellerController.deleteEv);

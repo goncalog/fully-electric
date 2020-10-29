@@ -34,8 +34,9 @@ app.use(express.static(path.join(__dirname, '../fully-electric-frontend/build'))
 app.use(function (req, res, next) {
   // Website allowed to request content
   res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader('Access-Control-Allow-Headers', "Content-Type");
 
   next();
 });

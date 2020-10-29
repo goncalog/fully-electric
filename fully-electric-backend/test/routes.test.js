@@ -138,20 +138,12 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
-    it('route to delete ev works (1)', () => {
+    it('route to delete ev works', () => {
         return request(app)
-            .delete('/content/ev/12345/delete')
+            .delete('/content/seller/xpto/ev/12345/delete')
             .expect('Content-type', /json/)
-            .expect({ title: 'Delete EV with id 12345' })
-            .expect(200)
-    });
-
-    it('route to delete ev works (2)', () => {
-        return request(app)
-            .delete('/content/ev/678910/delete')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Delete EV with id 678910' })
-            .expect(200)
+            .expect({ message: 'Unauthorized: User not logged in' })
+            .expect(401)
     });
 
     it('make route works (1)', () => {

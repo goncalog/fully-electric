@@ -119,12 +119,10 @@ exports.getSellerEvs = (req, res, next) => {
 exports.postCreateEv = [
     // Mongoose and the backend already validates the data, so validation isn't repeat it here 
     // (although triple redundancy could make sense)
-    // Sanitize fields (using wildcard).
-    validator.sanitizeBody('*').escape(),
+    // Removed fields sanitization due to resulting bugs when passing arrays and/or urls 
 
     // Process request after sanitization.
     (req, res, next) => {
-        console.log(req.body.imageUrls);
         evDetail = { 
             make: req.body.make, 
             model: req.body.model,
@@ -132,9 +130,7 @@ exports.postCreateEv = [
             price: req.body.price,
             mileage: req.body.mileage,
             location: req.body.location,
-            image_urls: typeof req.body.imageUrls === 'string'
-                    ? decodeURI(req.body.imageUrls)
-                    : req.body.imageUrls.map((url) => decodeURI(url)),
+            image_urls: req.body.imageUrls,
             seller: req.user, // The seller is the logged in user via Passport
             list_date: req.body.listDate,
             equipment_and_options: req.body.equipmentAndOptions,

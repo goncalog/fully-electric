@@ -152,6 +152,15 @@ exports.postCreateEv = [
     }
 ];
 
+// DELETE request to delete ev
+exports.deleteEv = (req, res, next) => {
+    EV.findByIdAndDelete(req.params.id, (err) => {
+        if (err) { return next(err); }
+
+        res.json({ title: `Deleted EV with id ${req.params.id}`, userId: req.user._id });
+    });
+}
+
 // POST request to contact seller
 exports.postContactSeller = (req, res, next) => {
     const nodemailer = require('nodemailer');

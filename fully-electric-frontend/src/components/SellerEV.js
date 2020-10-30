@@ -4,7 +4,9 @@ import EV from './EV';
 import '../css/SellerEV.css';
 
 export default function SellerEV(props) {
-    const handleUpdateButtonClick = () => props.history.push(`${props.match.url}/update`);
+    const handleUpdateButtonClick = () => {
+        props.history.push(`${props.match.url}/update`);
+    } 
 
     const handleDeleteButtonClick = () => {
         let url = (process.env.NODE_ENV === 'production') 

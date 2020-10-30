@@ -152,6 +152,30 @@ exports.postCreateEv = [
     }
 ];
 
+// GET request to update ev
+exports.getUpdateEv = (req, res, next) => {
+    console.log(req.params.id);
+    EV.findById(req.params.id)
+        .populate('location')
+        .populate('make')
+        .populate('model')
+        .populate('seller')
+        .exec(function (err, ev) {
+            if (err) { return next(err); }
+
+            res.json({ title: `Data to update EV with id ${req.params.id}`, ev: ev });
+        });
+}
+
+// PUT request to update ev
+exports.putUpdateEv = (req, res, next) => {
+    EV.findByIdAndUpdate(req.params.id, (err) => {
+        if (err) { return next(err); }
+
+        res.json({ title: `Updating EV with id ${req.params.id}`, userId: req.user._id });
+    });
+}
+
 // DELETE request to delete ev
 exports.deleteEv = (req, res, next) => {
     EV.findByIdAndDelete(req.params.id, (err) => {

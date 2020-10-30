@@ -24,6 +24,7 @@ describe('Select', () => {
             className: "Text to test className property",
             property: "Text to test property property",
             placeholder: "Text to test placeholder property",
+            option: '21123231',
             options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
             onTextChange: mockFunction,
         }
@@ -35,9 +36,10 @@ describe('Select', () => {
         expect(select().hasClass(props.className)).toBe(true);
     });
 
-    test('has one HTML select element', () => {
+    test('has one HTML select element with passed property', () => {
         const shallowWrapper = select().find('select');
         expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('value')).toBe(props.option);
     });
 
     test('has 3 HTML option elements', () => {

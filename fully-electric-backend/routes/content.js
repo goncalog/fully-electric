@@ -19,15 +19,6 @@ router.get('/ev/create', evController.getCreateEv);
 // GET request for unique ev
 router.get('/ev/:id', evController.getUniqueEv);
 
-// GET request to update ev
-router.get('/ev/:id/update', evController.getUpdateEv);
-
-// PUT request to update ev
-router.put('/ev/:id/update', evController.putUpdateEv);
-
-// DELETE request to delete ev
-router.delete('/ev/:id/delete', evController.deleteEv);
-
 // GET request for make
 router.get('/make/:id', makeController.getMake);
 
@@ -62,7 +53,16 @@ router.get('/seller/checkAuth', withAuth, sellerController.checkAuth);
 router.get('/seller/:id/evs', sellerController.getSellerEvs);
 
 // POST request to create new ev
-router.post('/seller/:id/ev/create', sellerController.postCreateEv);
+router.post('/seller/:id/ev/create', withAuth, sellerController.postCreateEv);
+
+// GET request to update ev
+router.get('/seller/:id/ev/:id/update', withAuth, sellerController.getUpdateEv);
+
+// PUT request to update ev
+router.put('/seller/:id/ev/:id/update', withAuth, sellerController.putUpdateEv);
+
+// DELETE request to delete ev
+router.delete('/seller/:id/ev/:id/delete', withAuth, sellerController.deleteEv);
 
 // POST request to contact seller
 router.post('/seller/:id/contact', sellerController.postContactSeller);

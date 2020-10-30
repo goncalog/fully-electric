@@ -119,22 +119,18 @@ exports.getSellerEvs = (req, res, next) => {
 exports.postCreateEv = [
     // Mongoose and the backend already validates the data, so validation isn't repeat it here 
     // (although triple redundancy could make sense)
-    // Sanitize fields (using wildcard).
-    validator.sanitizeBody('*').escape(),
+    // Removed fields sanitization due to resulting bugs when passing arrays and/or urls 
 
     // Process request after sanitization.
     (req, res, next) => {
-        console.log(req.body.imageUrls);
-        evDetail = { 
+        const evDetail = { 
             make: req.body.make, 
             model: req.body.model,
             year: req.body.year,
             price: req.body.price,
             mileage: req.body.mileage,
             location: req.body.location,
-            image_urls: typeof req.body.imageUrls === 'string'
-                    ? decodeURI(req.body.imageUrls)
-                    : req.body.imageUrls.map((url) => decodeURI(url)),
+            image_urls: req.body.imageUrls,
             seller: req.user, // The seller is the logged in user via Passport
             list_date: req.body.listDate,
             equipment_and_options: req.body.equipmentAndOptions,
@@ -155,6 +151,57 @@ exports.postCreateEv = [
         });
     }
 ];
+
+// GET request to update ev
+exports.getUpdateEv = (req, res, next) => {
+    EV.findById(req.params.id)
+        .populate('location')
+        .populate('make')
+        .populate('model')
+        .populate('seller')
+        .exec(function (err, ev) {
+            if (err) { return next(err); }
+
+            res.json({ title: `Data to update EV with id ${req.params.id}`, ev: ev });
+        });
+}
+
+// PUT request to update ev
+exports.putUpdateEv = (req, res, next) => {
+    const evDetail = { 
+        make: req.body.make, 
+        model: req.body.model,
+        year: req.body.year,
+        price: req.body.price,
+        mileage: req.body.mileage,
+        location: req.body.location,
+        image_urls: req.body.imageUrls,
+        seller: req.user, // The seller is the logged in user via Passport
+        list_date: req.body.listDate,
+        equipment_and_options: req.body.equipmentAndOptions,
+        exterior: req.body.bodyStyle 
+                ? { body_style: req.body.bodyStyle, colour: req.body.exteriorColour }
+                : { colour: req.body.exteriorColour },
+        interior: { seating: req.body.seating, colour: req.body.interiorColour },
+        vehicle_identification_number: req.body.vehicleIdentificationNumber,
+        full_vehicle_inspection: req.body.fullVehicleInspection, 
+    }
+
+    EV.findByIdAndUpdate(req.params.id, evDetail, (err) => {
+        if (err) { return next(err); }
+
+        res.json({ title: `Updating EV with id ${req.params.id}`, userId: req.user._id });
+    });
+}
+
+// DELETE request to delete ev
+exports.deleteEv = (req, res, next) => {
+    EV.findByIdAndDelete(req.params.id, (err) => {
+        if (err) { return next(err); }
+
+        res.json({ title: `Deleted EV with id ${req.params.id}`, userId: req.user._id });
+    });
+}
 
 // POST request to contact seller
 exports.postContactSeller = (req, res, next) => {

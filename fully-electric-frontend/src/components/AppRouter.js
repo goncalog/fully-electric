@@ -83,8 +83,8 @@ function AppRouter() {
                 </Route>
                 <Route path='/seller/:id/evs' component={withAuth(SellerEVs)}></Route>
                 <Route path='/seller/:id/ev/create' component={withAuth(EVForm)}></Route>
-                <Route path='/seller/:id/ev/:id' component={withAuth(SellerEV)}></Route>
                 <Route path='/seller/:id/ev/:id/update' component={withAuth(EVForm)}></Route>
+                <Route path='/seller/:id/ev/:id' component={withAuth(SellerEV)}></Route>
             </Switch>
         </Router>
     );

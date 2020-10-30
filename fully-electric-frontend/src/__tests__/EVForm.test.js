@@ -85,6 +85,7 @@ describe('EVForm', () => {
             expect(Object.keys(node.props())).toContain('placeholder');
             expect(Object.keys(node.props())).toContain('onTextChange');
             expect(Object.keys(node.props())).toContain('options');
+            expect(Object.keys(node.props())).toContain('option');
         });
     });
 

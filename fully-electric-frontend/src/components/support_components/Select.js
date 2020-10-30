@@ -13,11 +13,12 @@ export default class Select extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <select 
+                <select
+                    value={this.props.option}
                     onChange={this.handleTextChange} 
                     required
                 >
-                    <option value="" disabled selected hidden>{this.props.placeholder}</option>;
+                    <option value="" disabled hidden>{this.props.placeholder}</option>;
                     {this.props.options.map((item, key) => {
                         return <option key={key} value={item._id}>{`${item.name ? item.name : item.city}`}</option>;
                     })}

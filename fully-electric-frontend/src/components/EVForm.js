@@ -156,7 +156,7 @@ export default class EVForm extends React.Component {
         };
 
         fetch(url, {
-            method: 'POST',
+            method: this.props.match.url.slice(-6) === 'update' ? 'PUT' : 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

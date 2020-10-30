@@ -123,7 +123,7 @@ exports.postCreateEv = [
 
     // Process request after sanitization.
     (req, res, next) => {
-        evDetail = { 
+        const evDetail = { 
             make: req.body.make, 
             model: req.body.model,
             year: req.body.year,
@@ -154,7 +154,6 @@ exports.postCreateEv = [
 
 // GET request to update ev
 exports.getUpdateEv = (req, res, next) => {
-    console.log(req.params.id);
     EV.findById(req.params.id)
         .populate('location')
         .populate('make')
@@ -169,7 +168,26 @@ exports.getUpdateEv = (req, res, next) => {
 
 // PUT request to update ev
 exports.putUpdateEv = (req, res, next) => {
-    EV.findByIdAndUpdate(req.params.id, (err) => {
+    const evDetail = { 
+        make: req.body.make, 
+        model: req.body.model,
+        year: req.body.year,
+        price: req.body.price,
+        mileage: req.body.mileage,
+        location: req.body.location,
+        image_urls: req.body.imageUrls,
+        seller: req.user, // The seller is the logged in user via Passport
+        list_date: req.body.listDate,
+        equipment_and_options: req.body.equipmentAndOptions,
+        exterior: req.body.bodyStyle 
+                ? { body_style: req.body.bodyStyle, colour: req.body.exteriorColour }
+                : { colour: req.body.exteriorColour },
+        interior: { seating: req.body.seating, colour: req.body.interiorColour },
+        vehicle_identification_number: req.body.vehicleIdentificationNumber,
+        full_vehicle_inspection: req.body.fullVehicleInspection, 
+    }
+
+    EV.findByIdAndUpdate(req.params.id, evDetail, (err) => {
         if (err) { return next(err); }
 
         res.json({ title: `Updating EV with id ${req.params.id}`, userId: req.user._id });

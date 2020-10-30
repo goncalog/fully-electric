@@ -106,36 +106,20 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
-    it('route to get data to update ev works (1)', () => {
+    it('route to get data to update ev works', () => {
         return request(app)
-            .get('/content/ev/12345/update')
+            .get('/content/seller/xpto/ev/12345/update')
             .expect('Content-type', /json/)
-            .expect({ title: 'Data to update EV with id 12345' })
-            .expect(200)
-    });
-
-    it('route to get data to update ev works (2)', () => {
-        return request(app)
-            .get('/content/ev/678910/update')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Data to update EV with id 678910' })
-            .expect(200)
+            .expect({ message: 'Unauthorized: User not logged in' })
+            .expect(401)
     });
     
-    it('route to update ev works (1)', () => {
+    it('route to update ev works', () => {
         return request(app)
-            .put('/content/ev/12345/update')
+            .put('/content/seller/xpto/ev/12345/update')
             .expect('Content-type', /json/)
-            .expect({ title: 'Update EV with id 12345' })
-            .expect(200)
-    });
-
-    it('route to update ev works (2)', () => {
-        return request(app)
-            .put('/content/ev/678910/update')
-            .expect('Content-type', /json/)
-            .expect({ title: 'Update EV with id 678910' })
-            .expect(200)
+            .expect({ message: 'Unauthorized: User not logged in' })
+            .expect(401)
     });
 
     it('route to delete ev works', () => {

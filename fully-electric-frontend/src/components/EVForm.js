@@ -120,7 +120,8 @@ export default class EVForm extends React.Component {
             return;
         }
 
-        if (this.state.vehicleIdentificationNumber === '') {
+        if (this.state.vehicleIdentificationNumber === '' || 
+                this.state.vehicleIdentificationNumber.length !== 17) {
             alert('Please provide a valid VIN.');
             return;
         }

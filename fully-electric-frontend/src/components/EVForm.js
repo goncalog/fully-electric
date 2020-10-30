@@ -221,6 +221,34 @@ export default class EVForm extends React.Component {
                 .then((res) => res.json())
                 .then((res) => { this.setState({ locations: res.locations }) })
         }
+
+        // If this is the update page, load EV data
+        if (this.props.match.url.slice(-6) === 'update') {
+            let url = (process.env.NODE_ENV === 'production') 
+                    ? `/content${this.props.match.url}` 
+                    : `${process.env.REACT_APP_SERVER_URL}/content${this.props.match.url}`;
+
+            fetch(url, { credentials: 'include' })
+                .then((res) => res.json())
+                .then((res) => {
+                    this.handleMakeSelection('make', res.ev.make._id);
+                    this.setState({
+                        model: res.ev.model._id,
+                        price: res.ev.price,
+                        year: res.ev.year,
+                        mileage: res.ev.mileage,
+                        location: res.ev.location._id,
+                        imageUrls: res.ev.image_urls,
+                        equipmentAndOptions: res.ev.equipment_and_options.map((item) => ({ name: item })),
+                        bodyStyle: res.ev.exterior.body_style ? res.ev.exterior.body_style : '',
+                        exteriorColour: res.ev.exterior.colour,
+                        interiorColour: res.ev.interior.colour,
+                        seating: res.ev.interior.seating,
+                        vehicleIdentificationNumber: res.ev.vehicle_identification_number,
+                        fullVehicleInspection: res.ev.full_vehicle_inspection, 
+                    }); 
+                });
+        }
     }
 
     render() {
@@ -237,6 +265,7 @@ export default class EVForm extends React.Component {
                     property="make"
                     placeholder="Make" 
                     onTextChange={this.handleMakeSelection}
+                    option={this.state.make} 
                     options={this.state.makes}
                 />
                 <Select 
@@ -244,6 +273,7 @@ export default class EVForm extends React.Component {
                     property="model"
                     placeholder="Model" 
                     onTextChange={this.handleTextChange}
+                    option={this.state.model}
                     options={this.state.models}
                 />
                 <Input 
@@ -270,8 +300,9 @@ export default class EVForm extends React.Component {
                 <Select
                     className="location"
                     property="location"
-                    placeholder="Location" 
+                    placeholder="Location"
                     onTextChange={this.handleTextChange}
+                    option={this.state.location} 
                     options={this.state.locations}
                 />
                 
@@ -351,6 +382,7 @@ export default class EVForm extends React.Component {
                     property="fullVehicleInspection"
                     placeholder="Full Vehicle Inspection" 
                     onTextChange={this.handleTextChange}
+                    option={this.state.fullVehicleInspection} 
                     options={[{ name: 'Yes', _id: true }, { name: 'No', _id: false }]}
                 />
 

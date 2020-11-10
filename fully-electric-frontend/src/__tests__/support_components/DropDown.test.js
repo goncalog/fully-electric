@@ -1,6 +1,7 @@
 import React from 'react';
 import DropDown from '../../components/support_components/DropDown';
 import MinMax from '../../components/support_components/MinMax';
+import CheckBox from '../../components/support_components/CheckBox';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -49,24 +50,10 @@ describe('DropDown (Checkbox)', () => {
         expect(shallowWrapper.hasClass('dropdown-content show')).toBe(true);
     });
 
-    test('has 2 HTML input elements', () => {
-        const shallowWrapper = dropDown().find('input');
-        expect(shallowWrapper.length).toEqual(2);
-        shallowWrapper.forEach((node, index) => {
-            expect(node.key()).toBe((index).toString());
-            expect(node.prop('id')).toBe((index));
-            expect(node.prop('value')).toBe(props.options[index]._id);
-            expect(node.prop('type')).toBe('checkbox');
-        });
-    });
-
-    test('has 2 HTML label elements', () => {
-        const shallowWrapper = dropDown().find('label');
-        expect(shallowWrapper.length).toEqual(2);
-        shallowWrapper.forEach((node, index) => {
-            expect(node.prop('for')).toBe((index));
-            expect(node.text()).toBe(props.options[index].name);
-        });
+    test('has one CheckBox component', () => {
+        const shallowWrapper = dropDown().find(CheckBox);
+        expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('options')).toBe(props.options);
     });
 
     test('should call mockFunction onClick', () => {

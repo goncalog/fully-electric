@@ -1,10 +1,11 @@
 import React from 'react';
 import DropDown from '../../components/support_components/DropDown';
+import MinMax from '../../components/support_components/MinMax';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-describe('DropDown', () => {
+describe('DropDown (Checkbox)', () => {
     let props;
     let shallowDropDown;
     const mockFunction= jest.fn();
@@ -68,10 +69,54 @@ describe('DropDown', () => {
         });
     });
 
-    test('should call mockFunction onTextChange', () => {
+    test('should call mockFunction onClick', () => {
         const shallowWrapper = dropDown().find('button');
         shallowWrapper.props().onClick();
         expect(mockFunction).toHaveBeenCalled();
         expect(mockFunction).toHaveBeenCalledWith(props.property);
+    });
+});
+
+describe('DropDown (MinMax)', () => {
+    let props;
+    let shallowDropDown;
+    const mockFunction= jest.fn();
+    const dropDown = () => {
+        if (!shallowDropDown) {
+            shallowDropDown = shallow(<DropDown {...props}/>);
+        }
+        return shallowDropDown;
+    }
+
+    // This resets the props and shallowDropDown variables before every test. 
+    // Otherwise, state from one test would leak into another. 
+    // By setting shallowDropDown to undefined here, when the next test runs, 
+    // if it calls dropDown, a new DropDown will be created with the current props.
+    beforeEach(() => {
+        props = {
+            type: "minMax",
+            property: "Text to test property property",
+            title: "Text to test title property",
+            options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
+            onClick: mockFunction,
+            visibility: true,
+            min: "Text to test min property",
+            max: "Text to test max property",
+            onTextChange: mockFunction,
+        }
+        shallowDropDown = undefined;
+    });
+
+    test('has one MinMax component', () => {
+        const shallowWrapper = dropDown().find(MinMax);
+        expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('min')).toBe(props.min);
+        expect(shallowWrapper.prop('max')).toBe(props.max);
+    });
+
+    test('should call mockFunction onTextChange', () => {
+        const shallowWrapper = dropDown().find(MinMax);
+        shallowWrapper.props().onTextChange();
+        expect(mockFunction).toHaveBeenCalled();
     });
 });

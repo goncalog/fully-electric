@@ -13,13 +13,19 @@ export default class EVs extends React.Component {
             evs: [], 
             makes: [{ name: 'Tesla' }, { name: 'Nissan' }, { name: 'Renault' }],
             models: [{ name: 'X' }, { name: 'S' }, { name: '3' }],
-            filterVisibility: { make: false, model: false }, 
+            filterVisibility: { make: false, model: false, price: false },
+            price: { min: "", max: ""}, 
         };
         this.handleClick = this.handleClick.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
     }
 
     handleClick(property) {
         this.setState({ filterVisibility: { [property]: !this.state.filterVisibility[property] }});
+    }
+
+    handleTextChange(property, type, text) {
+        this.setState( { [property]:  { [type]: text }});
     }
 
     componentDidMount() {
@@ -75,6 +81,16 @@ export default class EVs extends React.Component {
                         // option={this.state.model} 
                         options={this.state.models}
                         visibility={this.state.filterVisibility.model}
+                    />
+                    <DropDown
+                        type="minMax" 
+                        property="price"
+                        title="Price"
+                        onClick={this.handleClick}
+                        visibility={this.state.filterVisibility.price}
+                        min={this.state.price.min}
+                        max={this.state.price.max}
+                        onTextChange={this.handleTextChange}
                     />
                 </div>
                 <EVsContainer evs={evs} {...this.props} />

@@ -26,6 +26,7 @@ describe('DropDown', () => {
             // option: '21123231',
             options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
             onClick: mockFunction,
+            visibility: true,
         }
         shallowDropDown = undefined;
     });
@@ -38,12 +39,13 @@ describe('DropDown', () => {
     test('has one HTML button element with passed property', () => {
         const shallowWrapper = dropDown().find('button');
         expect(shallowWrapper.length).toEqual(1);
-        expect(shallowWrapper.text()).toBe(props.title);
+        expect(shallowWrapper.text()).toBe(`${props.title} ▾`);
     });
 
     test('has one HTML dropdown-content div element', () => {
         const shallowWrapper = dropDown().find('div.dropdown-content');
         expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.hasClass('dropdown-content show')).toBe(true);
     });
 
     test('has 2 HTML input elements', () => {

@@ -6,14 +6,16 @@ export default function DropDown(props) {
     }
 
     return (
-        <div className={props.property}>
-            <button onClick={handleButtonClick}>{props.title}</button>
-            <div className="dropdown-content">
+        <div className={`dropdown ${props.property}`}>
+            <button className="dropdown-button" onClick={handleButtonClick}>{`${props.title} ▾`}</button>
+            <div className={props.visibility ? "dropdown-content show" : "dropdown-content"}>
                 {props.options.map((item, key) => {
                     return (
-                        <div key={key}>
-                            <input type="checkbox" key={key} id={key} value={item._id}></input>
-                            <label for={key}>{`${item.name ? item.name : item.city}`}</label>
+                        <div key={key}>                            
+                            <label for={key}>
+                                <input type="checkbox" key={key} id={key} value={item._id}></input>
+                                {`${item.name ? item.name : item.city}`}
+                            </label>
                         </div>
                     );
                 })}

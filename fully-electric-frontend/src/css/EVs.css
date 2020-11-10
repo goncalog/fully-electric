@@ -38,9 +38,17 @@
     display: block;
 }
 
-.dropdown input {
+.dropdown label input {
     vertical-align: middle;
     margin: 0 5px;
+}
+
+.min input {
+    margin: 5px;
+}
+
+.max input {
+    margin: 0 5px 5px 5px;
 }
 
 .evs-container {

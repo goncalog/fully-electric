@@ -9,7 +9,7 @@ export default function Filters(props) {
     function handleTextChange(property, type, text) {
         props.onTextChange(property, type, text);
     }
-    
+
     return (
         <div className="filters">
             <DropDown 
@@ -36,6 +36,26 @@ export default function Filters(props) {
                 visibility={props.visibility.price}
                 min={props.price.min}
                 max={props.price.max}
+                onTextChange={handleTextChange}
+            />
+            <DropDown
+                type="minMax" 
+                property={props.mileage.property}
+                title={props.mileage.title}
+                onClick={handleClick}
+                visibility={props.visibility.mileage}
+                min={props.mileage.min}
+                max={props.mileage.max}
+                onTextChange={handleTextChange}
+            />
+            <DropDown
+                type="minMax" 
+                property={props.range.property}
+                title={props.range.title}
+                onClick={handleClick}
+                visibility={props.visibility.range}
+                min={props.range.min}
+                max={props.range.max}
                 onTextChange={handleTextChange}
             />
         </div>

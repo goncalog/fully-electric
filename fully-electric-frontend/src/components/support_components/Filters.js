@@ -58,6 +58,14 @@ export default function Filters(props) {
                 max={props.range.max}
                 onTextChange={handleTextChange}
             />
+            <DropDown 
+                property={props.extras.property}
+                title={props.extras.title}
+                onClick={handleClick}
+                // option={props.extras} 
+                options={props.extras.extras}
+                visibility={props.visibility.extras}
+            />
         </div>
     );
 }

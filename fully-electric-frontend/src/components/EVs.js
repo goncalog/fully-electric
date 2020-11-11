@@ -21,13 +21,10 @@ export default class EVs extends React.Component {
                 title: 'Model',
                 models: [{ name: 'X' }, { name: 'S' }, { name: '3' }],
             },
-            price: {
-                property: 'price',
-                title: 'Price',
-                min: "",
-                max: "",
-            },
-            filterVisibility: { make: false, model: false, price: false },
+            price: { property: 'price', title: 'Price', min: "", max: "",},
+            mileage: { property: 'mileage', title: 'Mileage', min: "", max: "",},
+            range: { property: 'range', title: 'Range', min: "", max: "",},
+            filterVisibility: { make: false, model: false, price: false, mileage: false, range: false, },
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
@@ -82,6 +79,8 @@ export default class EVs extends React.Component {
                     make={this.state.make}
                     model={this.state.model}
                     price={this.state.price}
+                    mileage={this.state.mileage}
+                    range={this.state.range}
                     visibility={this.state.filterVisibility}
                     onClick={this.handleClick}
                     onTextChange={this.handleTextChange}

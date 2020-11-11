@@ -49,6 +49,8 @@ describe('EVs', () => {
         expect(Object.keys(shallowWrapper.props())).toContain('make');
         expect(Object.keys(shallowWrapper.props())).toContain('model');
         expect(Object.keys(shallowWrapper.props())).toContain('price');
+        expect(Object.keys(shallowWrapper.props())).toContain('mileage');
+        expect(Object.keys(shallowWrapper.props())).toContain('range');
         expect(Object.keys(shallowWrapper.props())).toContain('visibility');
         expect(Object.keys(shallowWrapper.props())).toContain('onClick');
         expect(Object.keys(shallowWrapper.props())).toContain('onTextChange');

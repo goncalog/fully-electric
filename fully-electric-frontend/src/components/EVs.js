@@ -11,16 +11,8 @@ export default class EVs extends React.Component {
         super(props);
         this.state = { 
             evs: [],
-            make: {
-                property: 'make',
-                title: 'Make',
-                makes: [{ name: 'Tesla' }, { name: 'Nissan' }, { name: 'Renault' }],
-            },
-            model: {
-                property: 'model',
-                title: 'Model',
-                models: [{ name: 'X' }, { name: 'S' }, { name: '3' }],
-            },
+            make: { property: 'make', title: 'Make', makes: [], },
+            model: { property: 'model', title: 'Model', models: [], },
             price: { property: 'price', title: 'Price', min: "", max: "",},
             mileage: { property: 'mileage', title: 'Mileage', min: "", max: "",},
             range: { property: 'range', title: 'Range', min: "", max: "",},
@@ -46,6 +38,27 @@ export default class EVs extends React.Component {
         fetch(this.props.fetchUrl)
             .then(res => res.json())
             .then((res) => { this.setState({ evs: res.evs }) })
+
+        // Fetch makes and models
+        if (this.state.make.makes.length === 0) {
+            let url = (process.env.NODE_ENV === 'production') 
+                    ? `/content/makes` 
+                    : `${process.env.REACT_APP_SERVER_URL}/content/makes`;
+
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => { this.setState({ make: { ...this.state.make, makes: res.makes }}) })
+        }
+
+        if (this.state.model.models.length === 0) {
+            let url = (process.env.NODE_ENV === 'production') 
+                    ? `/content/models` 
+                    : `${process.env.REACT_APP_SERVER_URL}/content/models`;
+
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => { this.setState({ model: { ...this.state.model, models: res.models }}) })
+        }
     }
 
     render() {

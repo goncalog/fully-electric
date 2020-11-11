@@ -1,5 +1,6 @@
 import React from 'react';
 import EVs from '../components/EVs';
+import Filters from '../components/support_components/Filters';
 import EVsContainer from '../components/support_components/EVsContainer';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -38,12 +39,23 @@ describe('EVs', () => {
         window.scrollTo = jsdomScrollTo; // restore the jsdom scrollTo
     });
 
-    test('has one child', () => {
-        expect(evs().children().length).toEqual(1);
+    test('has 2 children', () => {
+        expect(evs().children().length).toEqual(2);
+    });
+
+    test('has one Filters component rendered with passed properties', () => {
+        const shallowWrapper = evs().find(Filters);
+        expect(shallowWrapper.length).toEqual(1);
+        expect(Object.keys(shallowWrapper.props())).toContain('make');
+        expect(Object.keys(shallowWrapper.props())).toContain('model');
+        expect(Object.keys(shallowWrapper.props())).toContain('price');
+        expect(Object.keys(shallowWrapper.props())).toContain('visibility');
+        expect(Object.keys(shallowWrapper.props())).toContain('onClick');
+        expect(Object.keys(shallowWrapper.props())).toContain('onTextChange');
     });
 
     test('has one EVsContainer component rendered with passed properties', () => {
         const shallowWrapper = evs().find(EVsContainer);
         expect(shallowWrapper.length).toEqual(1);
-    });
+    });    
 });

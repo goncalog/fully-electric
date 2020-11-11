@@ -57,5 +57,6 @@ describe('EVs', () => {
     test('has one EVsContainer component rendered with passed properties', () => {
         const shallowWrapper = evs().find(EVsContainer);
         expect(shallowWrapper.length).toEqual(1);
+        expect(Object.keys(shallowWrapper.props())).toContain('evs');
     });    
 });

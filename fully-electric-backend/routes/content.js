@@ -31,6 +31,9 @@ router.get('/make/:id/models', makeController.getModels);
 // GET request for model
 router.get('/model/:id', modelController.getModel);
 
+// GET request for list of all models
+router.get('/models', modelController.getModels);
+
 // GET request for list of all locations
 router.get('/locations', locationController.getLocations);
 

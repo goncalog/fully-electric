@@ -1,20 +1,33 @@
 import React from 'react';
+import Filters from './support_components/Filters';
 import EVsContainer from './support_components/EVsContainer';
 import getFullEvTitle from '../utils/getFullEvTitle';
 import '../css/EVs.css';
 import formatMiles from '../utils/formatMiles';
 import formatNumber from '../utils/formatNumber';
-import DropDown from './support_components/DropDown';
 
 export default class EVs extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            evs: [], 
-            makes: [{ name: 'Tesla' }, { name: 'Nissan' }, { name: 'Renault' }],
-            models: [{ name: 'X' }, { name: 'S' }, { name: '3' }],
+            evs: [],
+            make: {
+                property: 'make',
+                title: 'Make',
+                makes: [{ name: 'Tesla' }, { name: 'Nissan' }, { name: 'Renault' }],
+            },
+            model: {
+                property: 'model',
+                title: 'Model',
+                models: [{ name: 'X' }, { name: 'S' }, { name: '3' }],
+            },
+            price: {
+                property: 'price',
+                title: 'Price',
+                min: "",
+                max: "",
+            },
             filterVisibility: { make: false, model: false, price: false },
-            price: { min: "", max: ""}, 
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
@@ -25,7 +38,7 @@ export default class EVs extends React.Component {
     }
 
     handleTextChange(property, type, text) {
-        this.setState( { [property]:  { [type]: text }});
+        this.setState({ [property]:  { ...this.state[property], [type]: text }});
     }
 
     componentDidMount() {
@@ -65,34 +78,14 @@ export default class EVs extends React.Component {
 
         return (
             <div className="evs">
-                <div className="filters">
-                    <DropDown 
-                        property="make"
-                        title="Make"
-                        onClick={this.handleClick}
-                        // option={this.state.make} 
-                        options={this.state.makes}
-                        visibility={this.state.filterVisibility.make}
-                    />
-                    <DropDown 
-                        property="model"
-                        title="Model"
-                        onClick={this.handleClick}
-                        // option={this.state.model} 
-                        options={this.state.models}
-                        visibility={this.state.filterVisibility.model}
-                    />
-                    <DropDown
-                        type="minMax" 
-                        property="price"
-                        title="Price"
-                        onClick={this.handleClick}
-                        visibility={this.state.filterVisibility.price}
-                        min={this.state.price.min}
-                        max={this.state.price.max}
-                        onTextChange={this.handleTextChange}
-                    />
-                </div>
+                <Filters 
+                    make={this.state.make}
+                    model={this.state.model}
+                    price={this.state.price}
+                    visibility={this.state.filterVisibility}
+                    onClick={this.handleClick}
+                    onTextChange={this.handleTextChange}
+                />
                 <EVsContainer evs={evs} {...this.props} />
             </div>
         );

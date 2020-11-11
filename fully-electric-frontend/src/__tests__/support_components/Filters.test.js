@@ -26,6 +26,8 @@ describe('Filters', () => {
             make: "Text to test make property",
             model: "Text to test model property",
             price: "Text to test price property",
+            mileage: "Text to test mileage property",
+            range: "Text to test range property",
             visibility: "Text to test visibility property",
             onClick: mockFunction,
             onTextChange: mockFunctionTwo,
@@ -33,13 +35,13 @@ describe('Filters', () => {
         shallowFilters = undefined;
     });
 
-    test('has 3 children', () => {
-        expect(filters().children().length).toEqual(3);
+    test('has 5 children', () => {
+        expect(filters().children().length).toEqual(5);
     });
 
-    test('has 3 DropDown components', () => {
+    test('has 5 DropDown components', () => {
         const shallowWrapper = filters().find(DropDown);
-        expect(shallowWrapper.length).toEqual(3);
+        expect(shallowWrapper.length).toEqual(5);
         shallowWrapper.forEach((node, index) => {
             expect(Object.keys(node.props())).toContain('property');
             expect(Object.keys(node.props())).toContain('title');
@@ -47,7 +49,7 @@ describe('Filters', () => {
             expect(mockFunction).toHaveBeenCalled();
             expect(Object.keys(node.props())).toContain('visibility');
 
-            if (index === 2) {
+            if (index > 1) {
                 expect(Object.keys(node.props())).toContain('type');
                 expect(Object.keys(node.props())).toContain('min');
                 expect(Object.keys(node.props())).toContain('max');

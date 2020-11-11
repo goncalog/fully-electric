@@ -66,6 +66,14 @@ export default function Filters(props) {
                 options={props.extras.extras}
                 visibility={props.visibility.extras}
             />
+            <DropDown 
+                property={props.sort.property}
+                title={props.sort.title}
+                onClick={handleClick}
+                // option={props.extras} 
+                options={props.sort.extras}
+                visibility={props.visibility.sort}
+            />
         </div>
     );
 }

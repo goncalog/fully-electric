@@ -205,6 +205,36 @@ describe('Routes testing', function () {
             .expect(200)
     });
 
+    it('all models route works', () => {
+        return request(app)
+            .get('/content/models')
+            .expect('Content-type', /json/)
+            .expect(hasTitle)
+            .expect(hasModels)
+            .expect(isModel)
+            .expect(200)
+        
+        function hasTitle(res) {
+            if (!(res.body.title === 'List of all models')) {
+                throw new Error("Wrong title");  
+            } 
+        }
+
+        function hasModels(res) {
+            if (!(Object.keys(res.body.models).length === 13)) {
+                throw new Error("Doesn\'t have all the db models");
+            }
+        }
+
+        function isModel(res) {
+            for (let key in res.body.models) {
+                if (![8,9].includes((Object.keys(res.body.models[key]).length))) {
+                    throw new Error("Not an instance of Model");
+                }
+            }
+        }
+    });
+
     it('all locations route works', () => {
         return request(app)
             .get('/content/locations')

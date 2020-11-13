@@ -9,7 +9,8 @@ configure({ adapter: new Adapter() });
 describe('DropDown (Checkbox)', () => {
     let props;
     let shallowDropDown;
-    const mockFunction= jest.fn();
+    const mockFunction = jest.fn();
+    const mockFunctionTwo = jest.fn();
     const dropDown = () => {
         if (!shallowDropDown) {
             shallowDropDown = shallow(<DropDown {...props}/>);
@@ -29,6 +30,7 @@ describe('DropDown (Checkbox)', () => {
             options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
             onClick: mockFunction,
             visibility: true,
+            onCheckBoxChange: mockFunctionTwo,
         }
         shallowDropDown = undefined;
     });
@@ -44,6 +46,13 @@ describe('DropDown (Checkbox)', () => {
         expect(shallowWrapper.text()).toBe(`${props.title} ▾`);
     });
 
+    test('should call mockFunction onClick', () => {
+        const shallowWrapper = dropDown().find('button');
+        shallowWrapper.props().onClick();
+        expect(mockFunction).toHaveBeenCalled();
+        expect(mockFunction).toHaveBeenCalledWith(props.property);
+    });
+
     test('has one HTML dropdown-content div element', () => {
         const shallowWrapper = dropDown().find('div.dropdown-content');
         expect(shallowWrapper.length).toEqual(1);
@@ -56,11 +65,10 @@ describe('DropDown (Checkbox)', () => {
         expect(shallowWrapper.prop('options')).toBe(props.options);
     });
 
-    test('should call mockFunction onClick', () => {
-        const shallowWrapper = dropDown().find('button');
-        shallowWrapper.props().onClick();
-        expect(mockFunction).toHaveBeenCalled();
-        expect(mockFunction).toHaveBeenCalledWith(props.property);
+    test('should call mockFunction onChange', () => {
+        const shallowWrapper = dropDown().find(CheckBox);
+        shallowWrapper.props().onChange();
+        expect(mockFunctionTwo).toHaveBeenCalled();
     });
 });
 
@@ -84,7 +92,6 @@ describe('DropDown (MinMax)', () => {
             type: "minMax",
             property: "Text to test property property",
             title: "Text to test title property",
-            options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
             onClick: mockFunction,
             visibility: true,
             min: "Text to test min property",

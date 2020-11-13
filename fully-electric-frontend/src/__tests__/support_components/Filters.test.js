@@ -8,8 +8,9 @@ configure({ adapter: new Adapter() });
 describe('Filters', () => {
     let props;
     let shallowFilters;
-    const mockFunction= jest.fn();
-    const mockFunctionTwo= jest.fn();
+    const mockFunction = jest.fn();
+    const mockFunctionTwo = jest.fn();
+    const mockFunctionThree = jest.fn();
     const filters = () => {
         if (!shallowFilters) {
             shallowFilters = shallow(<Filters {...props}/>);
@@ -31,6 +32,7 @@ describe('Filters', () => {
             visibility: "Text to test visibility property",
             onClick: mockFunction,
             onTextChange: mockFunctionTwo,
+            onCheckBoxChange: mockFunctionThree,
         }
         shallowFilters = undefined;
     });
@@ -57,6 +59,8 @@ describe('Filters', () => {
                 expect(mockFunctionTwo).toHaveBeenCalled();
             } else {
                 expect(Object.keys(node.props())).toContain('options');
+                node.props().onCheckBoxChange();
+                expect(mockFunctionThree).toHaveBeenCalled();
             }
         });
     });

@@ -12,7 +12,6 @@ export default class EVs extends React.Component {
         this.state = { 
             evs: [],
             make: { property: 'make', title: 'Make', makes: [], },
-            model: { property: 'model', title: 'Model', models: [], },
             price: { property: 'price', title: 'Price', min: "", max: "",},
             mileage: { property: 'mileage', title: 'Mileage', min: "", max: "",},
             range: { property: 'range', title: 'Range', min: "", max: "",},
@@ -26,7 +25,7 @@ export default class EVs extends React.Component {
                 ], 
             },
             filterVisibility: { 
-                make: false, model: false, price: false, mileage: false, range: false, extras: false, 
+                make: false, price: false, mileage: false, range: false, extras: false, 
                 sort: false 
             },
         };
@@ -51,7 +50,7 @@ export default class EVs extends React.Component {
             .then(res => res.json())
             .then((res) => { this.setState({ evs: res.evs }) })
 
-        // Fetch makes and models
+        // Fetch makes
         if (this.state.make.makes.length === 0) {
             let url = (process.env.NODE_ENV === 'production') 
                     ? `/content/makes` 
@@ -60,16 +59,6 @@ export default class EVs extends React.Component {
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => { this.setState({ make: { ...this.state.make, makes: res.makes }}) })
-        }
-
-        if (this.state.model.models.length === 0) {
-            let url = (process.env.NODE_ENV === 'production') 
-                    ? `/content/models` 
-                    : `${process.env.REACT_APP_SERVER_URL}/content/models`;
-
-            fetch(url)
-                .then((res) => res.json())
-                .then((res) => { this.setState({ model: { ...this.state.model, models: res.models }}) })
         }
     }
 
@@ -102,7 +91,6 @@ export default class EVs extends React.Component {
             <div className="evs">
                 <Filters 
                     make={this.state.make}
-                    model={this.state.model}
                     price={this.state.price}
                     mileage={this.state.mileage}
                     range={this.state.range}

@@ -11,26 +11,26 @@ export default class EVs extends React.Component {
         super(props);
         this.state = { 
             evs: [],
-            make: { property: 'make', title: 'Make', makes: [], },
+            make: { property: 'make', title: 'Make', options: [], },
             price: { property: 'price', title: 'Price', min: "", max: "",},
             mileage: { property: 'mileage', title: 'Mileage', min: "", max: "",},
             range: { property: 'range', title: 'Range', min: "", max: "",},
-            extras: { property: 'extras', title: 'Extras', extras: [{ name: 'FSD' }], },
+            extras: { property: 'extras', title: 'Extras', options: [{ name: 'FSD' }], },
             sort: { 
                 property: 'sort', 
                 title: 'Sort', 
-                extras: [
+                options: [
                     { name: 'Lowest Price' }, { name: 'Highest Price' }, 
                     { name: 'Lowest Mileage' }, { name: 'Highest Range' }, 
                 ], 
             },
             filterVisibility: { 
-                make: false, price: false, mileage: false, range: false, extras: false, 
-                sort: false 
+                make: false, price: false, mileage: false, range: false, extras: false, sort: false 
             },
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
     }
 
     handleClick(property) {
@@ -39,6 +39,12 @@ export default class EVs extends React.Component {
 
     handleTextChange(property, type, text) {
         this.setState({ [property]:  { ...this.state[property], [type]: text }});
+    }
+
+    handleCheckBoxChange(prop, i) {
+        let options = this.state[prop].options.slice();
+        options[i].checked = !options[i].checked;
+        this.setState({ [prop]: { ...this.state[prop], options: options }});
     }
 
     componentDidMount() {
@@ -51,14 +57,17 @@ export default class EVs extends React.Component {
             .then((res) => { this.setState({ evs: res.evs }) })
 
         // Fetch makes
-        if (this.state.make.makes.length === 0) {
+        if (this.state.make.options.length === 0) {
             let url = (process.env.NODE_ENV === 'production') 
                     ? `/content/makes` 
                     : `${process.env.REACT_APP_SERVER_URL}/content/makes`;
 
             fetch(url)
                 .then((res) => res.json())
-                .then((res) => { this.setState({ make: { ...this.state.make, makes: res.makes }}) })
+                .then((res) => {
+                    res.makes.forEach((make) => make['checked'] = false);
+                    this.setState({ make: { ...this.state.make, options: res.makes }}) 
+                })
         }
     }
 
@@ -99,6 +108,7 @@ export default class EVs extends React.Component {
                     visibility={this.state.filterVisibility}
                     onClick={this.handleClick}
                     onTextChange={this.handleTextChange}
+                    onCheckBoxChange={this.handleCheckBoxChange}
                 />
                 <EVsContainer evs={evs} {...this.props} />
             </div>

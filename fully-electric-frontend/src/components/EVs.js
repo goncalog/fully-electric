@@ -5,12 +5,14 @@ import getFullEvTitle from '../utils/getFullEvTitle';
 import '../css/EVs.css';
 import formatMiles from '../utils/formatMiles';
 import formatNumber from '../utils/formatNumber';
+import applyFilters from '../utils/applyFilters';
 
 export default class EVs extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
             evs: [],
+            filteredEvs: [],
             make: { property: 'make', title: 'Make', options: [], },
             price: { property: 'price', title: 'Price', min: "", max: "",},
             mileage: { property: 'mileage', title: 'Mileage', min: "", max: "",},
@@ -54,7 +56,7 @@ export default class EVs extends React.Component {
         // Upload database data
         fetch(this.props.fetchUrl)
             .then(res => res.json())
-            .then((res) => { this.setState({ evs: res.evs }) })
+            .then((res) => { this.setState({ evs: res.evs, filteredEvs: res.evs }) })
 
         // Fetch makes
         if (this.state.make.options.length === 0) {
@@ -71,8 +73,20 @@ export default class EVs extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (
+            prevState.make !== this.state.make ||
+            prevState.price !== this.state.price ||
+            prevState.mileage !== this.state.mileage ||
+            prevState.range !== this.state.range ||
+            prevState.extras !== this.state.extras
+        ) {
+            this.setState({ filteredEvs: applyFilters(this.state) });
+        }
+    }
+
     render() {
-        const evs = this.state.evs.map((item) => {
+        const evs = this.state.filteredEvs.map((item) => {
             let ev = {
                 imageUrls: item.image_urls,
                 title: getFullEvTitle(item),

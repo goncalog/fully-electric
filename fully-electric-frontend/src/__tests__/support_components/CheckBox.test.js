@@ -7,6 +7,7 @@ configure({ adapter: new Adapter() });
 describe('CheckBox', () => {
     let props;
     let shallowCheckBox;
+    const mockFunction = jest.fn();
     const checkBox = () => {
         if (!shallowCheckBox) {
             shallowCheckBox = shallow(<CheckBox {...props}/>);
@@ -22,6 +23,7 @@ describe('CheckBox', () => {
         props = {
             // option: '21123231',
             options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
+            onChange: mockFunction,
         }
         shallowCheckBox = undefined;
     });
@@ -38,6 +40,8 @@ describe('CheckBox', () => {
             expect(node.prop('id')).toBe((index));
             expect(node.prop('value')).toBe(props.options[index]._id);
             expect(node.prop('type')).toBe('checkbox');
+            node.simulate('change', { target: { id: 'test' } });
+            expect(mockFunction).toHaveBeenCalled();
         });
     });
 

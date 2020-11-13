@@ -11,6 +11,10 @@ export default function DropDown(props) {
         props.onTextChange(props.property, type, text);
     }
 
+    function handleCheckBoxChange(i) {
+        props.onCheckBoxChange(props.property, i);
+    }
+
     return (
         <div className={`dropdown ${props.property}`}>
             <button className="dropdown-button" onClick={handleButtonClick}>{`${props.title} ▾`}</button>
@@ -18,7 +22,7 @@ export default function DropDown(props) {
             <div className={props.visibility ? "dropdown-content show" : "dropdown-content"}>
                 {props.type === 'minMax' 
                     ? <MinMax min={props.min} max={props.max} onTextChange={handleTextChange} />
-                    : <CheckBox options={props.options} />
+                    : <CheckBox options={props.options} onChange={handleCheckBoxChange} />
                 }
             </div>
         </div>

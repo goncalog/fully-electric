@@ -20,14 +20,6 @@ export default function Filters(props) {
                 options={props.make.makes}
                 visibility={props.visibility.make}
             />
-            <DropDown 
-                property={props.model.property}
-                title={props.model.title}
-                onClick={handleClick}
-                // option={props.model} 
-                options={props.model.models}
-                visibility={props.visibility.model}
-            />
             <DropDown
                 type="minMax" 
                 property={props.price.property}

@@ -54,6 +54,7 @@ describe('EVs', () => {
         expect(Object.keys(shallowWrapper.props())).toContain('visibility');
         expect(Object.keys(shallowWrapper.props())).toContain('onClick');
         expect(Object.keys(shallowWrapper.props())).toContain('onTextChange');
+        expect(Object.keys(shallowWrapper.props())).toContain('onCheckBoxChange');
     });
 
     test('has one EVsContainer component rendered with passed properties', () => {

@@ -47,7 +47,6 @@ describe('EVs', () => {
         const shallowWrapper = evs().find(Filters);
         expect(shallowWrapper.length).toEqual(1);
         expect(Object.keys(shallowWrapper.props())).toContain('make');
-        expect(Object.keys(shallowWrapper.props())).toContain('model');
         expect(Object.keys(shallowWrapper.props())).toContain('price');
         expect(Object.keys(shallowWrapper.props())).toContain('mileage');
         expect(Object.keys(shallowWrapper.props())).toContain('range');

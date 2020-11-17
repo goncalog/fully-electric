@@ -51,10 +51,11 @@ describe('EVs', () => {
         expect(Object.keys(shallowWrapper.props())).toContain('mileage');
         expect(Object.keys(shallowWrapper.props())).toContain('range');
         expect(Object.keys(shallowWrapper.props())).toContain('extras');
+        expect(Object.keys(shallowWrapper.props())).toContain('sort');
         expect(Object.keys(shallowWrapper.props())).toContain('visibility');
         expect(Object.keys(shallowWrapper.props())).toContain('onClick');
         expect(Object.keys(shallowWrapper.props())).toContain('onTextChange');
-        expect(Object.keys(shallowWrapper.props())).toContain('onCheckBoxChange');
+        expect(Object.keys(shallowWrapper.props())).toContain('onOptionChange');
     });
 
     test('has one EVsContainer component rendered with passed properties', () => {

@@ -6,6 +6,7 @@ import '../css/EVs.css';
 import formatMiles from '../utils/formatMiles';
 import formatNumber from '../utils/formatNumber';
 import applyFilters from '../utils/applyFilters';
+import applySort from '../utils/applySort';
 
 export default class EVs extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class EVs extends React.Component {
                 property: 'sort', 
                 title: 'Sort', 
                 options: [
-                    { name: 'Lowest Price' }, { name: 'Highest Price' }, 
+                    { name: 'Lowest Price', checked: true }, { name: 'Highest Price' }, 
                     { name: 'Lowest Mileage' }, { name: 'Highest Range' }, 
                 ], 
             },
@@ -32,7 +33,7 @@ export default class EVs extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
-        this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
     }
 
     handleClick(property) {
@@ -43,9 +44,18 @@ export default class EVs extends React.Component {
         this.setState({ [property]:  { ...this.state[property], [type]: text }});
     }
 
-    handleCheckBoxChange(prop, i) {
+    handleOptionChange(prop, i) {
         let options = this.state[prop].options.slice();
-        options[i].checked = !options[i].checked;
+
+        if (prop === 'sort') {
+            options = options.map((option, index) => {
+                (index === parseInt(i)) ? option.checked = true : option.checked = false;
+                return option;
+            });
+        } else {
+            options[i].checked = !options[i].checked;
+        }
+
         this.setState({ [prop]: { ...this.state[prop], options: options }});
     }
 
@@ -56,7 +66,7 @@ export default class EVs extends React.Component {
         // Upload database data
         fetch(this.props.fetchUrl)
             .then(res => res.json())
-            .then((res) => { this.setState({ evs: res.evs, filteredEvs: res.evs }) })
+            .then((res) => { this.setState({ evs: res.evs, filteredEvs: applySort(res.evs, this.state.sort) }) })
 
         // Fetch makes
         if (this.state.make.options.length === 0) {
@@ -79,9 +89,10 @@ export default class EVs extends React.Component {
             prevState.price !== this.state.price ||
             prevState.mileage !== this.state.mileage ||
             prevState.range !== this.state.range ||
-            prevState.extras !== this.state.extras
+            prevState.extras !== this.state.extras ||
+            prevState.sort !== this.state.sort
         ) {
-            this.setState({ filteredEvs: applyFilters(this.state) });
+            this.setState({ filteredEvs: applySort(applyFilters(this.state), this.state.sort) });
         }
     }
 
@@ -122,7 +133,7 @@ export default class EVs extends React.Component {
                     visibility={this.state.filterVisibility}
                     onClick={this.handleClick}
                     onTextChange={this.handleTextChange}
-                    onCheckBoxChange={this.handleCheckBoxChange}
+                    onOptionChange={this.handleOptionChange}
                 />
                 <EVsContainer evs={evs} {...this.props} />
             </div>

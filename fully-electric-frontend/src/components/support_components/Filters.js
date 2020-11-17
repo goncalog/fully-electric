@@ -10,8 +10,8 @@ export default function Filters(props) {
         props.onTextChange(property, type, text);
     }
 
-    function handleCheckBoxChange(property, i) {
-        props.onCheckBoxChange(property, i);
+    function handleOptionChange(property, i) {
+        props.onOptionChange(property, i);
     }
 
     return (
@@ -22,7 +22,7 @@ export default function Filters(props) {
                 onClick={handleClick}
                 options={props.make.options}
                 visibility={props.visibility.make}
-                onCheckBoxChange={handleCheckBoxChange}
+                onOptionChange={handleOptionChange}
             />
             <DropDown
                 type="minMax" 
@@ -60,16 +60,16 @@ export default function Filters(props) {
                 onClick={handleClick}
                 options={props.extras.options}
                 visibility={props.visibility.extras}
-                onCheckBoxChange={handleCheckBoxChange}
+                onOptionChange={handleOptionChange}
             />
-            <DropDown 
+            <DropDown
+                type="option"
                 property={props.sort.property}
                 title={props.sort.title}
-                onClick={handleClick}
-                // option={props.extras} 
+                onClick={handleClick} 
                 options={props.sort.options}
                 visibility={props.visibility.sort}
-                onCheckBoxChange={handleCheckBoxChange}
+                onOptionChange={handleOptionChange}
             />
         </div>
     );

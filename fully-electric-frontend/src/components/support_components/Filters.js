@@ -20,7 +20,6 @@ export default function Filters(props) {
                 property={props.make.property}
                 title={props.make.title}
                 onClick={handleClick}
-                // option={props.make} 
                 options={props.make.options}
                 visibility={props.visibility.make}
                 onCheckBoxChange={handleCheckBoxChange}
@@ -59,7 +58,6 @@ export default function Filters(props) {
                 property={props.extras.property}
                 title={props.extras.title}
                 onClick={handleClick}
-                // option={props.extras} 
                 options={props.extras.options}
                 visibility={props.visibility.extras}
                 onCheckBoxChange={handleCheckBoxChange}

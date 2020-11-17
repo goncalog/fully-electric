@@ -29,21 +29,22 @@ describe('Filters', () => {
             mileage: "Text to test mileage property",
             range: "Text to test range property",
             extras: "Text to test extras property",
+            sort: "Text to test sort property",
             visibility: "Text to test visibility property",
             onClick: mockFunction,
             onTextChange: mockFunctionTwo,
-            onCheckBoxChange: mockFunctionThree,
+            onOptionChange: mockFunctionThree,
         }
         shallowFilters = undefined;
     });
 
-    test('has 5 children', () => {
-        expect(filters().children().length).toEqual(5);
+    test('has 6 children', () => {
+        expect(filters().children().length).toEqual(6);
     });
 
-    test('has 5 DropDown components', () => {
+    test('has 6 DropDown components', () => {
         const shallowWrapper = filters().find(DropDown);
-        expect(shallowWrapper.length).toEqual(5);
+        expect(shallowWrapper.length).toEqual(6);
         shallowWrapper.forEach((node, index) => {
             expect(Object.keys(node.props())).toContain('property');
             expect(Object.keys(node.props())).toContain('title');
@@ -58,8 +59,9 @@ describe('Filters', () => {
                 node.props().onTextChange();
                 expect(mockFunctionTwo).toHaveBeenCalled();
             } else {
+                if (index === 5) expect(Object.keys(node.props())).toContain('type');
                 expect(Object.keys(node.props())).toContain('options');
-                node.props().onCheckBoxChange();
+                node.props().onOptionChange();
                 expect(mockFunctionThree).toHaveBeenCalled();
             }
         });

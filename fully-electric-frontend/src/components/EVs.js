@@ -6,6 +6,7 @@ import '../css/EVs.css';
 import formatMiles from '../utils/formatMiles';
 import formatNumber from '../utils/formatNumber';
 import applyFilters from '../utils/applyFilters';
+import applySort from '../utils/applySort';
 
 export default class EVs extends React.Component {
     constructor(props) {
@@ -65,7 +66,7 @@ export default class EVs extends React.Component {
         // Upload database data
         fetch(this.props.fetchUrl)
             .then(res => res.json())
-            .then((res) => { this.setState({ evs: res.evs, filteredEvs: res.evs }) })
+            .then((res) => { this.setState({ evs: res.evs, filteredEvs: applySort(res.evs, this.state.sort) }) })
 
         // Fetch makes
         if (this.state.make.options.length === 0) {
@@ -88,9 +89,10 @@ export default class EVs extends React.Component {
             prevState.price !== this.state.price ||
             prevState.mileage !== this.state.mileage ||
             prevState.range !== this.state.range ||
-            prevState.extras !== this.state.extras
+            prevState.extras !== this.state.extras ||
+            prevState.sort !== this.state.sort
         ) {
-            this.setState({ filteredEvs: applyFilters(this.state) });
+            this.setState({ filteredEvs: applySort(applyFilters(this.state), this.state.sort) });
         }
     }
 

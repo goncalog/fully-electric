@@ -2,6 +2,7 @@ import React from 'react';
 import DropDown from '../../components/support_components/DropDown';
 import MinMax from '../../components/support_components/MinMax';
 import CheckBox from '../../components/support_components/CheckBox';
+import Option from '../../components/support_components/Option';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -26,11 +27,10 @@ describe('DropDown (Checkbox)', () => {
         props = {
             property: "Text to test property property",
             title: "Text to test title property",
-            // option: '21123231',
             options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
             onClick: mockFunction,
             visibility: true,
-            onCheckBoxChange: mockFunctionTwo,
+            onOptionChange: mockFunctionTwo,
         }
         shallowDropDown = undefined;
     });
@@ -112,5 +112,47 @@ describe('DropDown (MinMax)', () => {
         const shallowWrapper = dropDown().find(MinMax);
         shallowWrapper.props().onTextChange();
         expect(mockFunction).toHaveBeenCalled();
+    });
+});
+
+describe('DropDown (Option)', () => {
+    let props;
+    let shallowDropDown;
+    const mockFunction = jest.fn();
+    const mockFunctionTwo = jest.fn();
+    const dropDown = () => {
+        if (!shallowDropDown) {
+            shallowDropDown = shallow(<DropDown {...props}/>);
+        }
+        return shallowDropDown;
+    }
+
+    // This resets the props and shallowDropDown variables before every test. 
+    // Otherwise, state from one test would leak into another. 
+    // By setting shallowDropDown to undefined here, when the next test runs, 
+    // if it calls dropDown, a new DropDown will be created with the current props.
+    beforeEach(() => {
+        props = {
+            type: "option",
+            property: "Text to test property property",
+            title: "Text to test title property",
+            options: [{ name: "Test 1", _id: '21123231' }, { name: "Test 2", _id: '435254243' }],
+            onClick: mockFunction,
+            visibility: true,
+            onOptionChange: mockFunctionTwo,
+        }
+        shallowDropDown = undefined;
+    });
+
+    test('has one Option component', () => {
+        const shallowWrapper = dropDown().find(Option);
+        expect(shallowWrapper.length).toEqual(1);
+        expect(shallowWrapper.prop('options')).toBe(props.options);
+    });
+
+    test('should call mockFunction onChange', () => {
+        const shallowWrapper = dropDown().find(Option);
+        shallowWrapper.props().onChange();
+        expect(mockFunctionTwo).toHaveBeenCalled();
     });
 });

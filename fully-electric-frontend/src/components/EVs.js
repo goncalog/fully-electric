@@ -22,7 +22,7 @@ export default class EVs extends React.Component {
                 property: 'sort', 
                 title: 'Sort', 
                 options: [
-                    { name: 'Lowest Price' }, { name: 'Highest Price' }, 
+                    { name: 'Lowest Price', checked: true }, { name: 'Highest Price' }, 
                     { name: 'Lowest Mileage' }, { name: 'Highest Range' }, 
                 ], 
             },
@@ -32,7 +32,7 @@ export default class EVs extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
-        this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
     }
 
     handleClick(property) {
@@ -43,9 +43,18 @@ export default class EVs extends React.Component {
         this.setState({ [property]:  { ...this.state[property], [type]: text }});
     }
 
-    handleCheckBoxChange(prop, i) {
+    handleOptionChange(prop, i) {
         let options = this.state[prop].options.slice();
-        options[i].checked = !options[i].checked;
+
+        if (prop === 'sort') {
+            options = options.map((option, index) => {
+                (index === parseInt(i)) ? option.checked = true : option.checked = false;
+                return option;
+            });
+        } else {
+            options[i].checked = !options[i].checked;
+        }
+
         this.setState({ [prop]: { ...this.state[prop], options: options }});
     }
 
@@ -122,7 +131,7 @@ export default class EVs extends React.Component {
                     visibility={this.state.filterVisibility}
                     onClick={this.handleClick}
                     onTextChange={this.handleTextChange}
-                    onCheckBoxChange={this.handleCheckBoxChange}
+                    onOptionChange={this.handleOptionChange}
                 />
                 <EVsContainer evs={evs} {...this.props} />
             </div>
